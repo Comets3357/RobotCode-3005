@@ -1,17 +1,17 @@
-#include "COMETS3357/Subsystems/SparkMax/WheelSparkMax.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxVelocity.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <COMETS3357/Subsystems/SubsystemManager.h>
 
 using namespace COMETS3357;
 
-WheelSparkMax::WheelSparkMax(std::string configName) : config{ConfigFiles::getInstance().GetConfigFiles().wheelMotorConfigs[configName]},
+SparkMaxVelocity::SparkMaxVelocity(std::string configName) : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs[configName]},
 motor{config.ID, rev::CANSparkMax::MotorType::kBrushless}, encoder{motor.GetEncoder()}, PIDController{motor.GetPIDController()}
 {
     config.motor = &motor;
     COMETS3357::SubsystemManager::GetInstance().AddInit([this]{RobotInit();});
 }
 
-void WheelSparkMax::RobotInit()
+void SparkMaxVelocity::RobotInit()
 {
 
     if (
@@ -31,14 +31,14 @@ void WheelSparkMax::RobotInit()
 
         if (config.follow != "NONE")
         {
-            motor.Follow(*COMETS3357::ConfigFiles::getInstance().GetConfigFiles().positionMotorConfigs[config.follow].motor);
+            motor.Follow(*COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs[config.follow].motor);
         }
 
         motor.BurnFlash();
     }
 }
 
-void WheelSparkMax::SetVelocityPID(PID velocityPID)
+void SparkMaxVelocity::SetVelocityPID(PID velocityPID)
 {
     pid = velocityPID;
     PIDController.SetP(pid.P, 0);
@@ -47,33 +47,33 @@ void WheelSparkMax::SetVelocityPID(PID velocityPID)
     PIDController.SetFF(pid.FF, 0);
 }
 
-void WheelSparkMax::SetVelocity(double velocity)
+void SparkMaxVelocity::SetVelocity(double velocity)
 {
     PIDController.SetReference(velocity, rev::CANSparkMax::ControlType::kVelocity, 0);
 }
 
-double WheelSparkMax::GetRelativeVelocity()
+double SparkMaxVelocity::GetRelativeVelocity()
 {
     return encoder.GetVelocity();
 }
 
-void WheelSparkMax::SetPercent(double power)
+void SparkMaxVelocity::SetPercent(double power)
 {
     motor.Set(power);
 }
 
-PID WheelSparkMax::GetPID()
+PID SparkMaxVelocity::GetPID()
 {
     return pid;
 }
 
-double WheelSparkMax::GetRelativePosition()
+double SparkMaxVelocity::GetRelativePosition()
 {
     return encoder.GetPosition();
 }
 
 
-void WheelSparkMax::SetRelativePosition(double position)
+void SparkMaxVelocity::SetRelativePosition(double position)
 {
     encoder.SetPosition(position);
 }

@@ -8,8 +8,8 @@
 #include <frc/kinematics/SwerveModulePosition.h>
 #include <frc/kinematics/SwerveModuleState.h>
 #include "COMETS3357/Configs/ConfigFiles.h"
-#include "COMETS3357/Subsystems/SparkMax/WheelSparkMax.h"
-#include "COMETS3357/Subsystems/SparkMax/PositionSparkMax.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxVelocity.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
 
 namespace COMETS3357
 {
@@ -59,8 +59,8 @@ namespace COMETS3357
 
     private:
 
-    COMETS3357::WheelSparkMax drivingMotor;
-    COMETS3357::PositionSparkMax azimuthMotor;
+    COMETS3357::SparkMaxVelocity drivingMotor;
+    COMETS3357::SparkMaxPosition azimuthMotor;
 
     double m_chassisAngularOffset = 0;
     frc::SwerveModuleState m_desiredState{units::meters_per_second_t{0.0},

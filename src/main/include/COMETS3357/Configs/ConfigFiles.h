@@ -11,20 +11,21 @@
 #include <rev/CANSparkMax.h>
 #include <units/velocity.h>
 #include <units/angular_velocity.h>
-#include "COMETS3357/PositionSparkMaxRunMode.h"
+#include "COMETS3357/SparkMaxPositionRunMode.h"
 #include <unordered_map>
 #include <frc/Filesystem.h>
 #include <rev/CANSparkMax.h>
+#include <frc/motorcontrol/PWMSparkMax.h>
 
 namespace COMETS3357
 {
 
 
-    struct PositionMotorConfig {
+    struct SparkMaxPositionConfig {
         rev::CANSparkMax* motor;
         std::string follow;
         int ID = 1;
-        PositionSparkMaxRunMode defaultMode;
+        SparkMaxPositionRunMode defaultMode;
         bool invertedAbsolute;
         bool invertedRelative;
         double currentLimit;
@@ -50,7 +51,7 @@ namespace COMETS3357
         std::map<std::string, double> positions;
     };
 
-    struct WheelMotorConfig {
+    struct SparkMaxVelocityConfig {
         rev::CANSparkMax* motor;
         std::string follow;
         int ID = 100;
@@ -64,7 +65,14 @@ namespace COMETS3357
         std::map<std::string, double> velocities;
     };
 
-    struct RollerMotorConfig {
+    struct SparkMaxPWMConfig
+    {
+        frc::PWMSparkMax* motor;
+        int ID = 100;
+        bool inverted;
+    };
+
+    struct SparkMaxPercentConfig {
         rev::CANSparkMax* motor;
         std::string follow;
         int ID = 1;
@@ -103,11 +111,12 @@ namespace COMETS3357
     };
 
     struct RobotConfig {
-        std::map<std::string, PositionMotorConfig> positionMotorConfigs;
-        std::map<std::string, WheelMotorConfig> wheelMotorConfigs;
-        std::map<std::string, RollerMotorConfig> rollerMotorConfigs;
+        std::map<std::string, SparkMaxPositionConfig> sparkMaxPositionConfigs;
+        std::map<std::string, SparkMaxVelocityConfig> sparkMaxVelocityConfigs;
+        std::map<std::string, SparkMaxPercentConfig> sparkMaxPercentConfigs;
         std::map<std::string, SwerveConfig> swerveConfigs;
         std::map<std::string, SwerveModuleConfig> swerveModuleConfigs;
+        std::map<std::string, SparkMaxPWMConfig> sparkMaxPWMConfigs;
     };
 
 

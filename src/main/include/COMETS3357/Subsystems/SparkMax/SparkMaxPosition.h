@@ -16,37 +16,37 @@
 #include <thread>
 #include "COMETS3357/PID.h"
 #include "COMETS3357/Configs/ConfigFiles.h"
-#include "COMETS3357/PositionSparkMaxRunMode.h"
+#include "COMETS3357/SparkMaxPositionRunMode.h"
 #include <wpi/raw_ostream.h>
 
 namespace COMETS3357
 {
 
-    class PositionSparkMax
+    class SparkMaxPosition
     {
     public:
 
-        PositionMotorConfig config;
+        SparkMaxPositionConfig config;
 
         /**
-         * Creates a new PositionSparkMax that has the capability of running a motor
+         * Creates a new SparkMaxPosition that has the capability of running a motor
          * to a specific position using either relative or absolute encoders.
          *
          * @param configName The name of the config linked to this specific motor
          */
-        PositionSparkMax(std::string configName);
+        SparkMaxPosition(std::string configName);
 
         /**
-         * Creates a new PositionSparkMax that has the capability of running a motor
+         * Creates a new SparkMaxPosition that has the capability of running a motor
          * to a specific position using either relative or absolute encoders.
          *
          * @param configName The name of the config linked to this specific motor
          * @param setAbsoluteOffset Should the motor set the absolute offset or leave it be.
          */
-        PositionSparkMax(std::string configName, bool setAbsoluteOffset);
+        SparkMaxPosition(std::string configName, bool setAbsoluteOffset);
 
         /**
-         * The initialization of the PositionSparkMax
+         * The initialization of the SparkMaxPosition
          */
         void RobotInit();
 
@@ -60,7 +60,7 @@ namespace COMETS3357
          *
          * @param mode The runmode that cooresponds with the FeedbackDevice
          */
-        void ChangeFeedBackDevice(PositionSparkMaxRunMode mode);
+        void ChangeFeedBackDevice(SparkMaxPositionRunMode mode);
 
         /**
          * Changes the current velocity PID to a new velocity PID that is specified
@@ -146,7 +146,7 @@ namespace COMETS3357
          *
          * @param mode The runmode to change to
          */
-        void changeRunMode(PositionSparkMaxRunMode mode);
+        void changeRunMode(SparkMaxPositionRunMode mode);
 
         /**
          * Checks to make sure that the Absolute Encoder is plugged in 
@@ -161,10 +161,10 @@ namespace COMETS3357
 
         double absoluteEncoderPosition = 0;
         double relativeEncoderPosition = 0;
-        COMETS3357::PositionSparkMaxRunMode runMode = POSITION_SPARK_MAX_NONE;
-        COMETS3357::PositionSparkMaxRunMode runModeRequest = runMode;
+        COMETS3357::SparkMaxPositionRunMode runMode = POSITION_SPARK_MAX_NONE;
+        COMETS3357::SparkMaxPositionRunMode runModeRequest = runMode;
         bool requestRunMode = false;
-        COMETS3357::PositionSparkMaxRunMode defaultRunMode = POSITION_SPARK_MAX_ABSOLUTE;
+        COMETS3357::SparkMaxPositionRunMode defaultRunMode = POSITION_SPARK_MAX_ABSOLUTE;
         rev::SparkMaxPIDController PIDController;
         rev::SparkMaxRelativeEncoder relativeEncoder;
         rev::SparkMaxAbsoluteEncoder absoluteEncoder;

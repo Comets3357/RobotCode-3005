@@ -5,15 +5,15 @@
 
 namespace COMETS3357
 {
-    class RollerSparkMax
+    class SparkMaxPercent
     {
     public:
         /**
-         * @brief Constructs a new RollerSparkMax
+         * @brief Constructs a new SparkMaxPercent
          * This is a class that represents a motor that is purely controlled by percent output
          * @param configName This is the name of the config for the motor being created.
         */
-        RollerSparkMax(std::string configName);
+        SparkMaxPercent(std::string configName);
 
         /**
          * @brief Sets the percent output of the motor
@@ -21,7 +21,7 @@ namespace COMETS3357
         */
         void SetPower(double power);
 
-        COMETS3357::RollerMotorConfig config;
+        COMETS3357::SparkMaxPercentConfig config;
         rev::CANSparkMax motor;
 
     private:

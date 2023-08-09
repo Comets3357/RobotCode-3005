@@ -1,9 +1,9 @@
 #pragma once
 
 #include "COMETS3357/Subsystems/Subsystem.h"
-#include "COMETS3357/Subsystems/SparkMax/PositionSparkMax.h"
-#include "COMETS3357/Subsystems/SparkMax/RollerSparkMax.h"
-#include "COMETS3357/Subsystems/SparkMax/WheelSparkMax.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPercent.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxVelocity.h"
 
 enum ExampleSubsystemState
 {
@@ -22,8 +22,8 @@ public:
 
 private:
 
-    COMETS3357::PositionSparkMax positionSparkMax{"ExamplePositionMotor"};
-    COMETS3357::WheelSparkMax wheelSparkMax{"ExampleWheelMotor"};
-    COMETS3357::RollerSparkMax rollerSparkMax{"ExampleRollerMotor"};
+    COMETS3357::SparkMaxPosition SparkMaxPosition{"ExamplePositionMotor"};
+    COMETS3357::SparkMaxVelocity SparkMaxVelocity{"ExampleWheelMotor"};
+    COMETS3357::SparkMaxPercent SparkMaxPercent{"ExampleRollerMotor"};
 
 };

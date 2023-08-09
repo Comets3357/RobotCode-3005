@@ -2,7 +2,7 @@
 
 namespace COMETS3357
 {
-    enum PositionSparkMaxRunMode
+    enum SparkMaxPositionRunMode
     {
         POSITION_SPARK_MAX_RELATIVE,
         POSITION_SPARK_MAX_ABSOLUTE,

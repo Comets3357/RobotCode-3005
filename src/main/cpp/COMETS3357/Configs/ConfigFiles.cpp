@@ -29,11 +29,12 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
         std::cerr << "JSON parse error: " << error << std::endl;
     }
 
-    picojson::array positionMotorConfigs = jsonValue.get("PositionMotorConfigs").get<picojson::array>();
-    picojson::array rollerMotorConfigs = jsonValue.get("RollerMotorConfigs").get<picojson::array>();
-    picojson::array wheelMotorConfigs = jsonValue.get("WheelMotorConfigs").get<picojson::array>();
+    picojson::array sparkMaxPositionConfigs = jsonValue.get("PositionMotorConfigs").get<picojson::array>();
+    picojson::array sparkMaxPercentConfigs = jsonValue.get("RollerMotorConfigs").get<picojson::array>();
+    picojson::array sparkMaxVelocityConfigs = jsonValue.get("WheelMotorConfigs").get<picojson::array>();
     picojson::array swerveConfigs = jsonValue.get("SwerveConfigs").get<picojson::array>();
     picojson::array swerveModuleConfigs = jsonValue.get("SwerveModuleConfigs").get<picojson::array>();
+    picojson::array sparkMaxPWMConfigs = jsonValue.get("SparkMaxPWMConfigs").get<picojson::array>();
 
     for (auto& config : swerveModuleConfigs)
     {
@@ -43,6 +44,18 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
         moduleConfig.angularOffset = config.get("AngularOffset").get<double>();
 
         robotConfig.swerveModuleConfigs[config.get("Name").get<std::string>()] = moduleConfig;
+    }
+
+    for (auto& config : sparkMaxPWMConfigs)
+    {
+        SparkMaxPWMConfig sparkMaxPWMConfig;
+
+        sparkMaxPWMConfig.ID = (int)config.get("ID").get<double>();
+        sparkMaxPWMConfig.inverted = config.get("Inverted").get<bool>();
+
+        robotConfig.sparkMaxPWMConfigs[config.get("Name").get<std::string>()] = sparkMaxPWMConfig;
+
+
     }
 
     for (auto& config : swerveConfigs)
@@ -66,10 +79,10 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
         robotConfig.swerveConfigs[config.get("Name").get<std::string>()] = swerveConfig;
     }
 
-    for (auto& config : positionMotorConfigs) {
-        PositionMotorConfig motorConfig;
+    for (auto& config : sparkMaxPositionConfigs) {
+        SparkMaxPositionConfig motorConfig;
         motorConfig.ID = (int)config.get("ID").get<double>();
-        motorConfig.defaultMode = config.get("DefaultRunMode").get<std::string>()=="ABSOLUTE" ? PositionSparkMaxRunMode::POSITION_SPARK_MAX_ABSOLUTE : PositionSparkMaxRunMode::POSITION_SPARK_MAX_RELATIVE;
+        motorConfig.defaultMode = config.get("DefaultRunMode").get<std::string>()=="ABSOLUTE" ? SparkMaxPositionRunMode::POSITION_SPARK_MAX_ABSOLUTE : SparkMaxPositionRunMode::POSITION_SPARK_MAX_RELATIVE;
         motorConfig.invertedAbsolute = config.get("InvertedAbsolute").get<bool>();
         motorConfig.invertedRelative = config.get("InvertedRelative").get<bool>();
         motorConfig.currentLimit = config.get("CurrentLimit").get<double>();
@@ -108,14 +121,14 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
             motorConfig.positions[position.first] = position.second.get<double>();
         }
 
-        robotConfig.positionMotorConfigs[config.get("Name").get<std::string>()] = motorConfig;
+        robotConfig.sparkMaxPositionConfigs[config.get("Name").get<std::string>()] = motorConfig;
 
     }
 
-    for (auto& config : wheelMotorConfigs)
+    for (auto& config : sparkMaxVelocityConfigs)
     {
     
-        WheelMotorConfig motorConfig;
+        SparkMaxVelocityConfig motorConfig;
         motorConfig.ID = (int)config.get("ID").get<double>();
         motorConfig.invertedRelative = config.get("InvertedRelative").get<bool>();
         motorConfig.currentLimit = config.get("CurrentLimit").get<double>();
@@ -136,12 +149,12 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
             motorConfig.velocities[velocity.first] = velocity.second.get<double>();
         }
 
-        robotConfig.wheelMotorConfigs[config.get("Name").get<std::string>()] = motorConfig;
+        robotConfig.sparkMaxVelocityConfigs[config.get("Name").get<std::string>()] = motorConfig;
     }
 
-    for (auto& config : rollerMotorConfigs)
+    for (auto& config : sparkMaxVelocityConfigs)
     {
-        RollerMotorConfig motorConfig;
+        SparkMaxPercentConfig motorConfig;
         motorConfig.ID = (int)config.get("ID").get<double>();
         motorConfig.invertedRelative = config.get("InvertedRelative").get<bool>();
         motorConfig.currentLimit = config.get("CurrentLimit").get<double>();
@@ -154,6 +167,6 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
             motorConfig.percents[percent.first] = percent.second.get<double>();
         }
 
-        robotConfig.rollerMotorConfigs[config.get("Name").get<std::string>()] = motorConfig;
+        robotConfig.sparkMaxPercentConfigs[config.get("Name").get<std::string>()] = motorConfig;
     }
 }

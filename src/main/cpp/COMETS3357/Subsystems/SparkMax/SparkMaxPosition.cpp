@@ -1,12 +1,12 @@
-#include "COMETS3357/Subsystems/SparkMax/PositionSparkMax.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
 
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <COMETS3357/Subsystems/SubsystemManager.h>
 
 using namespace COMETS3357;
 
-PositionSparkMax::PositionSparkMax(std::string configName)
-    : config{ConfigFiles::getInstance().GetConfigFiles().positionMotorConfigs[configName]},
+SparkMaxPosition::SparkMaxPosition(std::string configName)
+    : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[configName]},
      motor{config.ID, rev::CANSparkMax::MotorType::kBrushless},
     PIDController{motor.GetPIDController()},
     relativeEncoder{motor.GetEncoder()},
@@ -22,8 +22,8 @@ PositionSparkMax::PositionSparkMax(std::string configName)
 
 };
 
-PositionSparkMax::PositionSparkMax(std::string configName, bool setAbsoluteOffset)
-    : config{ConfigFiles::getInstance().GetConfigFiles().positionMotorConfigs[configName]},
+SparkMaxPosition::SparkMaxPosition(std::string configName, bool setAbsoluteOffset)
+    : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[configName]},
      motor{config.ID, rev::CANSparkMax::MotorType::kBrushless},
     PIDController{motor.GetPIDController()},
     relativeEncoder{motor.GetEncoder()},
@@ -41,7 +41,7 @@ PositionSparkMax::PositionSparkMax(std::string configName, bool setAbsoluteOffse
 
 };
 
-void PositionSparkMax::RobotInit()
+void SparkMaxPosition::RobotInit()
 {
 
     if (
@@ -82,7 +82,7 @@ void PositionSparkMax::RobotInit()
 
         if (config.follow != "NONE")
         {
-            motor.Follow(*COMETS3357::ConfigFiles::getInstance().GetConfigFiles().positionMotorConfigs[config.follow].motor);
+            motor.Follow(*COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[config.follow].motor);
         }
 
         motor.BurnFlash();
@@ -94,12 +94,12 @@ void PositionSparkMax::RobotInit()
 
 }
 
-void PositionSparkMax::ZeroRelativeEncoder()
+void SparkMaxPosition::ZeroRelativeEncoder()
 {
     relativeEncoder.SetPosition(absoluteEncoderPosition);
 }
 
-void PositionSparkMax::ChangeFeedBackDevice(PositionSparkMaxRunMode mode)
+void SparkMaxPosition::ChangeFeedBackDevice(SparkMaxPositionRunMode mode)
 {
     switch (mode)
     {
@@ -114,7 +114,7 @@ void PositionSparkMax::ChangeFeedBackDevice(PositionSparkMaxRunMode mode)
     }
 }
 
-void PositionSparkMax::SetVelocityPID(PID pid)
+void SparkMaxPosition::SetVelocityPID(PID pid)
 {
     PIDController.SetP(pid.P, 0);
     PIDController.SetI(pid.I, 0);
@@ -124,7 +124,7 @@ void PositionSparkMax::SetVelocityPID(PID pid)
     velocityPID = pid;
 }
 
-void PositionSparkMax::SetPositionPID(PID pid)
+void SparkMaxPosition::SetPositionPID(PID pid)
 {
     PIDController.SetP(pid.P, 1);
     PIDController.SetI(pid.I, 1);
@@ -135,12 +135,12 @@ void PositionSparkMax::SetPositionPID(PID pid)
 }
 
 
-void PositionSparkMax::SetPIDOutputRange(double min, double max, int slot)
+void SparkMaxPosition::SetPIDOutputRange(double min, double max, int slot)
 {
     PIDController.SetOutputRange(min, max, slot);
 }
 
-double PositionSparkMax::GetPosition()
+double SparkMaxPosition::GetPosition()
 {
     switch (runMode)
     {
@@ -156,43 +156,43 @@ double PositionSparkMax::GetPosition()
     }
 }
 
-void PositionSparkMax::SetVelocity(double velocity)
+void SparkMaxPosition::SetVelocity(double velocity)
 {
     PIDController.SetReference(velocity, rev::CANSparkMax::ControlType::kVelocity, 0);
 }
 
-void PositionSparkMax::SetPosition(double position)
+void SparkMaxPosition::SetPosition(double position)
 {
     frc::SmartDashboard::PutNumber("POSITION", position);
     PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition, 1);
 }
 
-void PositionSparkMax::SetPosition(std::string position)
+void SparkMaxPosition::SetPosition(std::string position)
 {
     PIDController.SetReference(config.positions[position], rev::CANSparkMax::ControlType::kPosition, 1);
 }
 
-double PositionSparkMax::GetRelativePosition()
+double SparkMaxPosition::GetRelativePosition()
 {
     return relativeEncoderPosition;
 }
 
-double PositionSparkMax::GetAbsolutePosition()
+double SparkMaxPosition::GetAbsolutePosition()
 {
     return absoluteEncoderPosition;
 }
 
-double PositionSparkMax::GetRelativeVelocity()
+double SparkMaxPosition::GetRelativeVelocity()
 {
     return relativeEncoder.GetVelocity();
 }
 
-double PositionSparkMax::GetAbsoluteVelocity()
+double SparkMaxPosition::GetAbsoluteVelocity()
 {
     return absoluteEncoder.GetVelocity();
 }
 
-void PositionSparkMax::Periodic()
+void SparkMaxPosition::Periodic()
 {
     absoluteEncoderPosition = absoluteEncoder.GetPosition();
     relativeEncoderPosition = absoluteEncoder.GetPosition();
@@ -205,7 +205,7 @@ void PositionSparkMax::Periodic()
     CheckAbsoluteEncoder();
 }
 
-void PositionSparkMax::changeRunMode(PositionSparkMaxRunMode mode)
+void SparkMaxPosition::changeRunMode(SparkMaxPositionRunMode mode)
 {
     runMode = mode;
     ChangeFeedBackDevice(runMode);
@@ -213,7 +213,7 @@ void PositionSparkMax::changeRunMode(PositionSparkMaxRunMode mode)
 
 
 
-void PositionSparkMax::CheckAbsoluteEncoder()
+void SparkMaxPosition::CheckAbsoluteEncoder()
 {
     // if (runMode != POSITION_SPARK_MAX_ABSOLUTE) {
     //     return;
