@@ -136,14 +136,15 @@ bool Controller::LoadControls(picojson::value &controllers)
 
             for (auto& mode : controllerType.second.get<picojson::object>())//controller.GetName()])
             {
+                if (mode.first == "Taranus" && frc::DriverStation::GetJoystickName(slot) != "FrSky Taranis Joystick") break;
                 if (mode.first != "DefaultMode")
                 {
 
-                    if (frc::DriverStation::GetJoystickName(slot) == "FrSky Taranis Joystick")
+                    if (controllerType.first == "Taranus")
                     {
                         
                     }
-                    else
+                    else if (controllerType.first == "XBOX")
                     {
                         SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 0;}}, "D-padUp", mode);
                         SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 90;}}, "D-padRight", mode);

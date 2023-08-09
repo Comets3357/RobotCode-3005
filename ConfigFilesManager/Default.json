@@ -1,5 +1,5 @@
 {
-    "PositionMotorConfigs": [
+    "SparkMaxPositionConfigs": [
       {
         "AbsolutePositionConversionFactor": 1,
         "AbsoluteVelocityConversionFactor": 1,
@@ -13,6 +13,7 @@
         "MaxSpeed": 1,
         "MinSpeed": -1,
         "Name": "PositionMotor",
+        "Follow": "NONE",
         "PositionPID": {
           "D": 0,
           "FF": 0,
@@ -37,13 +38,18 @@
         "Position": 0
       }
     ],
-    "RollerMotorConfigs": [
+    "SparkMaxPercentConfigs": [
       {
         "Name": "RollerMotor",
         "ID": 0,
         "InvertedRelative": false,
         "CurrentLimit": 40,
-        "IdleMode": "Brake"
+        "IdleMode": "Brake",
+        "Follow": "NONE",
+        "Percents":
+        {
+
+        }
       }
     ],
     "SwerveConfigs": [
@@ -79,6 +85,7 @@
         "Name": "WheelMotor",
         "RelativePositionConversionFactor": 1,
         "RelativeVelocityConversionFactor": 1,
+        "Follow": "NONE",
         "VelocityPID": {
           "D": 0,
           "FF": 0,
