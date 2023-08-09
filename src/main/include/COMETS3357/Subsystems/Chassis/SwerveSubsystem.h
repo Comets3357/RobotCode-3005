@@ -32,6 +32,7 @@ namespace COMETS3357
     SwerveSubsystem(std::string configFileName);
 
     SwerveConfig configuration;
+    std::shared_ptr<nt::NetworkTable> gyroSubsystemData;
 
     void Initialize() override;
 
@@ -141,7 +142,7 @@ namespace COMETS3357
     // 4 defines the number of modules
     frc::SwerveDriveOdometry<4> m_odometry;
 
-    std::shared_ptr<nt::NetworkTable> gyroSubsystemData;
+    
 
     
   };

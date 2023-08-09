@@ -29,9 +29,9 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
         std::cerr << "JSON parse error: " << error << std::endl;
     }
 
-    picojson::array sparkMaxPositionConfigs = jsonValue.get("PositionMotorConfigs").get<picojson::array>();
-    picojson::array sparkMaxPercentConfigs = jsonValue.get("RollerMotorConfigs").get<picojson::array>();
-    picojson::array sparkMaxVelocityConfigs = jsonValue.get("WheelMotorConfigs").get<picojson::array>();
+    picojson::array sparkMaxPositionConfigs = jsonValue.get("SparkMaxPositionConfigs").get<picojson::array>();
+    picojson::array sparkMaxPercentConfigs = jsonValue.get("SparkMaxPercentConfigs").get<picojson::array>();
+    picojson::array sparkMaxVelocityConfigs = jsonValue.get("SparkMaxVelocityConfigs").get<picojson::array>();
     picojson::array swerveConfigs = jsonValue.get("SwerveConfigs").get<picojson::array>();
     picojson::array swerveModuleConfigs = jsonValue.get("SwerveModuleConfigs").get<picojson::array>();
     picojson::array sparkMaxPWMConfigs = jsonValue.get("SparkMaxPWMConfigs").get<picojson::array>();
@@ -152,7 +152,7 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
         robotConfig.sparkMaxVelocityConfigs[config.get("Name").get<std::string>()] = motorConfig;
     }
 
-    for (auto& config : sparkMaxVelocityConfigs)
+    for (auto& config : sparkMaxPercentConfigs)
     {
         SparkMaxPercentConfig motorConfig;
         motorConfig.ID = (int)config.get("ID").get<double>();
