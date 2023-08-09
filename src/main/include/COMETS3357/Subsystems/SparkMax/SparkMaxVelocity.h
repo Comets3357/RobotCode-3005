@@ -7,16 +7,16 @@
 
 namespace COMETS3357
 {
-    class WheelSparkMax
+    class SparkMaxVelocity
     {
     public:
 
         /**
-         * @brief Constructs a WheelSparkMax class
-         * The WheelSparkMax class is for a motor purely controlled by either velocity or percent output
+         * @brief Constructs a SparkMaxVelocity class
+         * The SparkMaxVelocity class is for a motor purely controlled by either velocity or percent output
          * @param configName The name of the config file for the motor being created
         */
-        WheelSparkMax(std::string configName);
+        SparkMaxVelocity(std::string configName);
         
         /**
          * @brief Sets the PID constants on the Velocity PID
@@ -60,7 +60,7 @@ namespace COMETS3357
         */
         void SetRelativePosition(double position);
 
-        COMETS3357::WheelMotorConfig config;
+        COMETS3357::SparkMaxVelocityConfig config;
         rev::CANSparkMax motor;
 
     private:

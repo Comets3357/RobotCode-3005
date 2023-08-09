@@ -1,20 +1,20 @@
-#include "COMETS3357/Subsystems/SparkMax/RollerSparkMax.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPercent.h"
 #include <COMETS3357/Subsystems/SubsystemManager.h>
 
 using namespace COMETS3357;
 
-RollerSparkMax::RollerSparkMax(std::string configName) : config{ConfigFiles::getInstance().GetConfigFiles().rollerMotorConfigs[configName]}, motor{config.ID, rev::CANSparkMax::MotorType::kBrushless}
+SparkMaxPercent::SparkMaxPercent(std::string configName) : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs[configName]}, motor{config.ID, rev::CANSparkMax::MotorType::kBrushless}
 {
     config.motor = &motor;
     COMETS3357::SubsystemManager::GetInstance().AddInit([this]{RobotInit();});
 }
 
-void RollerSparkMax::SetPower(double power)
+void SparkMaxPercent::SetPower(double power)
 {
     motor.Set(power);
 }
 
-void RollerSparkMax::RobotInit()
+void SparkMaxPercent::RobotInit()
 {
 
     if (
@@ -29,7 +29,7 @@ void RollerSparkMax::RobotInit()
 
         if (config.follow != "NONE")
         {
-            motor.Follow(*COMETS3357::ConfigFiles::getInstance().GetConfigFiles().positionMotorConfigs[config.follow].motor);
+            motor.Follow(*COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs[config.follow].motor);
         }
 
         motor.BurnFlash();

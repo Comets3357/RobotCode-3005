@@ -1,7 +1,7 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-#include "COMETS3357/Subsystems/SparkMax/WheelSparkMax.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxVelocity.h"
 #include "COMETS3357/PID.h"
 #include "COMETS3357/TimerSubsystem.h"
 
@@ -90,10 +90,10 @@ namespace COMETS3357
 
         bool odometryInitialized = false;
 
-        COMETS3357::WheelSparkMax dbR{""};
-        COMETS3357::WheelSparkMax dbL{""};
-        COMETS3357::WheelSparkMax dbFR{""};
-        COMETS3357::WheelSparkMax dbFL{""};
+        COMETS3357::SparkMaxVelocity dbR{""};
+        COMETS3357::SparkMaxVelocity dbL{""};
+        COMETS3357::SparkMaxVelocity dbFR{""};
+        COMETS3357::SparkMaxVelocity dbFL{""};
 
 
         COMETS3357::PID pid{};
