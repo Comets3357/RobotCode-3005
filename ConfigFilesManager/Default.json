@@ -4,15 +4,15 @@
         "AbsolutePositionConversionFactor": 1,
         "AbsoluteVelocityConversionFactor": 1,
         "AbsoluteZeroOffset": 0,
-        "CurrentLimit": 40,
-        "DefaultRunMode": "RELATIVE",
+        "CurrentLimit": 20,
+        "DefaultRunMode": "ABSOLUTE",
         "ID": 0,
         "IdleMode": "Brake",
         "InvertedAbsolute": false,
         "InvertedRelative": false,
         "MaxSpeed": 1,
         "MinSpeed": -1,
-        "Name": "PositionMotor",
+        "Name": "SparkMaxPosition",
         "Follow": "NONE",
         "PositionPID": {
           "D": 0,
@@ -30,12 +30,15 @@
           "FF": 0,
           "I": 0,
           "P": 0
+        },
+        "ForwardSoftLimitEnabled": false,
+        "ReverseSoftLimitEnabled": false,
+        "ForwardSoftLimit": 0,
+        "ReverseSoftLimit": 0,
+        "Positions":
+        {
+          
         }
-      }
-    ],
-    "Positions": [
-      {
-        "Position": 0
       }
     ],
     "SparkMaxPercentConfigs": [
@@ -76,13 +79,13 @@
         "Name": "Module1"
       }
     ],
-    "WheelMotorConfigs": [
+    "SparkMaxVelocityConfigs": [
       {
-        "CurrentLimit": 60,
-        "ID": 2,
+        "CurrentLimit": 20,
+        "ID": 0,
         "IdleMode": "Brake",
         "InvertedRelative": false,
-        "Name": "WheelMotor",
+        "Name": "SparkMaxVelocity",
         "RelativePositionConversionFactor": 1,
         "RelativeVelocityConversionFactor": 1,
         "Follow": "NONE",
@@ -91,7 +94,19 @@
           "FF": 0,
           "I": 0,
           "P": 0
+        },
+        "Velocities":
+        {
+  
         }
+      }
+    ],
+    "SparkMaxPWMConfigs":
+    [
+      {
+        "ID": 0,
+        "Name": "SparkMaxPWM",
+        "Inverted": false
       }
     ]
   }
