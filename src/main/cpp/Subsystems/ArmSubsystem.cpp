@@ -13,7 +13,7 @@ void ArmSubsystem::Initialize()
 
 void ArmSubsystem::Periodic()
 {
-
+    motor.Periodic();
 }
 
 void ArmSubsystem::SetPosition(double position)

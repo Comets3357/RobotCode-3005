@@ -4,7 +4,7 @@
     {
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 161.06,
+      "AbsoluteZeroOffset": 339.156818,
       "CurrentLimit": 45,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 31,
@@ -34,8 +34,8 @@
       },
       "ForwardSoftLimitEnabled": true,
       "ReverseSoftLimitEnabled": true,
-      "ForwardSoftLimit": 165,
-      "ReverseSoftLimit": 5,
+      "ForwardSoftLimit": 5,
+      "ReverseSoftLimit": 165,
       "Positions":
       {
         
