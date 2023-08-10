@@ -2,6 +2,46 @@
   "ControllerMap": "CompControllerMap",
   "SparkMaxPositionConfigs": [
     {
+      "AbsolutePositionConversionFactor": 360,
+      "AbsoluteVelocityConversionFactor": 1,
+      "AbsoluteZeroOffset": 161.06,
+      "CurrentLimit": 45,
+      "DefaultRunMode": "ABSOLUTE",
+      "ID": 31,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": true,
+      "InvertedRelative": false,
+      "MaxSpeed": 0.3,
+      "MinSpeed": -0.3,
+      "Name": "Elbow",
+      "Follow": "NONE",
+      "PositionPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0.08
+      },
+      "PositionPIDWrappingEnabled": false,
+      "RelativePositionConversionFactor": 1.54285,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 0,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "ForwardSoftLimitEnabled": true,
+      "ReverseSoftLimitEnabled": true,
+      "ForwardSoftLimit": 165,
+      "ReverseSoftLimit": 5,
+      "Positions":
+      {
+        
+      }
+    },
+    {
       "AbsolutePositionConversionFactor": 6.2831853072000001,
       "AbsoluteVelocityConversionFactor": 0.104719755,
       "AbsoluteZeroOffset": 0,
@@ -162,7 +202,20 @@
       }
     }
   ],
-  "SparkMaxPercentConfigs": [],
+  "SparkMaxPercentConfigs": [
+    {
+      "Name": "Roller",
+      "ID": 33,
+      "InvertedRelative": false,
+      "CurrentLimit": 20,
+      "IdleMode": "Coast",
+      "Follow": "NONE",
+      "Percents":
+      {
+
+      }
+    }
+  ],
   "SparkMaxPWMConfigs": [],
   "SwerveConfigs": [
     {

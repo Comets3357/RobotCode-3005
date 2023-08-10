@@ -82,6 +82,7 @@ void Controller::SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTrig
             frc2::Subsystem* sub = std::get<1>(defaultCommand.second);
             std::function<void(double, double, double, double)> function = std::get<0>(defaultCommand.second);
             modeTriggers[mode.first].OnTrue(new frc2::InstantCommand{[this, sub, function]{sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});},{}});
+            sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});
         }
     }
 }
@@ -136,7 +137,7 @@ bool Controller::LoadControls(picojson::value &controllers)
 
             for (auto& mode : controllerType.second.get<picojson::object>())//controller.GetName()])
             {
-                if (mode.first == "Taranus" && frc::DriverStation::GetJoystickName(slot) != "FrSky Taranis Joystick") break;
+                //if (mode.first == "Taranus" && frc::DriverStation::GetJoystickName(slot) != "FrSky Taranis Joystick") break;
                 if (mode.first != "DefaultMode")
                 {
 
