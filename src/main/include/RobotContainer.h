@@ -21,7 +21,7 @@
 #include "COMETS3357/Configs/ControllerMap.h"
 #include "COMETS3357/TimerSubsystem.h"
 
-#include "commands/ExampleCommand.h"
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -48,9 +48,7 @@ class RobotContainer {
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
-      {"Test1", std::make_shared<ExampleCommand>(1)},
-      {"Test2", std::make_shared<ExampleCommand>(2)},
-      {"Test3", std::make_shared<ExampleCommand>(3)}
+ 
   };
 
 
