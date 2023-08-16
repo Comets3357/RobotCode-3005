@@ -21,8 +21,6 @@
 #include "COMETS3357/Configs/ControllerMap.h"
 #include "COMETS3357/TimerSubsystem.h"
 
-
-
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -47,7 +45,8 @@ class RobotContainer {
 
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
-{
+  {
+
   };
 
 
