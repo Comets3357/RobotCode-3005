@@ -14,3 +14,15 @@ void EndEffectorSubsystem::Periodic()
 {
     
 }
+
+void EndEffectorSubsystem::SetPosition(double position)
+{
+    endeffectormotor.SetPosition(position);
+}
+
+void EndEffectorSubsystem::SetPosition(std::string position)
+{
+    endeffectormotor.SetPosition(position);
+
+}
+

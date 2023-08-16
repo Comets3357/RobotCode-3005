@@ -1,8 +1,7 @@
 #pragma once
 
 #include "COMETS3357/Subsystems/Subsystem.h"
-
-#include "COMETS3357/Subsystems/SparkMax/SparkMaxPercent.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
 
 enum EndEffectorSubsystemState
 {
@@ -19,10 +18,11 @@ public:
 
     void Periodic() override;
 
-    void SetPercent(double power);
+    void SetPosition(double position);
+    void SetPosition(std::string position);
 
 private:
 
-    COMETS3357::SparkMaxPercent EndEffectorMotor{"EndEffectorMotor"};
+    COMETS3357::SparkMaxPosition endeffectormotor{"endeffectormotor"};
 
 };
