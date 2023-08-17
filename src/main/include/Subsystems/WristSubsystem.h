@@ -2,7 +2,7 @@
 
 #include "COMETS3357/Subsystems/Subsystem.h"
 
-#include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPercent.h"
 
 enum WristState
 {
@@ -19,12 +19,13 @@ public:
 
     void Periodic() override;
 
-    void SetPosition(double position);
-    void SetPosition(std::string position);
+    void SetPercent(double Percent);
+    
+    void SetPercent(std::string Percent);
 
 private:
 
-    COMETS3357::SparkMaxPosition wristMotor{"WristMotor"};
+    COMETS3357::SparkMaxPercent wristMotor{"WristMotor"};
 
 };
 

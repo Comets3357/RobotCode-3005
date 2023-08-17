@@ -15,14 +15,13 @@ void EndEffectorSubsystem::Periodic()
     
 }
 
-void EndEffectorSubsystem::SetPosition(double position)
+void EndEffectorSubsystem::SetPercent(double percent)
 {
-    endeffectormotor.SetPosition(position);
+    endEffectorMotor.SetPower(percent);
 }
 
-void EndEffectorSubsystem::SetPosition(std::string position)
+void EndEffectorSubsystem::SetPercent(std::string percent)
 {
-    endeffectormotor.SetPosition(position);
-
+    endEffectorMotor.SetPower(percent);
 }
 

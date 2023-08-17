@@ -3,28 +3,28 @@
 ElbowSubsystem::ElbowSubsystem() : COMETS3357::Subsystem<ElbowState>("ElbowSubsystem")
 {
 
-};
+}
 
 void ElbowSubsystem::Initialize()
 {
 
-};
+}
 
 void ElbowSubsystem::Periodic()
 {
-    elbowMotor.Periodic();
-};
+    
+}
 
-void ElbowSubsystem::SetPosition(double position)
+void ElbowSubsystem::SetPercent(double percent)
 {
-    elbowMotor.SetPosition(position);
-};
+    elbowMotor.SetPower(percent);
+}
 
-void ElbowSubsystem::SetPosition(std::string position)
+void ElbowSubsystem::SetPercent(std::string percent)
 {
-elbowMotor.SetPosition(position);
+elbowMotor.SetPower(percent);
 
-};
+}
 
 
 

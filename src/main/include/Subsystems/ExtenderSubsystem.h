@@ -1,7 +1,7 @@
 #pragma once
 
 #include "COMETS3357/Subsystems/Subsystem.h"
-#include "COMETS3357/Subsystems/Sparkmax/SparkMaxPosition.h"
+#include "COMETS3357/Subsystems/Sparkmax/SparkMaxPercent.h"
 
 enum ExtenderState
 {
@@ -18,11 +18,12 @@ public:
     
     void Periodic() override;
 
-    void SetPosition(double position);
-    void SetPosition(std::string position);
+    void SetPercent(double Percent);
+    
+    void SetPercent(std::string Percent);
 
 private:
 
-    COMETS3357::SparkMaxPosition extendermotor{"ExtenderMotor"};
+    COMETS3357::SparkMaxPercent extendermotor{"ExtenderMotor"};
 
 };

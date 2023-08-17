@@ -15,12 +15,12 @@ void ExtenderSubsystem::Periodic()
 
 }
 
-void ExtenderSubsystem::SetPosition(double position)
+void ExtenderSubsystem::SetPercent(double Percent)
 {
-    extendermotor.SetPosition(position);
+    extendermotor.SetPower(Percent);
 }
 
-void ExtenderSubsystem::SetPosition(std::string position)
+void ExtenderSubsystem::SetPercent(std::string Percent)
 {
-    extendermotor.SetPosition(position);
+    extendermotor.SetPower(Percent);
 }

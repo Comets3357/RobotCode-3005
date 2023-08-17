@@ -63,9 +63,9 @@ class RobotContainer {
   {
    {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.Drive(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX}, true, true);}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualEndEffector", {[this](auto leftX, auto leftY, auto rightX, auto rightY){endEffector.SetPercent(leftY);}, &endEffector, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"ManualExtender", {[this](auto leftX, auto leftY, auto rightX, auto rightY){extender.SetPosition(rightY);}, &extender, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"ManualElbow", {[this](auto leftX, auto leftY, auto rightX, auto rightY){elbow.SetPosition(rightY);}, &elbow, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"ManualWrist", {[this](auto leftX, auto leftY, auto rightX, auto rightY){wrist.SetPosition(leftY);}, &wrist, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
+   {"ManualExtender", {[this](auto leftX, auto leftY, auto rightX, auto rightY){extender.SetPercent(rightY);}, &extender, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualElbow", {[this](auto leftX, auto leftY, auto rightX, auto rightY){elbow.SetPercent(rightY);}, &elbow, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualWrist", {[this](auto leftX, auto leftY, auto rightX, auto rightY){wrist.SetPercent(leftY);}, &wrist, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };

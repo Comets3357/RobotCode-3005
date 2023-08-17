@@ -16,12 +16,12 @@ void WristSubsystem::Periodic()
 
 }
 
-void WristSubsystem::SetPosition(double position)
+void WristSubsystem::SetPercent(double percent)
 {
-
+    wristMotor.SetPower(percent);
 }
 
-void WristSubsystem::SetPosition(std::string position)
+void WristSubsystem::SetPercent(std::string percent)
 {
-    wristMotor.SetPosition(position);
+    wristMotor.SetPower(percent);
 }
