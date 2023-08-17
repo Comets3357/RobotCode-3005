@@ -18,9 +18,9 @@ public:
     
     void Periodic() override;
 
-    void SetPercent(double Percent);
+    void SetPercent(double percent);
     
-    void SetPercent(std::string Percent);
+    void SetPercent(std::string percent);
 
 private:
 
