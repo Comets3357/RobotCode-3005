@@ -14,6 +14,11 @@ void SparkMaxPercent::SetPower(double power)
     motor.Set(power);
 }
 
+void SparkMaxPercent::SetPower(std::string power)
+{
+    motor.Set(config.percents[power]);
+}
+
 void SparkMaxPercent::RobotInit()
 {
 
