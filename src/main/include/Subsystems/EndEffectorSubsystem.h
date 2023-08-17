@@ -6,7 +6,8 @@
 
 enum EndEffectorSubsystemState
 {
-
+    CUBE,
+    CONE
 };
 
 class EndEffectorSubsystem : public COMETS3357::Subsystem<EndEffectorSubsystemState>
