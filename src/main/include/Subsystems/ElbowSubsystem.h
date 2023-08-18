@@ -1,11 +1,7 @@
 #pragma once
 
 #include "COMETS3357/Subsystems/Subsystem.h"
-#include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
-
-
-
-
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPercent.h"
 
 enum ElbowState 
 {
@@ -22,13 +18,13 @@ public:
 
     void Periodic() override;
 
-    void SetPosition(double position);
+    void SetPercent(double percent);
 
-    void SetPosition(std::string position);
+    void SetPercent(std::string percent);
 
 private:
 
-    COMETS3357::SparkMaxPosition elbowMotor{"elbowMotor"};
+    COMETS3357::SparkMaxPercent elbowMotor{"elbowMotor"};
 };
 
 

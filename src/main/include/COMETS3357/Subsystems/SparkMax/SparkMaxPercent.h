@@ -20,6 +20,7 @@ namespace COMETS3357
          * @param power The power ranging from -1 to 1 to set to the motor
         */
         void SetPower(double power);
+        void SetPower(std::string power);
 
         COMETS3357::SparkMaxPercentConfig config;
         rev::CANSparkMax motor;

@@ -14,3 +14,14 @@ void EndEffectorSubsystem::Periodic()
 {
     
 }
+
+void EndEffectorSubsystem::SetPercent(double percent)
+{
+    endEffectorMotor.SetPower(percent);
+}
+
+void EndEffectorSubsystem::SetPercent(std::string percent)
+{
+    endEffectorMotor.SetPower(percent);
+}
+
