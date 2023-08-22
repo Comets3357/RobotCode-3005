@@ -21,6 +21,12 @@
 #include "COMETS3357/Configs/ControllerMap.h"
 #include "COMETS3357/TimerSubsystem.h"
 
+#include "Subsystems/ElbowSubsystem.h"
+#include "Subsystems/EndEffectorSubsystem.h"
+#include "Subsystems/ExtenderSubsystem.h"
+#include "Subsystems/WristSubsystem.h"
+
+
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -39,8 +45,11 @@ class RobotContainer {
   COMETS3357::TimerSubsystem timer{};
   COMETS3357::GyroSubsystem gyro{};
   COMETS3357::SwerveSubsystem swerve{"Swerve"};
+  ElbowSubsystem elbow{};
+  EndEffectorSubsystem endEffector{};
+  ExtenderSubsystem extender{};
+  WristSubsystem wrist{};
  
-
 
 
 
@@ -52,7 +61,11 @@ class RobotContainer {
 
   std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, COMETS3357::Controller::JoystickCommandMode>> joystickActionMap
   {
-    {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.Drive(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX}, true, true);}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
+   {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.Drive(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX}, true, true);}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualEndEffector", {[this](auto leftX, auto leftY, auto rightX, auto rightY){endEffector.SetPercent(leftY);}, &endEffector, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualExtender", {[this](auto leftX, auto leftY, auto rightX, auto rightY){extender.SetPercent(rightY);}, &extender, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualElbow", {[this](auto leftX, auto leftY, auto rightX, auto rightY){elbow.SetPercent(rightY);}, &elbow, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualWrist", {[this](auto leftX, auto leftY, auto rightX, auto rightY){wrist.SetPercent(leftY);}, &wrist, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };
