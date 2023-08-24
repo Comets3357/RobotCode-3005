@@ -9,10 +9,9 @@ void PlacementCommand::Initialize()
 {
     if (endEffectorSubsystem->State()==EndEffectorSubsystemState::CONE){
         conePositionCommand.Schedule();
-        
     }
     else {
-    cubePositionCommand.Schedule();
+        cubePositionCommand.Schedule();
     }
 }
 
