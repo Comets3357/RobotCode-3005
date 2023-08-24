@@ -51,15 +51,14 @@ class RobotContainer {
   EndEffectorSubsystem endEffector{};
   ExtenderSubsystem extender{};
   WristSubsystem wrist{};
- 
 
- //Commands
-SetPositionCommand highCubePosition{&elbow, &extender, &wrist, "ElbowHighCubePosition", "ExtenderHighCubePosition", "WristHighCubePosition"};
-SetPositionCommand highConePosition{&elbow, &extender, &wrist, "ElbowHighConePosition", "ExtenderHighConePosition", "WristHighConePosition"};
-SetPositionCommand midConePosition{&elbow, &extender, &wrist, "ElbowMidConePosition", "ExtenderMidConePosition", "WristMidConePosition"};
-SetPositionCommand midCubePosition{&elbow, &extender, &wrist, "ElbowMidCubePosition", "ExtenderMidCubePosition", "WristMidCubePosition"};
-SetPositionCommand lowCubePosition{&elbow, &extender, &wrist, "ElbowLowCubePosition", "ExtenderLowCubePosition", "WristLowCubePosition"};
-SetPositionCommand lowConePosition{&elbow, &extender, &wrist, "ElbowLowConePosition", "ExtenderLowConePosition", "WristLowConePosition"};
+  //Commands
+  SetPositionCommand highCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHighCubePosition", "ExtenderHighCubePosition", "WristHighCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
+  SetPositionCommand highConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHighConePosition", "ExtenderHighConePosition", "WristHighConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD};
+  SetPositionCommand midConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowMidConePosition", "ExtenderMidConePosition", "WristMidConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD};
+  SetPositionCommand midCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowMidCubePosition", "ExtenderMidCubePosition", "WristMidCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
+  SetPositionCommand lowCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowLowCubePosition", "ExtenderLowCubePosition", "WristLowCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
+  SetPositionCommand lowConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowLowConePosition", "ExtenderLowConePosition", "WristLowConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD};
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
