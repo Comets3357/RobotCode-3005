@@ -1,7 +1,7 @@
 #pragma once
 
 #include "COMETS3357/Subsystems/Subsystem.h"
-#include "COMETS3357/Subsystems/SparkMax/SparkMaxPercent.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
 
 enum ElbowState 
 {
@@ -20,11 +20,13 @@ public:
 
     void SetPercent(double percent);
 
-    void SetPercent(std::string percent);
+    void SetPosition(double position);
+
+    void SetPosition(std::string position);
 
 private:
 
-    COMETS3357::SparkMaxPercent elbowMotor{"elbowMotor"};
+    COMETS3357::SparkMaxPosition elbowMotor{"elbowMotor"};
 };
 
 

@@ -136,6 +136,9 @@ namespace COMETS3357
 
         void SetPosition(std::string position);
 
+
+        void SetPower(double percent);
+
         /**
          * Runs ever loop
          */
