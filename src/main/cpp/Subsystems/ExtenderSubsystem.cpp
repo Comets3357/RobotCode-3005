@@ -20,7 +20,12 @@ void ExtenderSubsystem::SetPercent(double Percent)
     extendermotor.SetPower(Percent);
 }
 
-void ExtenderSubsystem::SetPercent(std::string Percent)
+void ExtenderSubsystem::SetPosition(double position)
 {
-    extendermotor.SetPower(Percent);
+    extendermotor.SetPosition(position);
+}
+
+void ExtenderSubsystem::SetPosition(std::string position)
+{
+    extendermotor.SetPosition(position);
 }

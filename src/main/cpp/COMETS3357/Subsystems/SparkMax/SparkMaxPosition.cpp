@@ -99,6 +99,11 @@ void SparkMaxPosition::ZeroRelativeEncoder()
     relativeEncoder.SetPosition(absoluteEncoderPosition);
 }
 
+void SparkMaxPosition::SetPower(double percent)
+{
+    motor.Set(percent);
+}
+
 void SparkMaxPosition::ChangeFeedBackDevice(SparkMaxPositionRunMode mode)
 {
     switch (mode)

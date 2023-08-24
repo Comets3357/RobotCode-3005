@@ -78,7 +78,7 @@
       "ReverseSoftLimit": 0,
       "Positions":
       {
-        
+          "ExtenderHomePosition": 0
       }
     },
     {
@@ -118,7 +118,7 @@
       "ReverseSoftLimit": 0,
       "Positions":
       {
-      
+        "ElbowHomePosition": 0
       }
     },
     {
@@ -159,7 +159,7 @@
       "ReverseSoftLimit": 0,
       "Positions":
       {
-        
+        "WristHomePosition": 0
       }
     },
     {

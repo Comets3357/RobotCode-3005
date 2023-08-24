@@ -15,15 +15,19 @@ void ElbowSubsystem::Periodic()
     
 }
 
+void ElbowSubsystem::SetPosition(double position)
+{
+    elbowMotor.SetPosition(position);
+}
+
+void ElbowSubsystem::SetPosition(std::string position)
+{
+    elbowMotor.SetPosition(position);
+}
+
 void ElbowSubsystem::SetPercent(double percent)
 {
     elbowMotor.SetPower(percent);
-}
-
-void ElbowSubsystem::SetPercent(std::string percent)
-{
-elbowMotor.SetPower(percent);
-
 }
 
 

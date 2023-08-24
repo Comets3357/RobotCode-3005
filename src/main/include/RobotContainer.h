@@ -26,6 +26,8 @@
 #include "Subsystems/ExtenderSubsystem.h"
 #include "Subsystems/WristSubsystem.h"
 
+#include "Commands/SetPositionCommand.h"
+#include "Commands/PlacementCommand.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -51,11 +53,25 @@ class RobotContainer {
   WristSubsystem wrist{};
  
 
-
+ //Commands
+SetPositionCommand highCubePosition{&elbow, &extender, &wrist, "ElbowHighCubePosition", "ExtenderHighCubePosition", "WristHighCubePosition"};
+SetPositionCommand highConePosition{&elbow, &extender, &wrist, "ElbowHighConePosition", "ExtenderHighConePosition", "WristHighConePosition"};
+SetPositionCommand midConePosition{&elbow, &extender, &wrist, "ElbowMidConePosition", "ExtenderMidConePosition", "WristMidConePosition"};
+SetPositionCommand midCubePosition{&elbow, &extender, &wrist, "ElbowMidCubePosition", "ExtenderMidCubePosition", "WristMidCubePosition"};
+SetPositionCommand lowCubePosition{&elbow, &extender, &wrist, "ElbowLowCubePosition", "ExtenderLowCubePosition", "WristLowCubePosition"};
+SetPositionCommand lowConePosition{&elbow, &extender, &wrist, "ElbowLowConePosition", "ExtenderLowConePosition", "WristLowConePosition"};
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
-
+    {"HomePosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowHomePosition", "ExtenderHomePosition", "WristHomePosition")},
+    {"HighPosition", std::make_shared<PlacementCommand>(&endEffector, highCubePosition, highConePosition)},
+    {"MidPosition", std::make_shared<PlacementCommand>(&endEffector, midCubePosition, midConePosition)},
+    {"LowPosition", std::make_shared<PlacementCommand>(&endEffector, lowCubePosition, lowConePosition)},
+    {"UpRightConePosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowUpRightConePosition", "ExtenderUpRightConePosition", "WristUpRightConePosition")},
+    {"SideConePosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowSideConePosition", "ExtenderSideConePosition", "WristSideConePosition")},
+    {"CubePosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowCubePosition", "ExtenderCubePosition", "WristCubePosition")},
+    {"SingleSubPosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowSingleSubPosition", "ExtenderSingleSubPosition", "WristSingleSubPosition")},
+    {"DoubleSubPosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowDoubleSubPosition", "ExtenderDoubleSubPosition", "WristDoubleSubPosition")},
   };
 
 
