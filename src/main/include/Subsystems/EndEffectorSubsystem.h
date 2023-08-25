@@ -25,6 +25,6 @@ public:
 
 private:
 
-    COMETS3357::SparkMaxPercent endEffectorMotor{"endEffectorMotor"};
+    COMETS3357::SparkMaxPercent endEffectorMotor{"EndEffectorMotor"};
 
 };
