@@ -22,6 +22,8 @@ namespace COMETS3357
         void SetPower(double power);
         void SetPower(std::string power);
 
+        double GetOutputCurrent();
+
         COMETS3357::SparkMaxPercentConfig config;
         rev::CANSparkMax motor;
 

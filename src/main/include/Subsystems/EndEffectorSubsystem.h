@@ -13,6 +13,12 @@ class EndEffectorSubsystem : public COMETS3357::Subsystem<EndEffectorSubsystemSt
 {
 public:
 
+    enum PieceStatus
+    {
+        WITH_GAMEPIECE,
+        WITHOUT_GAMEPIECE
+    };
+
     EndEffectorSubsystem();
 
     void Initialize() override;
@@ -26,5 +32,7 @@ public:
 private:
 
     COMETS3357::SparkMaxPercent endEffectorMotor{"EndEffectorMotor"};
+
+    PieceStatus status = WITHOUT_GAMEPIECE;
 
 };
