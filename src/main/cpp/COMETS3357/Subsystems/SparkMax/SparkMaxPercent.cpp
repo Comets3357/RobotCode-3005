@@ -40,3 +40,9 @@ void SparkMaxPercent::RobotInit()
         motor.BurnFlash();
     }
 }
+
+
+double SparkMaxPercent::GetOutputCurrent()
+{
+    return motor.GetOutputCurrent();
+}
