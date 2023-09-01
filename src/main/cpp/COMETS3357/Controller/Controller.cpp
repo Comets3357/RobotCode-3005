@@ -72,6 +72,7 @@ void Controller::SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTrig
             frc2::Subsystem* sub = std::get<1>(joystickActionMap[joystickTrigger.first]);
             std::function<void(double, double, double, double)> function = std::get<0>(joystickActionMap[joystickTrigger.first]);
             (joystickTrigger.second && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, sub, function]{function(controller.GetLeftX(),controller.GetLeftY(),controller.GetRightX(),controller.GetRightY());},{sub}});
+            (joystickTrigger.second && modeTriggers[mode.first]).OnFalse(new frc2::RunCommand{[this, sub, function]{function(0,0,0,0);}, {sub}});
         }
     }
 

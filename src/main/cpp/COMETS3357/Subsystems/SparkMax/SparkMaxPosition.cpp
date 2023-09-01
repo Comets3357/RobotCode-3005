@@ -102,6 +102,7 @@ void SparkMaxPosition::ZeroRelativeEncoder()
 void SparkMaxPosition::SetPower(double percent)
 {
     motor.Set(percent);
+    frc::SmartDashboard::PutNumber("IDK", percent);
 }
 
 void SparkMaxPosition::ChangeFeedBackDevice(SparkMaxPositionRunMode mode)
