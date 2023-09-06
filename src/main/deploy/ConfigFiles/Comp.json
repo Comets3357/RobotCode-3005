@@ -104,6 +104,57 @@
       }
     },
     {
+      "AbsolutePositionConversionFactor": 1,
+      "AbsoluteVelocityConversionFactor": 1,
+      "AbsoluteZeroOffset": 0,
+      "CurrentLimit": 45,
+      "DefaultRunMode": "ABSOLUTE",
+      "ID": 11,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": false,
+      "InvertedRelative": false,
+      "MaxSpeed": 1,
+      "MinSpeed": -1,
+      "Name": "ElbowMotorFollow",
+      "Follow": "ElbowMotor",
+      "PositionPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "PositionPIDWrappingEnabled": false,
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 0,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "ForwardSoftLimitEnabled": false,
+      "ReverseSoftLimitEnabled": false,
+      "ForwardSoftLimit": 0,
+      "ReverseSoftLimit": 0,
+      "Positions":
+      {
+        "ElbowHomePosition": 0,
+        "ElbowHighCubePosition": 0,
+        "ElbowHighConePosition": 0,
+        "ElbowMidCubePosition": 0,
+        "ElbowMidConePosition": 0,
+        "ElbowLowCubePosition": 0,
+        "ElbowLowConePosition": 0,
+        "ElbowUpRightConePosition": 0,
+        "ElbowSideConePosition": 0,
+        "ElbowCubePosition": 0,
+        "ElbowSingleSubPosition": 0,
+        "ElbowDoubleSubPosition": 0
+      }
+    },
+    {
 
       "AbsolutePositionConversionFactor": 1,
       "AbsoluteVelocityConversionFactor": 1,

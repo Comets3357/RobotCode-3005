@@ -12,7 +12,8 @@ void ElbowSubsystem::Initialize()
 
 void ElbowSubsystem::Periodic()
 {
-    
+    elbowMotor.Periodic();
+    elbowFollow.Periodic();
 }
 
 void ElbowSubsystem::SetPosition(double position)
