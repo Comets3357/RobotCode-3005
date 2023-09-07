@@ -7,7 +7,7 @@
       "AbsoluteZeroOffset": 0,
       "CurrentLimit": 45,
       "DefaultRunMode": "ABSOLUTE",
-      "ID": 10,
+      "ID": 31,
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
       "InvertedRelative": false,
@@ -53,12 +53,12 @@
       }
     },
     {
-      "AbsolutePositionConversionFactor": 1,
+      "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 0,
+      "AbsoluteZeroOffset": 92.9,
       "CurrentLimit": 45,
       "DefaultRunMode": "ABSOLUTE",
-      "ID": 11,
+      "ID": 21,
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
       "InvertedRelative": false,
@@ -81,7 +81,7 @@
         "D": 0,
         "FF": 0,
         "I": 0,
-        "P": 0
+        "P": 1
       },
       "ForwardSoftLimitEnabled": false,
       "ReverseSoftLimitEnabled": false,
@@ -109,7 +109,7 @@
       "AbsoluteZeroOffset": 0,
       "CurrentLimit": 45,
       "DefaultRunMode": "ABSOLUTE",
-      "ID": 11,
+      "ID": 20,
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
       "InvertedRelative": false,
@@ -132,7 +132,7 @@
         "D": 0,
         "FF": 0,
         "I": 0,
-        "P": 0
+        "P": 1
       },
       "ForwardSoftLimitEnabled": false,
       "ReverseSoftLimitEnabled": false,
@@ -161,7 +161,7 @@
       "AbsoluteZeroOffset": 0,
       "CurrentLimit": 20,
       "DefaultRunMode": "ABSOLUTE",
-      "ID": 12,
+      "ID": 32,
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
       "InvertedRelative": false,
@@ -370,7 +370,7 @@
   "SparkMaxPercentConfigs": [
     {
       "Name": "EndEffectorMotor",
-      "ID": 13,
+      "ID": 41,
       "InvertedRelative": false,
       "CurrentLimit": 40,
       "IdleMode": "Brake",

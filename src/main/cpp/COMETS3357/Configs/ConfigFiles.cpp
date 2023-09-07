@@ -1,6 +1,10 @@
 #include "COMETS3357/Configs/ConfigFiles.h"
 
 
+#include <COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h>
+#include <COMETS3357/Subsystems/SparkMax/SparkMaxPercent.h>
+#include <COMETS3357/Subsystems/SparkMax/SparkMaxVelocity.h>
+
 using namespace COMETS3357;
 
 RobotConfig& ConfigFiles::GetConfigFiles()

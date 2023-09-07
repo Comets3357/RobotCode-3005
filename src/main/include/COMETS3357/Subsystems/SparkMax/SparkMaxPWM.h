@@ -6,6 +6,9 @@
 
 namespace COMETS3357
 {
+
+    struct SparkMaxPWMConfig;
+
     class SparkMaxPWM
     {
     public:

@@ -17,12 +17,17 @@
 #include <rev/CANSparkMax.h>
 #include <frc/motorcontrol/PWMSparkMax.h>
 
+
+
+
 namespace COMETS3357
 {
-
+    class SparkMaxPosition;
+    class SparkMaxPercent;
+    class SparkMaxVelocity;
 
     struct SparkMaxPositionConfig {
-        rev::CANSparkMax* motor;
+        COMETS3357::SparkMaxPosition* motor;
         std::string follow;
         int ID = 1;
         SparkMaxPositionRunMode defaultMode;
@@ -52,7 +57,7 @@ namespace COMETS3357
     };
 
     struct SparkMaxVelocityConfig {
-        rev::CANSparkMax* motor;
+        COMETS3357::SparkMaxVelocity* motor;
         std::string follow;
         int ID = 100;
         bool invertedRelative;
@@ -73,7 +78,7 @@ namespace COMETS3357
     };
 
     struct SparkMaxPercentConfig {
-        rev::CANSparkMax* motor;
+        COMETS3357::SparkMaxPercent* motor;
         std::string follow;
         int ID = 1;
         bool invertedRelative;
