@@ -81,6 +81,12 @@ void SparkMaxPosition::RobotInit()
         PIDController.SetPositionPIDWrappingMinInput(config.turningEncoderPositionPIDMinInput);
         PIDController.SetPositionPIDWrappingMaxInput(config.turningEncoderPositionPIDMaxInput);
 
+        motor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, config.forwardSoftLimitEnabled);
+        motor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, config.reverseSoftLimitEnabled);
+        motor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, config.forwardSoftLimit);
+        motor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, config.reverseSoftLimit);
+        
+
         // if (config.follow != "NONE")
         // {
         //     motor.Follow(COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[config.follow].motor->motor);
@@ -88,6 +94,8 @@ void SparkMaxPosition::RobotInit()
         motor.BurnFlash();
         
     }
+
+    relativeEncoder.SetPosition(0);
 
 
         
@@ -209,6 +217,7 @@ void SparkMaxPosition::Periodic()
     
 
     CheckAbsoluteEncoder();
+    //ZeroRelativeEncoder();
 }
 
 void SparkMaxPosition::changeRunMode(SparkMaxPositionRunMode mode)

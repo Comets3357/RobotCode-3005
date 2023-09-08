@@ -18,8 +18,7 @@ void ExtenderSubsystem::Periodic()
 
 void ExtenderSubsystem::SetPercent(double percent)
 {
-    extendermotor.SetPower(percent * 0.5);
-    frc::SmartDashboard::PutNumber("ERK", percent);
+    extendermotor.SetPower(percent * 0.2);
 }
 
 void ExtenderSubsystem::SetPosition(double position)

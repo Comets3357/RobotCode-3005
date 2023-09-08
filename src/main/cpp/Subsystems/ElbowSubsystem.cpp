@@ -9,6 +9,7 @@ ElbowSubsystem::ElbowSubsystem() : COMETS3357::Subsystem<ElbowState>("ElbowSubsy
 void ElbowSubsystem::Initialize()
 {
     elbowFollow.motor.Follow(elbowMotor.motor);
+    elbowFollow.motor.BurnFlash();
 }
 
 void ElbowSubsystem::Periodic()
@@ -31,7 +32,7 @@ void ElbowSubsystem::SetPosition(std::string position)
 
 void ElbowSubsystem::SetPercent(double percent)
 {
-    elbowMotor.SetPower(percent * 0.5);
+    elbowMotor.SetPower(percent * 0.15);
     
 }
 
