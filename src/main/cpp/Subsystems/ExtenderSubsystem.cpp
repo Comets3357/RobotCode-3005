@@ -18,7 +18,7 @@ void ExtenderSubsystem::Periodic()
 
 void ExtenderSubsystem::SetPercent(double percent)
 {
-    extendermotor.SetPower(percent * 0.2);
+    extendermotor.SetPower(percent * 0.1);
 }
 
 void ExtenderSubsystem::SetPosition(double position)
