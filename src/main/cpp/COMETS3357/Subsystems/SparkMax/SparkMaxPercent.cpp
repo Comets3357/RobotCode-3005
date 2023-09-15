@@ -5,7 +5,7 @@ using namespace COMETS3357;
 
 SparkMaxPercent::SparkMaxPercent(std::string configName) : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs[configName]}, motor{config.ID, rev::CANSparkMax::MotorType::kBrushless}
 {
-    config.motor = &motor;
+    config.motor = this;
     COMETS3357::SubsystemManager::GetInstance().AddInit([this]{RobotInit();});
 }
 
@@ -34,9 +34,15 @@ void SparkMaxPercent::RobotInit()
 
         if (config.follow != "NONE")
         {
-            motor.Follow(*COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs[config.follow].motor);
+            motor.Follow(COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs[config.follow].motor->motor);
         }
 
         motor.BurnFlash();
     }
+}
+
+
+double SparkMaxPercent::GetOutputCurrent()
+{
+    return motor.GetOutputCurrent();
 }

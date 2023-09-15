@@ -1,4 +1,5 @@
 #include "Subsystems/ElbowSubsystem.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 ElbowSubsystem::ElbowSubsystem() : COMETS3357::Subsystem<ElbowState>("ElbowSubsystem")
 {
@@ -7,12 +8,16 @@ ElbowSubsystem::ElbowSubsystem() : COMETS3357::Subsystem<ElbowState>("ElbowSubsy
 
 void ElbowSubsystem::Initialize()
 {
-
+    elbowFollow.motor.Follow(elbowMotor.motor);
+    elbowFollow.motor.BurnFlash();
 }
 
 void ElbowSubsystem::Periodic()
 {
-    
+    elbowMotor.Periodic();
+    elbowFollow.Periodic();
+
+    frc::SmartDashboard::PutNumber("ERK2", elbowMotor.GetAbsolutePosition());
 }
 
 void ElbowSubsystem::SetPosition(double position)
@@ -27,7 +32,8 @@ void ElbowSubsystem::SetPosition(std::string position)
 
 void ElbowSubsystem::SetPercent(double percent)
 {
-    elbowMotor.SetPower(percent);
+    elbowMotor.SetPower(percent * 0.15);
+    
 }
 
 

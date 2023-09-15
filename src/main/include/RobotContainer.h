@@ -28,6 +28,7 @@
 
 #include "Commands/SetPositionCommand.h"
 #include "Commands/PlacementCommand.h"
+#include "Commands/AutoRetractCommand.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -59,18 +60,24 @@ class RobotContainer {
   SetPositionCommand midCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowMidCubePosition", "ExtenderMidCubePosition", "WristMidCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
   SetPositionCommand lowCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowLowCubePosition", "ExtenderLowCubePosition", "WristLowCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
   SetPositionCommand lowConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowLowConePosition", "ExtenderLowConePosition", "WristLowConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD};
+  SetPositionCommand upRightConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowUpRightConePosition", "ExtenderUpRightConePosition", "WristUpRightConePosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT};
+  SetPositionCommand sideConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowSideConePosition", "ExtenderSideConePosition", "WristSideConePosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT};
+  SetPositionCommand cubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowCubePosition", "ExtenderCubePosition", "WristCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT};
+  SetPositionCommand singleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowSingleSubPosition", "ExtenderSingleSubPosition", "WristSingleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT};
+  SetPositionCommand doubleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowDoubleSubPosition", "ExtenderDoubleSubPosition", "WristDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
+  SetPositionCommand homePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHomePosition", "ExtenderHomePosition", "WristHomePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
-    {"HomePosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowHomePosition", "ExtenderHomePosition", "WristHomePosition")},
+    {"HomePosition", std::make_shared<SetPositionCommand>(homePosition)},
     {"HighPosition", std::make_shared<PlacementCommand>(&endEffector, highCubePosition, highConePosition)},
     {"MidPosition", std::make_shared<PlacementCommand>(&endEffector, midCubePosition, midConePosition)},
     {"LowPosition", std::make_shared<PlacementCommand>(&endEffector, lowCubePosition, lowConePosition)},
-    {"UpRightConePosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowUpRightConePosition", "ExtenderUpRightConePosition", "WristUpRightConePosition")},
-    {"SideConePosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowSideConePosition", "ExtenderSideConePosition", "WristSideConePosition")},
-    {"CubePosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowCubePosition", "ExtenderCubePosition", "WristCubePosition")},
-    {"SingleSubPosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowSingleSubPosition", "ExtenderSingleSubPosition", "WristSingleSubPosition")},
-    {"DoubleSubPosition", std::make_shared<SetPositionCommand>(&elbow, &extender, &wrist, "ElbowDoubleSubPosition", "ExtenderDoubleSubPosition", "WristDoubleSubPosition")},
+    {"UpRightConePosition", std::make_shared<AutoRetractCommand>(upRightConePosition, homePosition, &endEffector, 0)},
+    {"SideConePosition", std::make_shared<AutoRetractCommand>(sideConePosition, homePosition, &endEffector, 0)},
+    {"CubePosition", std::make_shared<AutoRetractCommand>(cubePosition, homePosition, &endEffector, 0)},
+    {"SingleSubPosition", std::make_shared<AutoRetractCommand>(singleSubPosition, homePosition, &endEffector, 0)},
+    {"DoubleSubPosition", std::make_shared<AutoRetractCommand>(doubleSubPosition, homePosition, &endEffector, 0)},
   };
 
 

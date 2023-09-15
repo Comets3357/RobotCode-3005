@@ -23,6 +23,8 @@ public:
     
     void SetPercent(std::string percent);
 
+    double GetOutputCurrent();
+
 private:
 
     COMETS3357::SparkMaxPercent endEffectorMotor{"EndEffectorMotor"};

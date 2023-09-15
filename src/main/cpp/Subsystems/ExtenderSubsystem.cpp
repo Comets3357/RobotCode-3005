@@ -1,4 +1,5 @@
 #include "Subsystems/ExtenderSubsystem.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 ExtenderSubsystem::ExtenderSubsystem() : COMETS3357::Subsystem<ExtenderState>("ExtenderSubsystem")
 {
@@ -15,9 +16,9 @@ void ExtenderSubsystem::Periodic()
 
 }
 
-void ExtenderSubsystem::SetPercent(double Percent)
+void ExtenderSubsystem::SetPercent(double percent)
 {
-    extendermotor.SetPower(Percent);
+    extendermotor.SetPower(percent * 0.1);
 }
 
 void ExtenderSubsystem::SetPosition(double position)

@@ -26,7 +26,8 @@ public:
 
 private:
 
-    COMETS3357::SparkMaxPosition elbowMotor{"elbowMotor"};
+    COMETS3357::SparkMaxPosition elbowMotor{"ElbowMotor", true};
+    COMETS3357::SparkMaxPosition elbowFollow{"ElbowMotorFollow", true};
 };
 
 

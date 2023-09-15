@@ -4,7 +4,7 @@
     {
         "XBOX":
         {
-            "DefaultMode": "XBOXSemiAuto",
+            "DefaultMode": "PrimarySemiAuto",
             "PrimarySemiAuto":
             {
                 "D-padLeft": "NONE",
@@ -88,7 +88,7 @@
         },
         "XBOX":
         {
-            "DefaultMode": "XBOXSemiAuto",
+            "DefaultMode": "XBOXManual",
             "XBOXSemiAuto":
             {
                 "D-padLeft": "NONE",
@@ -99,7 +99,7 @@
                 "LeftStickX": "NONE",
                 "LeftStickButton": "NONE",
                 "RightStickX": "NONE",
-                "RightStickY": "NONE",
+                "RightStickY": "ManualExtender",
                 "RightStickButton": "NONE",
                 "AButton": "ArmUp",
                 "BButton": "NONE",
@@ -159,7 +159,7 @@
                 "RightStickX": "NONE",
                 "RightStickY": "ManualElbow",
                 "RightStickButton": "NONE",
-                "AButton": "NONE",
+                "AButton": "HomePosition",
                 "BButton": "NONE",
                 "XButton": "NONE",
                 "YButton": "NONE",

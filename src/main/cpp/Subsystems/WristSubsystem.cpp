@@ -18,7 +18,7 @@ void WristSubsystem::Periodic()
 
 void WristSubsystem::SetPosition(double position)
 {
-    wristMotor.SetPosition(position);
+    wristMotor.SetPosition(position * 0.05);
 }
 
 void WristSubsystem::SetPosition(std::string position)

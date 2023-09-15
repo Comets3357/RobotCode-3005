@@ -10,6 +10,7 @@
 #include <units/velocity.h>
 #include "COMETS3357/utils/SwerveUtils.h"
 
+#include <frc/smartdashboard/SmartDashboard.h>
 using namespace COMETS3357;
 
 SwerveSubsystem::SwerveSubsystem(std::string configFileName)
@@ -53,6 +54,7 @@ void SwerveSubsystem::Periodic() {
   m_rearLeft.Periodic();
   m_rearRight.Periodic();
 
+  frc::SmartDashboard::PutNumber("ASDSasdfsghdfD", (double)m_frontLeft.GetPosition().distance);
 
   m_odometry.Update(frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}),
                     {m_frontLeft.GetPosition(), m_rearLeft.GetPosition(),

@@ -16,7 +16,7 @@ SparkMaxPosition::SparkMaxPosition(std::string configName)
     runMode = defaultRunMode;
 
     changeRunMode(defaultRunMode);
-    config.motor = &motor;
+    config.motor = this;
 
    COMETS3357::SubsystemManager::GetInstance().AddInit([this]{RobotInit();});
 
@@ -35,7 +35,7 @@ SparkMaxPosition::SparkMaxPosition(std::string configName, bool setAbsoluteOffse
     changeRunMode(defaultRunMode);
 
     setAbsPos = setAbsoluteOffset;
-    config.motor = &motor;
+    config.motor = this;
 
     COMETS3357::SubsystemManager::GetInstance().AddInit([this]{RobotInit();});
 
@@ -44,20 +44,20 @@ SparkMaxPosition::SparkMaxPosition(std::string configName, bool setAbsoluteOffse
 void SparkMaxPosition::RobotInit()
 {
 
-    if (
-        motor.GetInverted() != config.invertedRelative || 
-        motor.GetIdleMode() != config.idleMode || 
-        PIDController.GetOutputMin(1) != config.minSpeed ||
-        PIDController.GetOutputMax(1) != config.maxSpeed ||
-        relativeEncoder.GetPositionConversionFactor() != config.relativePositionConversionFactor ||
-        relativeEncoder.GetVelocityConversionFactor() != config.relativeVelocityConversionFactor ||
-        absoluteEncoder.GetInverted() != config.invertedAbsolute ||
-        absoluteEncoder.GetPositionConversionFactor() != config.absolutePositionConversionFactor ||
-        absoluteEncoder.GetVelocityConversionFactor() != config.absoluteVelocityConversionFactor ||
-        PIDController.GetPositionPIDWrappingEnabled() != config.positionPIDWrappingEnabled ||
-        PIDController.GetPositionPIDWrappingMinInput() != config.turningEncoderPositionPIDMinInput ||
-        PIDController.GetPositionPIDWrappingMaxInput() != config.turningEncoderPositionPIDMaxInput
-    )
+    if ( true)
+        // motor.GetInverted() != config.invertedRelative || 
+        // motor.GetIdleMode() != config.idleMode || 
+        // PIDController.GetOutputMin(1) != config.minSpeed ||
+        // PIDController.GetOutputMax(1) != config.maxSpeed ||
+        // relativeEncoder.GetPositionConversionFactor() != config.relativePositionConversionFactor ||
+        // relativeEncoder.GetVelocityConversionFactor() != config.relativeVelocityConversionFactor ||
+        // absoluteEncoder.GetInverted() != config.invertedAbsolute ||
+        // absoluteEncoder.GetPositionConversionFactor() != config.absolutePositionConversionFactor ||
+        // absoluteEncoder.GetVelocityConversionFactor() != config.absoluteVelocityConversionFactor ||
+        // PIDController.GetPositionPIDWrappingEnabled() != config.positionPIDWrappingEnabled ||
+        // PIDController.GetPositionPIDWrappingMinInput() != config.turningEncoderPositionPIDMinInput ||
+        // PIDController.GetPositionPIDWrappingMaxInput() != config.turningEncoderPositionPIDMaxInput
+   // )
     {
         motor.RestoreFactoryDefaults();
         motor.SetInverted(config.invertedRelative);
@@ -76,18 +76,26 @@ void SparkMaxPosition::RobotInit()
             absoluteEncoder.SetZeroOffset(config.absoluteZeroOffset);
         }
 
+
         PIDController.SetPositionPIDWrappingEnabled(config.positionPIDWrappingEnabled);
         PIDController.SetPositionPIDWrappingMinInput(config.turningEncoderPositionPIDMinInput);
         PIDController.SetPositionPIDWrappingMaxInput(config.turningEncoderPositionPIDMaxInput);
 
-        if (config.follow != "NONE")
-        {
-            motor.Follow(*COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[config.follow].motor);
-        }
+        motor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, config.forwardSoftLimitEnabled);
+        motor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, config.reverseSoftLimitEnabled);
+        motor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, config.forwardSoftLimit);
+        motor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, config.reverseSoftLimit);
+        
 
+        // if (config.follow != "NONE")
+        // {
+        //     motor.Follow(COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[config.follow].motor->motor);
+        // }
         motor.BurnFlash();
         
     }
+
+    relativeEncoder.SetPosition(0);
 
 
         
@@ -102,6 +110,7 @@ void SparkMaxPosition::ZeroRelativeEncoder()
 void SparkMaxPosition::SetPower(double percent)
 {
     motor.Set(percent);
+    
 }
 
 void SparkMaxPosition::ChangeFeedBackDevice(SparkMaxPositionRunMode mode)
@@ -208,6 +217,7 @@ void SparkMaxPosition::Periodic()
     
 
     CheckAbsoluteEncoder();
+    //ZeroRelativeEncoder();
 }
 
 void SparkMaxPosition::changeRunMode(SparkMaxPositionRunMode mode)

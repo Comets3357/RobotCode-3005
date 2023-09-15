@@ -4,16 +4,16 @@
     {
       "AbsolutePositionConversionFactor": 1,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 0,
+      "AbsoluteZeroOffset": 0.515,
       "CurrentLimit": 45,
-      "DefaultRunMode": "ABSOLUTE",
-      "ID": 0,
+      "DefaultRunMode": "RELATIVE",
+      "ID": 31,
       "IdleMode": "Brake",
-      "InvertedAbsolute": false,
+      "InvertedAbsolute": true,
       "InvertedRelative": false,
       "MaxSpeed": 1,
       "MinSpeed": -1,
-      "Name": "extendermotor",
+      "Name": "ExtenderMotor",
       "Follow": "NONE",
       "PositionPID": {
         "D": 0,
@@ -22,7 +22,7 @@
         "P": 0
       },
       "PositionPIDWrappingEnabled": false,
-      "RelativePositionConversionFactor": 1,
+      "RelativePositionConversionFactor": 0.74862,
       "RelativeVelocityConversionFactor": 1,
       "TurningEncoderPositionPIDMaxInput": 0,
       "TurningEncoderPositionPIDMinInput": 0,
@@ -32,13 +32,13 @@
         "I": 0,
         "P": 0
       },
-      "ForwardSoftLimitEnabled": false,
-      "ReverseSoftLimitEnabled": false,
-      "ForwardSoftLimit": 0,
-      "ReverseSoftLimit": 0,
+      "ForwardSoftLimitEnabled": true,
+      "ReverseSoftLimitEnabled": true,
+      "ForwardSoftLimit": 18.5,
+      "ReverseSoftLimit": 0.5,
       "Positions":
       {
-          "ExtenderHomePosition": 0,
+          "ExtenderHomePosition": 10,
           "ExtenderHighCubePosition": 0,
           "ExtenderHighConePosition": 0,
           "ExtenderMidCubePosition": 0,
@@ -53,19 +53,70 @@
       }
     },
     {
+      "AbsolutePositionConversionFactor": 360,
+      "AbsoluteVelocityConversionFactor": 1,
+      "AbsoluteZeroOffset": 93.231,
+      "CurrentLimit": 45,
+      "DefaultRunMode": "ABSOLUTE",
+      "ID": 21,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": false,
+      "InvertedRelative": true,
+      "MaxSpeed": 1,
+      "MinSpeed": -1,
+      "Name": "ElbowMotor",
+      "Follow": "NONE",
+      "PositionPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "PositionPIDWrappingEnabled": false,
+      "RelativePositionConversionFactor": 7.776,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 0,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 1
+      },
+      "ForwardSoftLimitEnabled": true,
+      "ReverseSoftLimitEnabled": true,
+      "ForwardSoftLimit": 299, 
+      "ReverseSoftLimit": 15, 
+      "Positions":
+      {
+        "ElbowHomePosition": 10,
+        "ElbowHighCubePosition": 0,
+        "ElbowHighConePosition": 0,
+        "ElbowMidCubePosition": 0,
+        "ElbowMidConePosition": 0,
+        "ElbowLowCubePosition": 0,
+        "ElbowLowConePosition": 0,
+        "ElbowUpRightConePosition": 0,
+        "ElbowSideConePosition": 0,
+        "ElbowCubePosition": 0,
+        "ElbowSingleSubPosition": 0,
+        "ElbowDoubleSubPosition": 0
+      }
+    },
+    {
       "AbsolutePositionConversionFactor": 1,
       "AbsoluteVelocityConversionFactor": 1,
       "AbsoluteZeroOffset": 0,
       "CurrentLimit": 45,
       "DefaultRunMode": "ABSOLUTE",
-      "ID": 0,
+      "ID": 20,
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
-      "InvertedRelative": false,
+      "InvertedRelative": true,
       "MaxSpeed": 1,
       "MinSpeed": -1,
-      "Name": "elbowMotor",
-      "Follow": "NONE",
+      "Name": "ElbowMotorFollow",
+      "Follow": "ElbowMotor",
       "PositionPID": {
         "D": 0,
         "FF": 0,
@@ -89,7 +140,7 @@
       "ReverseSoftLimit": 0,
       "Positions":
       {
-        "ElbowHomePosition": 0,
+        "ElbowHomePosition": 10,
         "ElbowHighCubePosition": 0,
         "ElbowHighConePosition": 0,
         "ElbowMidCubePosition": 0,
@@ -110,7 +161,7 @@
       "AbsoluteZeroOffset": 0,
       "CurrentLimit": 20,
       "DefaultRunMode": "ABSOLUTE",
-      "ID": 0,
+      "ID": 32,
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
       "InvertedRelative": false,
@@ -141,7 +192,7 @@
       "ReverseSoftLimit": 0,
       "Positions":
       {
-        "WristHomePosition": 0,
+        "WristHomePosition": 10,
         "WristHighCubePosition": 0,
         "WristHighConePosition": 0,
         "WristMidCubePosition": 0,
@@ -319,7 +370,7 @@
   "SparkMaxPercentConfigs": [
     {
       "Name": "EndEffectorMotor",
-      "ID": 0,
+      "ID": 41,
       "InvertedRelative": false,
       "CurrentLimit": 40,
       "IdleMode": "Brake",
@@ -383,7 +434,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor1",
-      "RelativePositionConversionFactor": 0.05077956125529683312,
+      "RelativePositionConversionFactor": 0.0727910427491711,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -403,7 +454,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor2",
-      "RelativePositionConversionFactor": 0.05077956125529683312,
+      "RelativePositionConversionFactor": 0.0727910427491711,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -423,7 +474,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor3",
-      "RelativePositionConversionFactor": 0.05077956125529683312,
+      "RelativePositionConversionFactor": 0.0727910427491711,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -443,7 +494,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor4",
-      "RelativePositionConversionFactor": 0.05077956125529683312,
+      "RelativePositionConversionFactor": 0.0727910427491711,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
