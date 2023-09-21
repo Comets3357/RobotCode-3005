@@ -178,12 +178,12 @@ void SparkMaxPosition::SetVelocity(double velocity)
 void SparkMaxPosition::SetPosition(double position)
 {
     frc::SmartDashboard::PutNumber("POSITION", position);
-    PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition, 1);
+    PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
 }
 
 void SparkMaxPosition::SetPosition(std::string position)
 {
-    PIDController.SetReference(config.positions[position], rev::CANSparkMax::ControlType::kPosition, 1);
+    PIDController.SetReference(config.positions[position], rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
 }
 
 double SparkMaxPosition::GetRelativePosition()
@@ -208,6 +208,7 @@ double SparkMaxPosition::GetAbsoluteVelocity()
 
 void SparkMaxPosition::Periodic()
 {
+
     absoluteEncoderPosition = absoluteEncoder.GetPosition();
     relativeEncoderPosition = absoluteEncoder.GetPosition();
 
@@ -224,6 +225,12 @@ void SparkMaxPosition::changeRunMode(SparkMaxPositionRunMode mode)
 {
     runMode = mode;
     ChangeFeedBackDevice(runMode);
+}
+
+
+void SparkMaxPosition::SetFeedForward(std::function<double(double)> feedforward)
+{
+    feedForwardFunction = feedforward;
 }
 
 

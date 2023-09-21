@@ -3,7 +3,9 @@
 
 ElbowSubsystem::ElbowSubsystem() : COMETS3357::Subsystem<ElbowState>("ElbowSubsystem")
 {
-
+    elbowMotor.SetFeedForward([](double){
+        return 0;
+    });
 }
 
 void ElbowSubsystem::Initialize()
@@ -36,7 +38,10 @@ void ElbowSubsystem::SetPercent(double percent)
     
 }
 
-
+double ElbowSubsystem::GetPosition()
+{
+    return elbowMotor.GetPosition();
+}
 
 
 

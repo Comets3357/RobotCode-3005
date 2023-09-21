@@ -25,8 +25,7 @@ SetPositionCommand::SetPositionCommand(
 
 void SetPositionCommand::Initialize()
 {
-    elbowSub->SetPosition(elbowPos);
-    extenderSub->SetPosition(extenderPos);
+
     wristSub->SetPosition(wristPos);
 
     switch (endEffectorMode)
@@ -52,12 +51,21 @@ void SetPositionCommand::Initialize()
 
 void SetPositionCommand::Execute()
 {
-    
+    elbowSub->SetPosition(elbowPos);
+
+    if (std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 40)
+    {
+        extenderSub->SetPosition(extenderPos);
+    }
+    else
+    {
+        extenderSub->SetPosition(0.5);
+    }
 }
 
 bool SetPositionCommand::IsFinished()
 {
-    return true;
+    return std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 2;
 }
 
 void SetPositionCommand::End(bool interrupted)

@@ -3,7 +3,9 @@
 
 WristSubsystem::WristSubsystem() : COMETS3357::Subsystem<WristState>("WristSubsystem")
 {
-
+    wristMotor.SetFeedForward([](double){
+        return 0;
+    })
 }
 
 void WristSubsystem::Initialize()
@@ -29,4 +31,9 @@ void WristSubsystem::SetPosition(std::string position)
 void WristSubsystem::SetPercent(double percent)
 {
     wristMotor.SetPower(percent);
+}
+
+double WristSubsystem::GetPosition()
+{
+    return wristMotor.GetPosition();
 }

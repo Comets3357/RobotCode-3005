@@ -29,6 +29,7 @@
 #include "Commands/SetPositionCommand.h"
 #include "Commands/PlacementCommand.h"
 #include "Commands/AutoRetractCommand.h"
+#include "Commands/EjectCommand.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -78,6 +79,8 @@ class RobotContainer {
     {"CubePosition", std::make_shared<AutoRetractCommand>(cubePosition, homePosition, &endEffector, 0)},
     {"SingleSubPosition", std::make_shared<AutoRetractCommand>(singleSubPosition, homePosition, &endEffector, 0)},
     {"DoubleSubPosition", std::make_shared<AutoRetractCommand>(doubleSubPosition, homePosition, &endEffector, 0)},
+    {"EjectOnPress", std::make_shared<EjectCommand>(&endEffector, true)},
+    {"EjectOnRelease", std::make_shared<EjectCommand>(&endEffector, false)}
   };
 
 
