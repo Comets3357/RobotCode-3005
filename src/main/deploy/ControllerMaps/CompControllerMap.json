@@ -88,21 +88,21 @@
         },
         "XBOX":
         {
-            "DefaultMode": "XBOXManual",
+            "DefaultMode": "XBOXSemiAuto",
             "XBOXSemiAuto":
             {
                 "D-padLeft": "NONE",
                 "D-padRight": "NONE",
                 "D-padUp": "NONE",
                 "D-padDown": "NONE",
-                "LeftStickY": "RunRollers",
+                "LeftStickY": "NONE",
                 "LeftStickX": "NONE",
                 "LeftStickButton": "NONE",
                 "RightStickX": "NONE",
-                "RightStickY": "ManualExtender",
+                "RightStickY": "NONE",
                 "RightStickButton": "NONE",
-                "AButton": "ArmUp",
-                "BButton": "NONE",
+                "AButton": "CubePosition",
+                "BButton": "SideConePosition",
                 "XButton": "NONE",
                 "YButton": "NONE",
                 "LeftBumper": "NONE",

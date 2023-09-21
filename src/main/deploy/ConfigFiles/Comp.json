@@ -46,8 +46,8 @@
           "ExtenderLowCubePosition": 0,
           "ExtenderLowConePosition": 0,
           "ExtenderUpRightConePosition": 0,
-          "ExtenderSideConePosition": 0,
-          "ExtenderCubePosition": 0,
+          "ExtenderSideConePosition": 14.75,
+          "ExtenderCubePosition": 12,
           "ExtenderSingleSubPosition": 0,
           "ExtenderDoubleSubPosition": 0
       }
@@ -62,8 +62,8 @@
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
       "InvertedRelative": true,
-      "MaxSpeed": 1,
-      "MinSpeed": -1,
+      "MaxSpeed": 0.3,
+      "MinSpeed": -0.3,
       "Name": "ElbowMotor",
       "Follow": "NONE",
       "PositionPID": {
@@ -97,8 +97,8 @@
         "ElbowLowCubePosition": 0,
         "ElbowLowConePosition": 0,
         "ElbowUpRightConePosition": 0,
-        "ElbowSideConePosition": 0,
-        "ElbowCubePosition": 0,
+        "ElbowSideConePosition": 21.7,
+        "ElbowCubePosition": 32.6,
         "ElbowSingleSubPosition": 0,
         "ElbowDoubleSubPosition": 0
       }
@@ -113,8 +113,8 @@
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
       "InvertedRelative": true,
-      "MaxSpeed": 1,
-      "MinSpeed": -1,
+      "MaxSpeed": 0.1,
+      "MinSpeed": -0.1,
       "Name": "ElbowMotorFollow",
       "Follow": "ElbowMotor",
       "PositionPID": {
@@ -173,7 +173,7 @@
         "D": 0,
         "FF": 0,
         "I": 0,
-        "P": 0.5
+        "P": 0.06
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 2.26,
@@ -200,8 +200,8 @@
         "WristLowCubePosition": 0,
         "WristLowConePosition": 0,
         "WristUpRightConePosition": 0,
-        "WristSideConePosition": 0,
-        "WristCubePosition": 0,
+        "WristSideConePosition": 53,
+        "WristCubePosition": 233.5,
         "WristSingleSubPosition": 0,
         "WristDoubleSubPosition": 0
       }
