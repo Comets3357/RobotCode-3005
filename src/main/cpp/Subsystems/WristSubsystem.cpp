@@ -3,9 +3,7 @@
 
 WristSubsystem::WristSubsystem() : COMETS3357::Subsystem<WristState>("WristSubsystem")
 {
-    wristMotor.SetFeedForward([](double){
-        return 0;
-    })
+    wristMotor.SetFeedForward([](double a){return 0;});
 }
 
 void WristSubsystem::Initialize()

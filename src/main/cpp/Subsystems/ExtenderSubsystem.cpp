@@ -3,7 +3,7 @@
 
 ExtenderSubsystem::ExtenderSubsystem() : COMETS3357::Subsystem<ExtenderState>("ExtenderSubsystem")
 {
-
+    extendermotor.SetFeedForward([](double a){return 0;});
 }
 
 void ExtenderSubsystem::Initialize()
@@ -29,4 +29,9 @@ void ExtenderSubsystem::SetPosition(double position)
 void ExtenderSubsystem::SetPosition(std::string position)
 {
     extendermotor.SetPosition(position);
+}
+
+double ExtenderSubsystem::GetPosition()
+{
+    return extendermotor.GetPosition();
 }

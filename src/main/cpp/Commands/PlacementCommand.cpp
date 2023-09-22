@@ -2,7 +2,7 @@
 
 PlacementCommand::PlacementCommand(EndEffectorSubsystem* endEffector, SetPositionCommand &cubePosition, SetPositionCommand &conePosition) : endEffectorSubsystem{endEffector}, conePositionCommand{conePosition}, cubePositionCommand{cubePosition}
 {
-
+    
 }
 
 void PlacementCommand::Initialize()

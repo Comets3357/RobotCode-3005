@@ -27,7 +27,9 @@ public:
     
     void SetPercent(std::string percent);
 
-private:
+    double GetPosition();
+
+
 
     COMETS3357::SparkMaxPosition wristMotor{"WristMotor"};
 

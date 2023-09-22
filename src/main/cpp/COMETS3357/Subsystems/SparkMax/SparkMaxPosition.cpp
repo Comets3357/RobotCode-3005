@@ -218,7 +218,11 @@ void SparkMaxPosition::Periodic()
     
 
     CheckAbsoluteEncoder();
-    //ZeroRelativeEncoder();
+    if (runMode == POSITION_SPARK_MAX_ABSOLUTE && std::abs(absoluteEncoderPosition - relativeEncoderPosition) < 10)
+    {
+        ZeroRelativeEncoder();
+    }
+    
 }
 
 void SparkMaxPosition::changeRunMode(SparkMaxPositionRunMode mode)

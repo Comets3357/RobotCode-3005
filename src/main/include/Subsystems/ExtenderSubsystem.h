@@ -24,7 +24,9 @@ public:
 
     void SetPercent(double percent);
 
-private:
+    double GetPosition();
+
+
 
     COMETS3357::SparkMaxPosition extendermotor{"ExtenderMotor"};
 

@@ -25,7 +25,9 @@ public:
 
     double GetOutputCurrent();
 
-private:
+    double GetPosition();
+
+
 
     COMETS3357::SparkMaxPercent endEffectorMotor{"EndEffectorMotor"};
 

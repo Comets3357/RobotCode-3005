@@ -2,14 +2,23 @@
 
 
 
-EjectCommand::EjectCommand(EndEffectorSubsystemState* endEffectorState)
+EjectCommand::EjectCommand(EndEffectorSubsystem* endEffectorSub, bool on)
 {
-
+    enabled = on;
+    endEffectorSubsystem = endEffectorSub;
 }
 
 void EjectCommand::Initialize()
 {
-
+    if (enabled)
+    {
+        endEffectorSubsystem->SetPercent(-1);
+    }
+    else
+    {
+        endEffectorSubsystem->SetPercent(0);
+    }
+    
 }
 
 void EjectCommand::Execute()

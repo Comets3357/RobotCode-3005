@@ -3,8 +3,9 @@
 
 ElbowSubsystem::ElbowSubsystem() : COMETS3357::Subsystem<ElbowState>("ElbowSubsystem")
 {
-    elbowMotor.SetFeedForward([](double){
-        return 0;
+    elbowMotor.SetFeedForward([](double theta){
+        double p1 = 19, f1 = 0, f2 = 0;
+        return ((10.0/p1)*(f1-f2)+f1)*cos(theta * (PI/180));
     });
 }
 

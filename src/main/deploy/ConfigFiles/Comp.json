@@ -19,7 +19,7 @@
         "D": 0,
         "FF": 0,
         "I": 0,
-        "P": 0
+        "P": 0.3
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 0.74862,
@@ -55,7 +55,7 @@
     {
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 93.231,
+      "AbsoluteZeroOffset": 80,
       "CurrentLimit": 45,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 21,
@@ -67,10 +67,10 @@
       "Name": "ElbowMotor",
       "Follow": "NONE",
       "PositionPID": {
-        "D": 0,
+        "D": 0.25,
         "FF": 0,
         "I": 0,
-        "P": 0
+        "P": 0.0045
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 7.776,
@@ -156,9 +156,9 @@
     },
     {
 
-      "AbsolutePositionConversionFactor": 1,
+      "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 0,
+      "AbsoluteZeroOffset": 296,
       "CurrentLimit": 20,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 32,
@@ -173,10 +173,10 @@
         "D": 0,
         "FF": 0,
         "I": 0,
-        "P": 0
+        "P": 0.5
       },
       "PositionPIDWrappingEnabled": false,
-      "RelativePositionConversionFactor": 1,
+      "RelativePositionConversionFactor": 2.26,
       "RelativeVelocityConversionFactor": 1,
       "TurningEncoderPositionPIDMaxInput": 0,
       "TurningEncoderPositionPIDMinInput": 0,
@@ -186,10 +186,10 @@
         "I": 0,
         "P": 0
       },
-      "ForwardSoftLimitEnabled": false,
-      "ReverseSoftLimitEnabled": false,
-      "ForwardSoftLimit": 0,
-      "ReverseSoftLimit": 0,
+      "ForwardSoftLimitEnabled": true,
+      "ReverseSoftLimitEnabled": true,
+      "ForwardSoftLimit": 350,
+      "ReverseSoftLimit": 10,
       "Positions":
       {
         "WristHomePosition": 10,

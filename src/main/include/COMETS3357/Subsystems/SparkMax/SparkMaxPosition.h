@@ -136,7 +136,7 @@ namespace COMETS3357
 
         void SetPosition(std::string position);
 
-        void SetFeedForward(std::function<double(double, double)> feedforward);
+        void SetFeedForward(std::function<double(double)> feedforward);
 
 
         void SetPower(double percent);
@@ -177,7 +177,7 @@ namespace COMETS3357
         double lastPosition;
         bool setAbsPos = true;
 
-        std::function<double(double,double)> feedForwardFunction = NULL;
+        std::function<double(double)> feedForwardFunction = NULL;
 
     };
 };
