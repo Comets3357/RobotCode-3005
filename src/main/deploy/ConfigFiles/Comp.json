@@ -377,10 +377,10 @@
       "Follow": "NONE",
       "Percents":
       {
-        "EndEffectorConeInputPercent": 0,
-        "EndEffectorCubeInputPercent": 0,
-        "EndEffectorConeHoldPercent": 0,
-        "EndEffectorCubeHoldPercent": 0
+        "EndEffectorConeInputPercent": 0.5,
+        "EndEffectorCubeInputPercent": 0.5,
+        "EndEffectorConeHoldPercent": 0.5,
+        "EndEffectorCubeHoldPercent": 0.5
       }
     }
   ],

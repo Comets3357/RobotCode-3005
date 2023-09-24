@@ -17,8 +17,10 @@
 #include "COMETS3357/Configs/ConfigFiles.h"
 #include "COMETS3357/Subsystems/SubsystemManager.h"
 
+#include "COMETS3357/CometsRobot/CometsRobot.h"
 
-class Robot : public frc::TimedRobot {
+
+class Robot : public COMETS3357::CometsRobot {
  public:
 
   void RobotInit() override;

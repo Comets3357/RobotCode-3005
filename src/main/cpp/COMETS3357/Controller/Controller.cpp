@@ -144,7 +144,14 @@ bool Controller::LoadControls(picojson::value &controllers)
 
                     if (controllerType.first == "Taranus")
                     {
-                        
+                        std::map<std::string, frc2::Trigger> joystickTriggers;
+
+                        SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(1), 0.08) != 0;}}, "LeftStickY", mode, joystickTriggers);
+                        SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(1), 0.08) != 0;}}, "LeftStickX", mode, joystickTriggers);
+                        SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(1), 0.08) != 0;}}, "RightStickY", mode, joystickTriggers);
+                        SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(1), 0.08) != 0;}}, "RightStickX", mode, joystickTriggers);
+
+                        SetJoysticks(joystickTriggers, mode);
                     }
                     else if (controllerType.first == "XBOX")
                     {
