@@ -1,21 +1,13 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 #include "Robot.h"
-
 #include <frc2/command/CommandScheduler.h>
-
-
-
 #include <frc/smartdashboard/SmartDashboard.h>
 
-void Robot::RobotInit() {
+void Robot::RobotInit() 
+{
 // ConfigFiles::getInstance().LoadConfigFiles("Comp");
 // frc::SmartDashboard::PutNumber("A",ConfigFiles::getInstance().GetConfigFiles().wheelMotorConfigs["DriveMotor1"].ID);
 //m_container.timerSubsystem.ResetAndBeginTimer();
 COMETS3357::SubsystemManager::GetInstance().Init();
-
 }
 
 /**
@@ -26,9 +18,8 @@ COMETS3357::SubsystemManager::GetInstance().Init();
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {
-
-  
+void Robot::RobotPeriodic() 
+{
   frc2::CommandScheduler::GetInstance().Run();
   m_container.Periodic();
 }
@@ -40,7 +31,8 @@ void Robot::RobotPeriodic() {
  */
 void Robot::DisabledInit() {}
 
-void Robot::DisabledPeriodic() {
+void Robot::DisabledPeriodic() 
+{
 
 }
 
@@ -48,7 +40,8 @@ void Robot::DisabledPeriodic() {
  * This autonomous runs the autonomous command selected by your {@link
  * RobotContainer} class.
  */
-void Robot::AutonomousInit() {
+void Robot::AutonomousInit() 
+{
   //m_autonomousCommand = m_container.GetAutonomousCommand();
 
  // m_container.autos.AutonomousInit();
@@ -56,12 +49,14 @@ void Robot::AutonomousInit() {
 
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() {
+void Robot::TeleopInit() 
+{
   // This makes sure that the autonomous stops running when
   // teleop starts running. If you want the autonomous to
   // continue until interrupted by another command, remove
   // this line or comment it out.
-  if (m_autonomousCommand) {
+  if (m_autonomousCommand) 
+  {
     m_autonomousCommand->Cancel();
   }
 }
@@ -84,14 +79,14 @@ void Robot::SimulationInit() {}
 /**
  * This function is called periodically whilst in simulation.
  */
-void Robot::SimulationPeriodic() {
+void Robot::SimulationPeriodic() 
+{
   frc2::CommandScheduler::GetInstance().Run();
-
-  
 }
 
 #ifndef RUNNING_FRC_TESTS
-int main() {
+int main() 
+{
   return frc::StartRobot<Robot>();
 }
 #endif
