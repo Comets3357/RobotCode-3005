@@ -39,8 +39,9 @@ namespace COMETS3357
          * @brief Contructs a new controller
          * @param slot the slot of the controller
          * @param actions an event list of actions to pair to control bindings
+         * @param controllerType the controller you want to control the robot with
         */
-        Controller(int slot, std::unordered_map<std::string, std::shared_ptr<frc2::Command>> &buttonActions, std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, JoystickCommandMode>>& joystickActions);
+        Controller(int slot, std::unordered_map<std::string, std::shared_ptr<frc2::Command>> &buttonActions, std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, JoystickCommandMode>>& joystickActions, std::string controllerType);
 
         /**
          * @brief Loads the config of the controller
@@ -66,6 +67,7 @@ namespace COMETS3357
         void SetJoystickTrigger(frc2::Trigger trigger, std::string joystick, std::pair<const std::string, picojson::value>& mode, std::map<std::string, frc2::Trigger>& joystickTriggers);
         void SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTriggers, std::pair<const std::string, picojson::value>& mode);
 
+        std::string type;
     };
 
 
@@ -101,7 +103,7 @@ namespace COMETS3357
 
     private:
 
-
+        
 
         
     };
