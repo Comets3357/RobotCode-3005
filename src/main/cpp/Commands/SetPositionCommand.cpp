@@ -11,7 +11,8 @@ SetPositionCommand::SetPositionCommand(
     std::string elbowPosition, 
     std::string extenderPosition, 
     std::string wristPosition,
-    EndEffectorMode mode
+    EndEffectorMode mode,
+    EndEffectorSubsystemState gamePiece
     ) : 
     elbowSub{elbowSubsystem}, 
     extenderSub{extenderSubsystem},
@@ -20,13 +21,29 @@ SetPositionCommand::SetPositionCommand(
     elbowPos{elbowPosition},
     extenderPos{extenderPosition},
     wristPos{wristPosition},
-    endEffectorMode{mode}
+    endEffectorMode{mode},
+    piece{gamePiece}
 {
     AddRequirements({elbowSubsystem, extenderSubsystem, wristSubsystem, endEffectorSubsystem});
 }
 
 void SetPositionCommand::Initialize()
 {
+
+    if (elbowSub->GetPosition() < 20)
+    {
+        isFromHome = true;
+    }
+    else
+    {
+        isFromHome = false;
+    }
+
+    if (piece != NONE)
+    {
+        endEffectorSub->SetState(piece);
+    }
+    
 
     wristSub->SetPosition(wristPos);
     frc::SmartDashboard::PutNumber("wrist", wristSub->wristMotor.config.positions[wristPos]);
@@ -50,24 +67,64 @@ void SetPositionCommand::Initialize()
         case END_EFFECTOR_CUBE_HOLD:
         endEffectorSub->SetPercent("EndEffectorCubeHoldPercent");
         break;
+        case END_EFFECTOR_GAME_PIECE:
+            switch (endEffectorSub->State())
+            {
+            case CUBE:
+                endEffectorSub->SetPercent(-.05);
+                break;
+            case CONE:
+                endEffectorSub->SetPercent(.05);
+                break;
+            
+            default:
+                break;
+            }
+        break;
     }
     
 }
 
 void SetPositionCommand::Execute()
 {
-    elbowSub->SetPosition(elbowPos);
-    frc::SmartDashboard::PutNumber("elbow", elbowSub->elbowMotor.config.positions[elbowPos]);
-
-    if (true)//std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 40)
+    if (isFromHome)
     {
-        extenderSub->SetPosition(extenderPos);
-        frc::SmartDashboard::PutNumber("extender", extenderSub->extendermotor.config.positions[extenderPos]);
+        elbowSub->SetPosition(50);
+        if (elbowSub->GetPosition() > 30)
+        {
+            isFromHome = false;
+        }
     }
     else
     {
-        extenderSub->SetPosition(0.5);
+        if (elbowSub->elbowMotor.config.positions[elbowPos] < 20)
+        {
+            wristSub->SetPosition(wristPos);
+            extenderSub->SetPosition(extenderPos);
+            if (extenderSub->GetPosition() < 1 && std::abs(wristSub->GetPosition() - wristSub->wristMotor.config.positions[elbowPos]) < 10)
+            {
+                elbowSub->SetPosition(elbowPos);
+            }
+        }
+        else
+        {
+            wristSub->SetPosition(wristPos);
+            elbowSub->SetPosition(elbowPos);
+
+            if (std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 40)
+            {
+                extenderSub->SetPosition(extenderPos);
+                frc::SmartDashboard::PutNumber("extender", extenderSub->extendermotor.config.positions[extenderPos]);
+            }
+            else
+            {
+                extenderSub->SetPosition(0.5);
+            }
+        }
+        
     }
+
+    frc::SmartDashboard::PutNumber("elbow", elbowSub->elbowMotor.config.positions[elbowPos]);
 }
 
 bool SetPositionCommand::IsFinished()

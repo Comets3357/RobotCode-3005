@@ -11,8 +11,8 @@
       "IdleMode": "Brake",
       "InvertedAbsolute": true,
       "InvertedRelative": false,
-      "MaxSpeed": 1,
-      "MinSpeed": -1,
+      "MaxSpeed": 0.5,
+      "MinSpeed": -0.5,
       "Name": "ExtenderMotor",
       "Follow": "NONE",
       "PositionPID": {
@@ -38,8 +38,8 @@
       "ReverseSoftLimit": 0.5,
       "Positions":
       {
-          "ExtenderHomePosition": 10,
-          "ExtenderHighCubePosition": 17.25,
+          "ExtenderHomePosition": 0.1,
+          "ExtenderHighCubePosition": 16.25,
           "ExtenderHighConePosition": 18.25,
           "ExtenderMidCubePosition": 0.2,
           "ExtenderMidConePosition": 0.2,
@@ -62,8 +62,8 @@
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
       "InvertedRelative": true,
-      "MaxSpeed": 0.3,
-      "MinSpeed": -0.3,
+      "MaxSpeed": 0.15,
+      "MinSpeed": -0.15,
       "Name": "ElbowMotor",
       "Follow": "NONE",
       "PositionPID": {
@@ -89,16 +89,16 @@
       "ReverseSoftLimit": 15, 
       "Positions":
       {
-        "ElbowHomePosition": 10,
-        "ElbowHighCubePosition": 227,
-        "ElbowHighConePosition": 224.1,
-        "ElbowMidCubePosition": 244.5,
-        "ElbowMidConePosition": 232.2,
+        "ElbowHomePosition": 12,
+        "ElbowHighCubePosition": 222,
+        "ElbowHighConePosition": 215.1,
+        "ElbowMidCubePosition": 246.5,
+        "ElbowMidConePosition": 234.2,
         "ElbowLowCubePosition": 32.6,
         "ElbowLowConePosition": 37.6,
-        "ElbowUpRightConePosition": 21.8,
-        "ElbowSideConePosition": 26.4,
-        "ElbowCubePosition": 32.6,
+        "ElbowUpRightConePosition": 26.8,
+        "ElbowSideConePosition": 23.4,
+        "ElbowCubePosition": 30.6,
         "ElbowSingleSubPosition": 0,
         "ElbowDoubleSubPosition": 0
       }
@@ -158,22 +158,22 @@
 
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 296,
+      "AbsoluteZeroOffset": 51,
       "CurrentLimit": 20,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 32,
       "IdleMode": "Brake",
       "InvertedAbsolute": false,
       "InvertedRelative": false,
-      "MaxSpeed": 1,
-      "MinSpeed": -1,
+      "MaxSpeed": 0.5,
+      "MinSpeed": -0.5,
       "Name": "WristMotor",
       "Follow": "NONE",
       "PositionPID": {
         "D": 0,
         "FF": 0,
         "I": 0,
-        "P": 0.06
+        "P": 0.04
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 2.26,
@@ -192,16 +192,16 @@
       "ReverseSoftLimit": 10,
       "Positions":
       {
-        "WristHomePosition": 10,
-        "WristHighCubePosition": 53,
-        "WristHighConePosition": 140,
-        "WristMidCubePosition": 53,
-        "WristMidConePosition": 140,
-        "WristLowCubePosition": 53,
-        "WristLowConePosition": 140,
-        "WristUpRightConePosition": 141.6,
-        "WristSideConePosition": 53,
-        "WristCubePosition": 233.5,
+        "WristHomePosition": 45,
+        "WristHighCubePosition": 45,
+        "WristHighConePosition": 135,
+        "WristMidCubePosition": 45,
+        "WristMidConePosition": 135,
+        "WristLowCubePosition": 45,
+        "WristLowConePosition": 135,
+        "WristUpRightConePosition": 315,
+        "WristSideConePosition": 45,
+        "WristCubePosition": 225,
         "WristSingleSubPosition": 0,
         "WristDoubleSubPosition": 0
       }
@@ -372,15 +372,15 @@
       "Name": "EndEffectorMotor",
       "ID": 41,
       "InvertedRelative": false,
-      "CurrentLimit": 40,
+      "CurrentLimit": 20,
       "IdleMode": "Brake",
       "Follow": "NONE",
       "Percents":
       {
-        "EndEffectorConeInputPercent": 0.5,
-        "EndEffectorCubeInputPercent": 0.5,
-        "EndEffectorConeHoldPercent": 0.5,
-        "EndEffectorCubeHoldPercent": 0.5
+        "EndEffectorConeInputPercent": 0.75,
+        "EndEffectorCubeInputPercent": -0.2,
+        "EndEffectorConeHoldPercent": 0.05,
+        "EndEffectorCubeHoldPercent": -0.05
       }
     }
   ],

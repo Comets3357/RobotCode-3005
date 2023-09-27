@@ -5,6 +5,7 @@
 
 enum EndEffectorSubsystemState
 {
+NONE,
 CONE,   
 CUBE
 };

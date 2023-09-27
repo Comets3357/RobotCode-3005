@@ -12,9 +12,11 @@ void AutoRetractCommand::Initialize()
 
 void AutoRetractCommand::Execute()
 {
-    if (endEffectorSubsystem->GetOutputCurrent() > ampLimit)
+    if (endEffectorSubsystem->GetOutputCurrent() > 50)
     {
         homePositionCommand.Schedule();
+
+        
     }
 }
 

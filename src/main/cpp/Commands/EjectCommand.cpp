@@ -6,13 +6,26 @@ EjectCommand::EjectCommand(EndEffectorSubsystem* endEffectorSub, bool on)
 {
     enabled = on;
     endEffectorSubsystem = endEffectorSub;
+
+    AddRequirements({endEffectorSub});
 }
 
 void EjectCommand::Initialize()
 {
     if (enabled)
     {
-        endEffectorSubsystem->SetPercent(-1);
+        switch (endEffectorSubsystem->State())
+            {
+            case CUBE:
+                endEffectorSubsystem->SetPercent(0.2);
+                break;
+            case CONE:
+                endEffectorSubsystem->SetPercent(-0.2);
+                break;
+            
+            default:
+                break;
+            }
     }
     else
     {

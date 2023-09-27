@@ -31,6 +31,8 @@
 #include "Commands/AutoRetractCommand.h"
 #include "Commands/EjectCommand.h"
 
+#include <frc2/command/SequentialCommandGroup.h>
+
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -55,18 +57,24 @@ class RobotContainer {
   WristSubsystem wrist{};
 
   //Commands
-  SetPositionCommand highCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHighCubePosition", "ExtenderHighCubePosition", "WristHighCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
-  SetPositionCommand highConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHighConePosition", "ExtenderHighConePosition", "WristHighConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD};
-  SetPositionCommand midConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowMidConePosition", "ExtenderMidConePosition", "WristMidConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD};
-  SetPositionCommand midCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowMidCubePosition", "ExtenderMidCubePosition", "WristMidCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
-  SetPositionCommand lowCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowLowCubePosition", "ExtenderLowCubePosition", "WristLowCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
-  SetPositionCommand lowConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowLowConePosition", "ExtenderLowConePosition", "WristLowConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD};
-  SetPositionCommand upRightConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowUpRightConePosition", "ExtenderUpRightConePosition", "WristUpRightConePosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT};
-  SetPositionCommand sideConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowSideConePosition", "ExtenderSideConePosition", "WristSideConePosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT};
-  SetPositionCommand cubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowCubePosition", "ExtenderCubePosition", "WristCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT};
-  SetPositionCommand singleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowSingleSubPosition", "ExtenderSingleSubPosition", "WristSingleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT};
-  SetPositionCommand doubleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowDoubleSubPosition", "ExtenderDoubleSubPosition", "WristDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
-  SetPositionCommand homePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHomePosition", "ExtenderHomePosition", "WristHomePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD};
+  SetPositionCommand highCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHighCubePosition", "ExtenderHighCubePosition", "WristHighCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD, CUBE};
+  SetPositionCommand highConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHighConePosition", "ExtenderHighConePosition", "WristHighConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD, CONE};
+  SetPositionCommand midConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowMidConePosition", "ExtenderMidConePosition", "WristMidConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD, CONE};
+  SetPositionCommand midCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowMidCubePosition", "ExtenderMidCubePosition", "WristMidCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD, CUBE};
+  SetPositionCommand lowCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowLowCubePosition", "ExtenderLowCubePosition", "WristLowCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD, CUBE};
+  SetPositionCommand lowConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowLowConePosition", "ExtenderLowConePosition", "WristLowConePosition", SetPositionCommand::END_EFFECTOR_CONE_HOLD, CONE};
+  SetPositionCommand upRightConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowUpRightConePosition", "ExtenderUpRightConePosition", "WristUpRightConePosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT, CONE};
+  SetPositionCommand sideConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowSideConePosition", "ExtenderSideConePosition", "WristSideConePosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT, CONE};
+  SetPositionCommand cubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowCubePosition", "ExtenderCubePosition", "WristCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT, CUBE};
+  SetPositionCommand singleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowSingleSubPosition", "ExtenderSingleSubPosition", "WristSingleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT, NONE};
+  SetPositionCommand doubleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowDoubleSubPosition", "ExtenderDoubleSubPosition", "WristDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD, NONE};
+  SetPositionCommand homePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHomePosition", "ExtenderHomePosition", "WristHomePosition", SetPositionCommand::END_EFFECTOR_GAME_PIECE, NONE};
+
+  frc2::SequentialCommandGroup HighConePlaceAutonCommand{highConePosition, frc2::WaitCommand(1_s), EjectCommand(&endEffector, true), frc2::WaitCommand(1_s), EjectCommand(&endEffector, false), homePosition};
+  frc2::SequentialCommandGroup CubePickupAutonCommand{cubePosition, frc2::WaitCommand(2_s), homePosition};
+  frc2::SequentialCommandGroup HighCubePlaceAutonCommand{highCubePosition, frc2::WaitCommand(1_s), EjectCommand(&endEffector, true), frc2::WaitCommand(1_s), EjectCommand(&endEffector, false), homePosition};
+  frc2::SequentialCommandGroup MidCubePlaceAutonCommand{midCubePosition, frc2::WaitCommand(1_s), EjectCommand(&endEffector, true), frc2::WaitCommand(1_s), EjectCommand(&endEffector, false), homePosition};
+
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
