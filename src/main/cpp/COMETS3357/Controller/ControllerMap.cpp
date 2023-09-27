@@ -11,7 +11,8 @@ void ControllerMap::LoadControllerMap(std::string fileName)
     {
         
         std::ifstream jsonFile(frc::filesystem::GetDeployDirectory() + "/ControllerMaps/" + fileName + ".json");
-        if (!jsonFile.is_open()) {
+        if (!jsonFile.is_open()) 
+        {
             std::cerr << "Failed to open file" << std::endl;
         }
 
@@ -19,7 +20,8 @@ void ControllerMap::LoadControllerMap(std::string fileName)
 
         picojson::value jsonValue;
         std::string error = picojson::parse(jsonValue, jsonString);
-        if (!error.empty()) {
+        if (!error.empty()) 
+        {
             std::cerr << "JSON parse error: " << error << std::endl;
         }
 
