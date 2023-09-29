@@ -90,25 +90,25 @@ void Controller::SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTrig
 
 void Controller::InitController(std::string xboxDefaultMode, std::string taranusDefaultMode)
 {
-    if (frc::DriverStation::GetJoystickName(slot) == "FrSky Taranis Joystick")
+    if (type == "XBOX")
     {
-        currentMode = taranusDefaultMode;
+        currentMode = xboxDefaultMode;
     }
     else
     {
-        currentMode = xboxDefaultMode;
+        currentMode = taranusDefaultMode;
     }
 }
 
 void Controller::InitController(picojson::value &controllers)
 {
-    if (frc::DriverStation::GetJoystickName(slot) == "FrSky Taranis Joystick")
+    if (type == "XBOX")
     {
-        currentMode = controllers.get<picojson::object>().at("Taranus").get("DefaultMode").get<std::string>();
+        currentMode = controllers.get<picojson::object>().at("XBOX").get("DefaultMode").get<std::string>();
     }
     else
     {
-        currentMode = controllers.get<picojson::object>().at("XBOX").get("DefaultMode").get<std::string>();
+        currentMode = controllers.get<picojson::object>().at("Taranus").get("DefaultMode").get<std::string>();
     }
 
 }
@@ -116,6 +116,7 @@ void Controller::InitController(picojson::value &controllers)
 void Controller::LoadConfig(picojson::value &controllers)
 {
     //controllerConnectionTrigger.OnTrue(frc2::InstantCommand{[this,&controllers]{LoadControls(controllers);},{}}.IgnoringDisable(true));
+    InitController(controllers);
     LoadControls(controllers);
 
 }

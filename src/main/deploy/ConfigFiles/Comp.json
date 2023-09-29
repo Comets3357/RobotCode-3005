@@ -70,7 +70,7 @@
         "D": 0.25,
         "FF": 0,
         "I": 0,
-        "P": 0.0045
+        "P": 0.0075
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 7.776,
@@ -91,7 +91,7 @@
       {
         "ElbowHomePosition": 12,
         "ElbowHighCubePosition": 222,
-        "ElbowHighConePosition": 215.1,
+        "ElbowHighConePosition": 212.1,
         "ElbowMidCubePosition": 246.5,
         "ElbowMidConePosition": 234.2,
         "ElbowLowCubePosition": 32.6,
@@ -194,12 +194,12 @@
       {
         "WristHomePosition": 45,
         "WristHighCubePosition": 45,
-        "WristHighConePosition": 135,
+        "WristHighConePosition": 315,
         "WristMidCubePosition": 45,
         "WristMidConePosition": 135,
         "WristLowCubePosition": 45,
         "WristLowConePosition": 135,
-        "WristUpRightConePosition": 315,
+        "WristUpRightConePosition": 135,
         "WristSideConePosition": 45,
         "WristCubePosition": 225,
         "WristSingleSubPosition": 0,

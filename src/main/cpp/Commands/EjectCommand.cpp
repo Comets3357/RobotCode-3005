@@ -20,7 +20,7 @@ void EjectCommand::Initialize()
                 endEffectorSubsystem->SetPercent(0.2);
                 break;
             case CONE:
-                endEffectorSubsystem->SetPercent(-0.2);
+                endEffectorSubsystem->SetPercent(-0.3);
                 break;
             
             default:

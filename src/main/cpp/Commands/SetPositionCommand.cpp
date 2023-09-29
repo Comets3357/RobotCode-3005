@@ -89,8 +89,8 @@ void SetPositionCommand::Execute()
 {
     if (isFromHome)
     {
-        elbowSub->SetPosition(50);
-        if (elbowSub->GetPosition() > 30)
+        elbowSub->SetPosition(60);
+        if (elbowSub->GetPosition() > 40)
         {
             isFromHome = false;
         }
@@ -101,9 +101,14 @@ void SetPositionCommand::Execute()
         {
             wristSub->SetPosition(wristPos);
             extenderSub->SetPosition(extenderPos);
+            
             if (extenderSub->GetPosition() < 1 && std::abs(wristSub->GetPosition() - wristSub->wristMotor.config.positions[elbowPos]) < 10)
             {
                 elbowSub->SetPosition(elbowPos);
+            }
+            else
+            {
+                elbowSub->SetPosition(50);
             }
         }
         else
@@ -111,7 +116,7 @@ void SetPositionCommand::Execute()
             wristSub->SetPosition(wristPos);
             elbowSub->SetPosition(elbowPos);
 
-            if (std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 40)
+            if (std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 60)
             {
                 extenderSub->SetPosition(extenderPos);
                 frc::SmartDashboard::PutNumber("extender", extenderSub->extendermotor.config.positions[extenderPos]);
@@ -129,7 +134,7 @@ void SetPositionCommand::Execute()
 
 bool SetPositionCommand::IsFinished()
 {
-    return std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 2;
+    return std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 5;
 }
 
 void SetPositionCommand::End(bool interrupted)
