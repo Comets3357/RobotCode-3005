@@ -17,6 +17,7 @@ void ElbowSubsystem::Initialize()
 
 void ElbowSubsystem::Periodic()
 {
+ 
     elbowMotor.Periodic();
     elbowFollow.Periodic();
 
@@ -30,6 +31,7 @@ void ElbowSubsystem::SetPosition(double position)
 
 void ElbowSubsystem::SetPosition(std::string position)
 {
+    
     elbowMotor.SetPosition(position);
 }
 
@@ -41,7 +43,8 @@ void ElbowSubsystem::SetPercent(double percent)
 
 double ElbowSubsystem::GetPosition()
 {
-    return elbowMotor.GetPosition();
+
+    return elbowMotor.GetAbsolutePosition();
 }
 
 

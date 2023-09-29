@@ -29,6 +29,7 @@ SetPositionCommand::SetPositionCommand(
 
 void SetPositionCommand::Initialize()
 {
+    k = true;
 
     if (elbowSub->GetPosition() < 20)
     {
@@ -38,6 +39,7 @@ void SetPositionCommand::Initialize()
     {
         isFromHome = false;
     }
+
 
     if (piece != NONE)
     {
@@ -87,6 +89,7 @@ void SetPositionCommand::Initialize()
 
 void SetPositionCommand::Execute()
 {
+    
     if (isFromHome)
     {
         elbowSub->SetPosition(60);
@@ -97,13 +100,16 @@ void SetPositionCommand::Execute()
     }
     else
     {
-        if (elbowSub->elbowMotor.config.positions[elbowPos] < 20)
+        if (elbowSub->elbowMotor.config.positions[elbowPos] < 15)
         {
             wristSub->SetPosition(wristPos);
             extenderSub->SetPosition(extenderPos);
             
-            if (extenderSub->GetPosition() < 1 && std::abs(wristSub->GetPosition() - wristSub->wristMotor.config.positions[elbowPos]) < 10)
+            
+            if (elbowSub->GetPosition() > 40 || !k)
             {
+                k = false;
+                frc::SmartDashboard::PutNumber("getting here", 1);
                 elbowSub->SetPosition(elbowPos);
             }
             else
@@ -134,7 +140,7 @@ void SetPositionCommand::Execute()
 
 bool SetPositionCommand::IsFinished()
 {
-    return std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 5;
+    return false;//std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 10;
 }
 
 void SetPositionCommand::End(bool interrupted)

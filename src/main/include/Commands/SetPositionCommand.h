@@ -45,4 +45,6 @@ private:
     EndEffectorMode endEffectorMode = END_EFFECTOR_STAGNANT;
 
     bool isFromHome = false;
+
+    bool k = false;
 };

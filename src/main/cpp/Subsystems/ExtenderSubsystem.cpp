@@ -13,7 +13,7 @@ void ExtenderSubsystem::Initialize()
 
 void ExtenderSubsystem::Periodic()
 {
-
+    extendermotor.Periodic();
 }
 
 void ExtenderSubsystem::SetPercent(double percent)
@@ -33,5 +33,5 @@ void ExtenderSubsystem::SetPosition(std::string position)
 
 double ExtenderSubsystem::GetPosition()
 {
-    return extendermotor.GetPosition();
+    return extendermotor.GetRelativePosition();
 }

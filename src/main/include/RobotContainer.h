@@ -32,6 +32,7 @@
 #include "Commands/EjectCommand.h"
 
 #include <frc2/command/SequentialCommandGroup.h>
+#include "Commands/ConeFlipCommand.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -88,7 +89,8 @@ class RobotContainer {
     {"SingleSubPosition", std::make_shared<AutoRetractCommand>(singleSubPosition, homePosition, &endEffector, 0)},
     {"DoubleSubPosition", std::make_shared<AutoRetractCommand>(doubleSubPosition, homePosition, &endEffector, 0)},
     {"EjectOnPress", std::make_shared<EjectCommand>(&endEffector, true)},
-    {"EjectOnRelease", std::make_shared<EjectCommand>(&endEffector, false)}
+    {"EjectOnRelease", std::make_shared<EjectCommand>(&endEffector, false)},
+    {"ConeFlip", std::make_shared<ConeFlipCommand>(&wrist)}
   };
 
 
@@ -98,7 +100,8 @@ class RobotContainer {
    {"ManualEndEffector", {[this](auto leftX, auto leftY, auto rightX, auto rightY){endEffector.SetPercent(leftY);}, &endEffector, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualExtender", {[this](auto leftX, auto leftY, auto rightX, auto rightY){extender.SetPercent(rightY);}, &extender, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualElbow", {[this](auto leftX, auto leftY, auto rightX, auto rightY){elbow.SetPercent(rightY);}, &elbow, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"ManualWrist", {[this](auto leftX, auto leftY, auto rightX, auto rightY){wrist.SetPercent(leftY);}, &wrist, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
+   {"ManualWrist", {[this](auto leftX, auto leftY, auto rightX, auto rightY){wrist.SetPercent(leftY);}, &wrist, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"SemiAutoArmMove", {[this](auto leftX, auto leftY, auto rightX, auto rightY){elbow.SetPosition(elbow.GetPosition() + 3 * leftY);}, &elbow, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND }}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };

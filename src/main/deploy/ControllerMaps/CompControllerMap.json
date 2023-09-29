@@ -71,10 +71,10 @@
             "DefaultMode": "TaranusSemiAuto",
             "TaranusSemiAuto":
             {
-                "LeftStickY": "NONE",
-                "LeftStickX": "NONE",
-                "RightStickX": "NONE",
-                "RightStickY": "NONE"
+                "LeftStickY": "SwerveDefaultCommand",
+                "LeftStickX": "SwerveDefaultCommand",
+                "RightStickX": "SwerveDefaultCommand",
+                "RightStickY": "SwerveDefaultCommand"
                 
             }
         }
@@ -103,7 +103,7 @@
                 "RightStickButton": "NONE",
                 "AButton": "CubePosition",
                 "BButton": "SideConePosition",
-                "XButton": "ConeFlip",
+                "XButton": "NONE",
                 "YButton": "UpRightConePosition",
                 "LeftBumper": "NONE",
                 "RightBumper": "NONE",
@@ -120,7 +120,7 @@
                 "RightStickButtonPressed": "NONE",
                 "AButtonPressed": "NONE",
                 "BButtonPressed": "NONE",
-                "XButtonPressed": "NONE",
+                "XButtonPressed": "ConeFlip",
                 "YButtonPressed": "NONE",
                 "LeftBumperPressed": "XBOXSemiAutoShift",
                 "RightBumperPressed": "NONE",

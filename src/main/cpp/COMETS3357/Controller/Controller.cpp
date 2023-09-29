@@ -71,7 +71,15 @@ void Controller::SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTrig
         {
             frc2::Subsystem* sub = std::get<1>(joystickActionMap[joystickTrigger.first]);
             std::function<void(double, double, double, double)> function = std::get<0>(joystickActionMap[joystickTrigger.first]);
-            (joystickTrigger.second && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, sub, function]{function(controller.GetLeftX(),controller.GetLeftY(),controller.GetRightX(),controller.GetRightY());},{sub}});
+            if (type == "XBOX")
+            {
+                (joystickTrigger.second && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, sub, function]{function(controller.GetLeftX(),controller.GetLeftY(),controller.GetRightX(),controller.GetRightY());},{sub}});
+            }
+            else
+            {
+                (joystickTrigger.second && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, sub, function]{function(controller.GetRawAxis(3),-controller.GetRawAxis(0),controller.GetRawAxis(1),controller.GetRawAxis(2));},{sub}});
+            }
+            
             (joystickTrigger.second && modeTriggers[mode.first]).OnFalse(new frc2::RunCommand{[this, sub, function]{function(0,0,0,0);}, {sub}});
         }
     }
@@ -83,7 +91,15 @@ void Controller::SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTrig
             frc2::Subsystem* sub = std::get<1>(defaultCommand.second);
             std::function<void(double, double, double, double)> function = std::get<0>(defaultCommand.second);
             modeTriggers[mode.first].OnTrue(new frc2::InstantCommand{[this, sub, function]{sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});},{}});
-            sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});
+            if (type == "XBOX")
+            {
+                            sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});
+
+            }
+            else
+            {
+                sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetRawAxis(3),-controller.GetRawAxis(0),controller.GetRawAxis(1),controller.GetRawAxis(2));},{sub}});
+            }
         }
     }
 }
@@ -150,9 +166,9 @@ bool Controller::LoadControls(picojson::value &controllers)
                             std::map<std::string, frc2::Trigger> joystickTriggers;
 
                             SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(0), 0.08) != 0;}}, "LeftStickY", mode, joystickTriggers);
-                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(1), 0.08) != 0;}}, "LeftStickX", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(3), 0.08) != 0;}}, "LeftStickX", mode, joystickTriggers);
                             SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(2), 0.08) != 0;}}, "RightStickY", mode, joystickTriggers);
-                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(3), 0.08) != 0;}}, "RightStickX", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(1), 0.08) != 0;}}, "RightStickX", mode, joystickTriggers);
 
                             SetJoysticks(joystickTriggers, mode);
                         }
