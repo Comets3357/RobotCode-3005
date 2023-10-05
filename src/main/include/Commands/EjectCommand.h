@@ -8,7 +8,7 @@ class EjectCommand : public frc2::CommandHelper<frc2::CommandBase, EjectCommand>
 {
 public:
 
-    EjectCommand(EndEffectorSubsystemState* endEffectorState);
+    EjectCommand(EndEffectorSubsystem* endEffectorState, bool on);
 
     void Initialize() override;
 
@@ -19,6 +19,10 @@ public:
     void End(bool interrupted) override;
 
 private:
+
+    EndEffectorSubsystem* endEffectorSubsystem;
+
+    bool enabled = false;
 
 };
 

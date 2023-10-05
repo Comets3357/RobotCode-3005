@@ -83,6 +83,7 @@ MAXSwerveModule::MAXSwerveModule(SwerveModuleConfig config)
   m_desiredState.angle =
       frc::Rotation2d(units::radian_t{azimuthMotor.GetAbsolutePosition()});
   drivingMotor.SetRelativePosition(0);
+  azimuthMotor.SetFeedForward([](double a){return 0;});
 }
 
 frc::SwerveModuleState MAXSwerveModule::GetState()  {

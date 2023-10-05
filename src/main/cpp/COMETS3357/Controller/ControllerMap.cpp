@@ -2,7 +2,7 @@
 
 using namespace COMETS3357;
 
-ControllerMap::ControllerMap(std::unordered_map<std::string, std::shared_ptr<frc2::Command>> &buttonActionMap, std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, Controller::JoystickCommandMode>>& joystickActionMap, std::string fileName) : primary{0, buttonActionMap, joystickActionMap}, secondary{1, buttonActionMap, joystickActionMap}, test{2, buttonActionMap, joystickActionMap}
+ControllerMap::ControllerMap(std::unordered_map<std::string, std::shared_ptr<frc2::Command>> &buttonActionMap, std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, Controller::JoystickCommandMode>>& joystickActionMap, std::string fileName) : primary{0, buttonActionMap, joystickActionMap, "Taranus"}, secondary{1, buttonActionMap, joystickActionMap, "XBOX"}, test{2, buttonActionMap, joystickActionMap, "XBOX"}
 {
     LoadControllerMap(fileName);
 }
@@ -11,7 +11,8 @@ void ControllerMap::LoadControllerMap(std::string fileName)
     {
         
         std::ifstream jsonFile(frc::filesystem::GetDeployDirectory() + "/ControllerMaps/" + fileName + ".json");
-        if (!jsonFile.is_open()) {
+        if (!jsonFile.is_open()) 
+        {
             std::cerr << "Failed to open file" << std::endl;
         }
 
@@ -19,7 +20,8 @@ void ControllerMap::LoadControllerMap(std::string fileName)
 
         picojson::value jsonValue;
         std::string error = picojson::parse(jsonValue, jsonString);
-        if (!error.empty()) {
+        if (!error.empty()) 
+        {
             std::cerr << "JSON parse error: " << error << std::endl;
         }
 

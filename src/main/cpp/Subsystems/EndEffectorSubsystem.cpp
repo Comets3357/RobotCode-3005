@@ -17,7 +17,7 @@ void EndEffectorSubsystem::Periodic()
 
 void EndEffectorSubsystem::SetPercent(double percent)
 {
-    endEffectorMotor.SetPower(percent * 0.1);
+    endEffectorMotor.SetPower(percent * 0.5);
 }
 
 void EndEffectorSubsystem::SetPercent(std::string percent)

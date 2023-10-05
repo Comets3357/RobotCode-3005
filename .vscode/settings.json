@@ -110,6 +110,7 @@
     "xloctime": "cpp",
     "xtree": "cpp",
     "ranges": "cpp",
-    "xhash": "cpp"
+    "xhash": "cpp",
+    "matrixfunctions": "cpp"
   }
 }

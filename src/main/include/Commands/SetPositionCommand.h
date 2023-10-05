@@ -17,10 +17,11 @@ public:
         END_EFFECTOR_CONE_INPUT,
         END_EFFECTOR_CUBE_INPUT,
         END_EFFECTOR_CONE_HOLD,
-        END_EFFECTOR_CUBE_HOLD
+        END_EFFECTOR_CUBE_HOLD,
+        END_EFFECTOR_GAME_PIECE
     };
 
-    SetPositionCommand(ElbowSubsystem* elbowSubsystem, ExtenderSubsystem* extenderSubsystem, WristSubsystem* wristSubsystem, EndEffectorSubsystem* endEffectorSubsystem, std::string elbowPosition, std::string extenderPosition, std::string wristPosition, EndEffectorMode mode);
+    SetPositionCommand(ElbowSubsystem* elbowSubsystem, ExtenderSubsystem* extenderSubsystem, WristSubsystem* wristSubsystem, EndEffectorSubsystem* endEffectorSubsystem, std::string elbowPosition, std::string extenderPosition, std::string wristPosition, EndEffectorMode mode, EndEffectorSubsystemState gamePiece);
 
     void Initialize() override;
 
@@ -39,6 +40,11 @@ private:
     std::string elbowPos;
     std::string extenderPos;
     std::string wristPos;
+    EndEffectorSubsystemState piece;
 
     EndEffectorMode endEffectorMode = END_EFFECTOR_STAGNANT;
+
+    bool isFromHome = false;
+
+    bool k = false;
 };

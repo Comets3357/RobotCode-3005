@@ -3,7 +3,10 @@
 
 ElbowSubsystem::ElbowSubsystem() : COMETS3357::Subsystem<ElbowState>("ElbowSubsystem")
 {
-
+    elbowMotor.SetFeedForward([](double theta){
+        double p1 = 19, f1 = 0, f2 = 0;
+        return ((10.0/p1)*(f1-f2)+f1)*cos(theta * (PI/180));
+    });
 }
 
 void ElbowSubsystem::Initialize()
@@ -14,6 +17,7 @@ void ElbowSubsystem::Initialize()
 
 void ElbowSubsystem::Periodic()
 {
+ 
     elbowMotor.Periodic();
     elbowFollow.Periodic();
 
@@ -27,6 +31,7 @@ void ElbowSubsystem::SetPosition(double position)
 
 void ElbowSubsystem::SetPosition(std::string position)
 {
+    
     elbowMotor.SetPosition(position);
 }
 
@@ -36,7 +41,11 @@ void ElbowSubsystem::SetPercent(double percent)
     
 }
 
+double ElbowSubsystem::GetPosition()
+{
 
+    return elbowMotor.GetAbsolutePosition();
+}
 
 
 

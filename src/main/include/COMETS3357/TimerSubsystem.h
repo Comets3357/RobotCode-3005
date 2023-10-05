@@ -32,11 +32,14 @@ namespace COMETS3357
         */
         void ResetAndBeginTimer();
 
+        frc::Timer timer{};
+        units::second_t timeSinceEnabled{0};
+
     private:
 
-        frc::Timer timer{};
+        
 
-        units::second_t timeSinceEnabled{0};
+        
         units::second_t deltaTime{0};
         units::second_t lastTime{0};
     };

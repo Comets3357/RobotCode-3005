@@ -51,6 +51,11 @@ namespace COMETS3357
             return m_state;
         }
 
+        void SetState(state to)
+        {
+            m_state = to;
+        }
+
         
 
     protected:
