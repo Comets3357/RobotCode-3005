@@ -38,16 +38,16 @@
       "ReverseSoftLimit": 0.5,
       "Positions":
       {
-          "ExtenderHomePosition": 0.1,
-          "ExtenderHighCubePosition": 16.25,
-          "ExtenderHighConePosition": 18.25,
-          "ExtenderMidCubePosition": 0.2,
-          "ExtenderMidConePosition": 0.2,
-          "ExtenderLowCubePosition": 12,
-          "ExtenderLowConePosition": 11,
-          "ExtenderUpRightConePosition": 12,
-          "ExtenderSideConePosition": 13,
-          "ExtenderCubePosition": 12,
+          "ExtenderHomePosition": 0.85,
+          "ExtenderHighCubePosition": 17,
+          "ExtenderHighConePosition": 19,
+          "ExtenderMidCubePosition": 0.75,
+          "ExtenderMidConePosition": 0.75,
+          "ExtenderLowCubePosition": 12.75,
+          "ExtenderLowConePosition": 11.75,
+          "ExtenderUpRightConePosition": 12.75,
+          "ExtenderSideConePosition": 13.75,
+          "ExtenderCubePosition": 12.75,
           "ExtenderSingleSubPosition": 0,
           "ExtenderDoubleSubPosition": 0
       }
@@ -92,8 +92,8 @@
         "ElbowHomePosition": 12,
         "ElbowHighCubePosition": 222,
         "ElbowHighConePosition": 212.1,
-        "ElbowMidCubePosition": 246.5,
-        "ElbowMidConePosition": 234.2,
+        "ElbowMidCubePosition": 242.5,
+        "ElbowMidConePosition": 230.2,
         "ElbowLowCubePosition": 32.6,
         "ElbowLowConePosition": 37.6,
         "ElbowUpRightConePosition": 26.8,
@@ -158,7 +158,7 @@
 
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 51,
+      "AbsoluteZeroOffset": 12,
       "CurrentLimit": 20,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 32,
@@ -378,9 +378,9 @@
       "Percents":
       {
         "EndEffectorConeInputPercent": 0.75,
-        "EndEffectorCubeInputPercent": -0.2,
+        "EndEffectorCubeInputPercent": -0.3,
         "EndEffectorConeHoldPercent": 0.05,
-        "EndEffectorCubeHoldPercent": -0.05
+        "EndEffectorCubeHoldPercent": -0.075
       }
     }
   ],
@@ -397,8 +397,8 @@
       "MaxTurnSpeed": 6.2829999999999999,
       "Name": "Swerve",
       "RotationalSlewRate": 2,
-      "TrackWidth": 0.67310000000000003,
-      "WheelBase": 0.67310000000000003
+      "TrackWidth": 0.74,
+      "WheelBase": 0.8
     }
   ],
   "SwerveModuleConfigs": [
@@ -434,7 +434,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor1",
-      "RelativePositionConversionFactor": 0.0727910427491711,
+      "RelativePositionConversionFactor": 0.0485273613,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -454,7 +454,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor2",
-      "RelativePositionConversionFactor": 0.0727910427491711,
+      "RelativePositionConversionFactor": 0.0485273613,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -474,7 +474,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor3",
-      "RelativePositionConversionFactor": 0.0727910427491711,
+      "RelativePositionConversionFactor": 0.0485273613,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -494,7 +494,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor4",
-      "RelativePositionConversionFactor": 0.0727910427491711,
+      "RelativePositionConversionFactor": 0.0485273613,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {

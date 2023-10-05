@@ -33,6 +33,7 @@
 
 #include <frc2/command/SequentialCommandGroup.h>
 #include "Commands/ConeFlipCommand.h"
+#include "Commands/Wait.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -70,16 +71,24 @@ class RobotContainer {
   SetPositionCommand singleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowSingleSubPosition", "ExtenderSingleSubPosition", "WristSingleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT, NONE};
   SetPositionCommand doubleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowDoubleSubPosition", "ExtenderDoubleSubPosition", "WristDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD, NONE};
   SetPositionCommand homePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHomePosition", "ExtenderHomePosition", "WristHomePosition", SetPositionCommand::END_EFFECTOR_GAME_PIECE, NONE};
+  EjectCommand ejectPress{&endEffector, true};
+  EjectCommand ejectRelease{&endEffector, false};
 
-  frc2::SequentialCommandGroup HighConePlaceAutonCommand{highConePosition, frc2::WaitCommand(1_s), EjectCommand(&endEffector, true), frc2::WaitCommand(1_s), EjectCommand(&endEffector, false), homePosition};
-  frc2::SequentialCommandGroup CubePickupAutonCommand{cubePosition, frc2::WaitCommand(2_s), homePosition};
-  frc2::SequentialCommandGroup HighCubePlaceAutonCommand{highCubePosition, frc2::WaitCommand(1_s), EjectCommand(&endEffector, true), frc2::WaitCommand(1_s), EjectCommand(&endEffector, false), homePosition};
-  frc2::SequentialCommandGroup MidCubePlaceAutonCommand{midCubePosition, frc2::WaitCommand(1_s), EjectCommand(&endEffector, true), frc2::WaitCommand(1_s), EjectCommand(&endEffector, false), homePosition};
+  frc2::InstantCommand homePos{[this](){homePosition.Schedule();}, {}};
+  frc2::InstantCommand eject{[this](){ejectPress.Schedule();}, {}};
+  frc2::InstantCommand stopEject{[this](){ejectRelease.Schedule();}, {}};
+  frc2::InstantCommand highPlace{[this](){highConePosition.Schedule();}, {}};
+  frc2::InstantCommand lowerElbowWithRequire{[this](){elbow.SetPosition(230);}, {&elbow}};
+  frc2::InstantCommand lowerElbow{[this](){lowerElbowWithRequire.Schedule();}, {}};
 
+  Wait w1{&timer,1.75_s};
+  Wait w2{&timer,0.4_s};
+  Wait w3{&timer,0.1_s};
+  Wait w4{&timer,0.5_s};
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
-    {"HomePosition", std::make_shared<SetPositionCommand>(homePosition)},
+    {"HomePosition", std::make_shared<frc2::InstantCommand>(homePos)},
     {"HighPosition", std::make_shared<PlacementCommand>(&endEffector, highCubePosition, highConePosition)},
     {"MidPosition", std::make_shared<PlacementCommand>(&endEffector, midCubePosition, midConePosition)},
     {"LowPosition", std::make_shared<PlacementCommand>(&endEffector, lowCubePosition, lowConePosition)},
@@ -88,9 +97,12 @@ class RobotContainer {
     {"CubePosition", std::make_shared<AutoRetractCommand>(cubePosition, homePosition, &endEffector, 0)},
     {"SingleSubPosition", std::make_shared<AutoRetractCommand>(singleSubPosition, homePosition, &endEffector, 0)},
     {"DoubleSubPosition", std::make_shared<AutoRetractCommand>(doubleSubPosition, homePosition, &endEffector, 0)},
-    {"EjectOnPress", std::make_shared<EjectCommand>(&endEffector, true)},
-    {"EjectOnRelease", std::make_shared<EjectCommand>(&endEffector, false)},
-    {"ConeFlip", std::make_shared<ConeFlipCommand>(&wrist)}
+    {"EjectOnPress", std::make_shared<frc2::InstantCommand>(eject)},
+    {"EjectOnRelease", std::make_shared<frc2::InstantCommand>(stopEject)},
+    {"ConeFlip", std::make_shared<ConeFlipCommand>(&wrist)},
+    {"HighConePlacement", std::make_shared<frc2::InstantCommand>(highPlace)},
+    {"AutonConePlaceCommand", std::make_shared<frc2::SequentialCommandGroup>(highPlace, w1, lowerElbow, w2, eject, w3, homePos)},
+    {"AutonEnd", std::make_shared<frc2::SequentialCommandGroup>(w4, homePos)}
   };
 
 
@@ -102,6 +114,14 @@ class RobotContainer {
    {"ManualElbow", {[this](auto leftX, auto leftY, auto rightX, auto rightY){elbow.SetPercent(rightY);}, &elbow, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualWrist", {[this](auto leftX, auto leftY, auto rightX, auto rightY){wrist.SetPercent(leftY);}, &wrist, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"SemiAutoArmMove", {[this](auto leftX, auto leftY, auto rightX, auto rightY){elbow.SetPosition(elbow.GetPosition() + 3 * leftY);}, &elbow, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND }}
+  };
+
+  std::unordered_map<std::string, std::shared_ptr<frc2::Command>> autonActionMap
+  {
+    {"HighConePlace", std::make_shared<frc2::SequentialCommandGroup>(highConePosition,  homePosition)},
+    {"CubePickup", std::make_shared<frc2::SequentialCommandGroup>(cubePosition, frc2::WaitCommand(2_s), homePosition)},
+    {"HighCubePlace", std::make_shared<frc2::SequentialCommandGroup>(highCubePosition, frc2::WaitCommand(1_s), EjectCommand(&endEffector, true), frc2::WaitCommand(1_s), EjectCommand(&endEffector, false), homePosition)},
+    {"MidCubePlace", std::make_shared<frc2::SequentialCommandGroup>(midCubePosition, frc2::WaitCommand(1_s), EjectCommand(&endEffector, true), frc2::WaitCommand(1_s), EjectCommand(&endEffector, false), homePosition)}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };

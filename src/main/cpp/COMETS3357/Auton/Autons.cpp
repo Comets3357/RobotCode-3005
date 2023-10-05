@@ -7,11 +7,11 @@ Autons::Autons(SwerveSubsystem* drivebase, std::unordered_map<std::string, std::
         [this](auto initPose) {swerveSubsystem->ResetOdometry(initPose);},
         swerveSubsystem->kDriveKinematics,
         pathplanner::PIDConstants(5.0, 0.0, 0.0),
-        pathplanner::PIDConstants(0.5, 0.0, 0.0),
+        pathplanner::PIDConstants(2, 0.0, 0.0),
         [this](auto speeds) {swerveSubsystem->SetModuleStates(speeds);},
         actionMap,
         {swerveSubsystem},
-        false
+        true
     )
 {
     LoadAutons();
@@ -39,7 +39,7 @@ void Autons::LoadAutons()
         {
             std::string autonName = entry.path().stem().string();
             autoChooser.AddOption(autonName, autonName);
-            std::vector<pathplanner::PathPlannerTrajectory> pathGroup = pathplanner::PathPlanner::loadPathGroup(autonName, {pathplanner::PathConstraints{4_mps, 3_mps_sq}});
+            std::vector<pathplanner::PathPlannerTrajectory> pathGroup = pathplanner::PathPlanner::loadPathGroup(autonName, {pathplanner::PathConstraints{5_mps, 3.5_mps_sq}});
 
             autons[autonName] = std::make_unique<frc2::CommandPtr>(autoBuilder.fullAuto(pathGroup));
         }

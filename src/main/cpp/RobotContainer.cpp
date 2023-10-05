@@ -7,6 +7,7 @@ RobotContainer::RobotContainer()
   // Initialize all of your commands and subsystems here
   // Configure the button bindings
   ConfigureBindings();
+
 }
 
 void RobotContainer::ConfigureBindings() 

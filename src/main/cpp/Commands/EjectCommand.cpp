@@ -17,7 +17,7 @@ void EjectCommand::Initialize()
         switch (endEffectorSubsystem->State())
             {
             case CUBE:
-                endEffectorSubsystem->SetPercent(0.2);
+                endEffectorSubsystem->SetPercent(0.5);
                 break;
             case CONE:
                 endEffectorSubsystem->SetPercent(-0.3);

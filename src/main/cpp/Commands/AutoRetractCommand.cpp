@@ -12,17 +12,17 @@ void AutoRetractCommand::Initialize()
 
 void AutoRetractCommand::Execute()
 {
-    if (endEffectorSubsystem->GetOutputCurrent() > 50)
-    {
-        homePositionCommand.Schedule();
+    // if (endEffectorSubsystem->GetOutputCurrent() > 50)
+    // {
+    //     homePositionCommand.Schedule();
 
         
-    }
+    // }
 }
 
 bool AutoRetractCommand::IsFinished()
 {
-    return homePositionCommand.IsScheduled();
+    return true;
 }
 
 void AutoRetractCommand::End(bool interrupted)

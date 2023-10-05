@@ -93,7 +93,7 @@
             {
                 "D-padLeft": "NONE",
                 "D-padRight": "NONE",
-                "D-padUp": "NONE",
+                "D-padUp": "AutonConePlaceCommand",
                 "D-padDown": "NONE",
                 "LeftStickY": "NONE",
                 "LeftStickX": "NONE",
