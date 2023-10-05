@@ -4,7 +4,13 @@
 #include "COMETS3357/Subsystems/Subsystem.h"
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
+#include "LimelightHelper.h"
 #include <vector>
+#include <frc/geometry/Pose2d.h>
+#include <frc/geometry/Translation2d.h>
+#include <frc/geometry/Rotation2d.h>
+#include <frc/DriverStation.h>
+#include "COMETS3357/GyroSubsystem.h"
 
 namespace COMETS3357
 {
@@ -22,7 +28,10 @@ namespace COMETS3357
         /**
      * @brief Constructs a new Limelight object.
      */
-    LimelightSubsystem();
+    LimelightSubsystem(COMETS3357::GyroSubsystem * gyro);
+    
+
+    frc::Pose2d GetPose();
 
     /**
      * @brief Gets the horizontal offset from the Limelight.
@@ -134,5 +143,9 @@ namespace COMETS3357
 
     private:
         std::shared_ptr<nt::NetworkTable> table;
+
+        LimelightHelpers::LimelightResultsClass llresults; //= LimelightHelpers::getLatestResults();
+        std::vector<double> limelightOdometry = {0,0,0,0,0,0};
+        COMETS3357::GyroSubsystem * gyroSubsystem;
     };
 };

@@ -2,10 +2,25 @@
 
 using namespace COMETS3357;
 
-LimelightSubsystem::LimelightSubsystem() : Subsystem<LimelightState>("LimelightSubsystem") {
+LimelightSubsystem::LimelightSubsystem(COMETS3357::GyroSubsystem * gyro) : Subsystem<LimelightState>("LimelightSubsystem"), gyroSubsystem{gyro} {
     // Retrieve the Limelight network table instance
     nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
     table = inst.GetTable("limelight");
+}
+
+frc::Pose2d LimelightSubsystem::GetPose()
+{
+    try 
+    {
+        llresults = LimelightHelpers::getLatestResults(); 
+        limelightOdometry = frc::DriverStation::Alliance::kBlue ? llresults.targetingResults.botPose_wpiblue : llresults.targetingResults.botPose_wpired;
+
+    }
+    catch (...)
+    {
+        
+    }
+    return frc::Pose2d{frc::Translation2d{units::meter_t{limelightOdometry.at(0)}, units::meter_t{limelightOdometry.at(1)}}, frc::Rotation2d{units::radian_t{ gyroSubsystem->GetSubsystemData("Gyro")->GetEntry("angle").GetDouble(0)}}};
 }
 
 double LimelightSubsystem::getX() {

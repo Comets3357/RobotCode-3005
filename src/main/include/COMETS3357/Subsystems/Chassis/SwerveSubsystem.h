@@ -8,12 +8,14 @@
 #include <frc/kinematics/SwerveDriveKinematics.h>
 #include <frc/kinematics/SwerveDriveOdometry.h>
 #include <frc2/command/SubsystemBase.h>
+#include <frc/estimator/SwerveDrivePoseEstimator.h>
 
 #include "COMETS3357/Configs/ConfigFiles.h"
 
 #include "COMETS3357/Subsystems/Chassis/MAXSwerveModule.h"
 #include "units/time.h"
 #include "COMETS3357/GyroSubsystem.h"
+#include "COMETS3357/Subsystems/Vision/LimelightSubsystem.h"
 
 class RobotContainer;
 
@@ -29,7 +31,7 @@ namespace COMETS3357
   class SwerveSubsystem : public COMETS3357::Subsystem<SwerveState>
   {
   public:
-    SwerveSubsystem(std::string configFileName);
+    SwerveSubsystem(std::string configFileName, COMETS3357::LimelightSubsystem * limelightSubsystem);
 
     SwerveConfig configuration;
     std::shared_ptr<nt::NetworkTable> gyroSubsystemData;
@@ -140,7 +142,11 @@ namespace COMETS3357
 
     // Odometry class for tracking robot pose
     // 4 defines the number of modules
-    frc::SwerveDriveOdometry<4> m_odometry;
+    // frc::SwerveDriveOdometry<4> m_odometry;
+
+    frc::SwerveDrivePoseEstimator<4> m_odometry;
+
+    COMETS3357::LimelightSubsystem * limelight;
 
     
 

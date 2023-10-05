@@ -20,6 +20,7 @@
 #include "COMETS3357/Auton/Autons.h"
 #include "COMETS3357/Configs/ControllerMap.h"
 #include "COMETS3357/TimerSubsystem.h"
+#include "COMETS3357/Subsystems/Vision/LimelightSubsystem.h"
 
 #include "Subsystems/ElbowSubsystem.h"
 #include "Subsystems/EndEffectorSubsystem.h"
@@ -53,8 +54,9 @@ class RobotContainer {
 
   //Subsystems
   COMETS3357::TimerSubsystem timer{};
-  COMETS3357::GyroSubsystem gyro{};
-  COMETS3357::SwerveSubsystem swerve{"Swerve"};
+    COMETS3357::GyroSubsystem gyro{};
+  COMETS3357::LimelightSubsystem limelight{&gyro};
+  COMETS3357::SwerveSubsystem swerve{"Swerve", &limelight};
   ElbowSubsystem elbow{};
   EndEffectorSubsystem endEffector{};
   ExtenderSubsystem extender{};

@@ -13,7 +13,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 using namespace COMETS3357;
 
-SwerveSubsystem::SwerveSubsystem(std::string configFileName)
+SwerveSubsystem::SwerveSubsystem(std::string configFileName, COMETS3357::LimelightSubsystem * limelightSubsystem)
     : configuration{ConfigFiles::getInstance().GetConfigFiles().swerveConfigs[configFileName]},
       Subsystem<SwerveState>("SwerveSubsystem"),
       gyroSubsystemData{GetSubsystemData("GyroSubsystem")},
@@ -36,9 +36,10 @@ SwerveSubsystem::SwerveSubsystem(std::string configFileName)
                  frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}),
                  {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
                   m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
-                 frc::Pose2d{}}
+                 frc::Pose2d{}},
+      limelight{limelightSubsystem}
 {
-  
+  m_odometry.SetVisionMeasurementStdDevs(1);
 }
 
 void SwerveSubsystem::Initialize()
@@ -54,7 +55,7 @@ void SwerveSubsystem::Periodic() {
   m_rearLeft.Periodic();
   m_rearRight.Periodic();
 
-  frc::SmartDashboard::PutNumber("ASDSasdfsghdfD", (double)m_frontLeft.GetPosition().distance);
+  m_odometry.AddVisionMeasurement(limelight->GetPose(), frc::Timer::GetFPGATimestamp());
 
   m_odometry.Update(frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}),
                     {m_frontLeft.GetPosition(), m_rearLeft.GetPosition(),
@@ -283,7 +284,7 @@ void SwerveSubsystem::ZeroHeading() { }//m_gyro.Reset(); }
 
 double SwerveSubsystem::GetTurnRate() { return -gyroSubsystemData->GetEntry("angleRate").GetDouble(0); }
 
-frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetPose(); }
+frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetEstimatedPosition(); }
 
 void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
   m_odometry.ResetPosition(
