@@ -26,6 +26,8 @@
 #include "Subsystems/ExtenderSubsystem.h"
 #include "Subsystems/WristSubsystem.h"
 
+#include "Subsystems/LEDs.h"
+
 #include "Commands/SetPositionCommand.h"
 #include "Commands/PlacementCommand.h"
 #include "Commands/AutoRetractCommand.h"
@@ -57,6 +59,7 @@ class RobotContainer {
   EndEffectorSubsystem endEffector{};
   ExtenderSubsystem extender{};
   WristSubsystem wrist{};
+  LEDs LED{};
 
   //Commands
   SetPositionCommand highCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHighCubePosition", "ExtenderHighCubePosition", "WristHighCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD, CUBE};
@@ -80,6 +83,8 @@ class RobotContainer {
   frc2::InstantCommand highPlace{[this](){highConePosition.Schedule();}, {}};
   frc2::InstantCommand lowerElbowWithRequire{[this](){elbow.SetPosition(230);}, {&elbow}};
   frc2::InstantCommand lowerElbow{[this](){lowerElbowWithRequire.Schedule();}, {}};
+  frc2::InstantCommand coneFlash{[this](){LED.SetLEDCode('g');}, {&LED}};
+  frc2::InstantCommand cubeFlash{[this](){LED.SetLEDCode('e');}, {&LED}};
 
   Wait w1{&timer,1.75_s};
   Wait w2{&timer,0.4_s};
@@ -102,7 +107,9 @@ class RobotContainer {
     {"ConeFlip", std::make_shared<ConeFlipCommand>(&wrist)},
     {"HighConePlacement", std::make_shared<frc2::InstantCommand>(highPlace)},
     {"AutonConePlaceCommand", std::make_shared<frc2::SequentialCommandGroup>(highPlace, w1, lowerElbow, w2, eject, w3, homePos)},
-    {"AutonEnd", std::make_shared<frc2::SequentialCommandGroup>(w4, homePos)}
+    {"AutonEnd", std::make_shared<frc2::SequentialCommandGroup>(w4, homePos)},
+    {"ConeFlash", std::make_shared<frc2::InstantCommand>(coneFlash)},
+    {"CubeFlash", std::make_shared<frc2::InstantCommand>(cubeFlash)}
   };
 
 
