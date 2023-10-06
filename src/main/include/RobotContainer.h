@@ -20,6 +20,7 @@
 #include "COMETS3357/Auton/Autons.h"
 #include "COMETS3357/Configs/ControllerMap.h"
 #include "COMETS3357/TimerSubsystem.h"
+#include "COMETS3357/Subsystems/Vision/LimelightSubsystem.h"
 
 #include "Subsystems/ElbowSubsystem.h"
 #include "Subsystems/EndEffectorSubsystem.h"
@@ -54,7 +55,9 @@ class RobotContainer {
   //Subsystems
   COMETS3357::TimerSubsystem timer{};
   COMETS3357::GyroSubsystem gyro{};
+  COMETS3357::LimelightSubsystem limelight{};
   COMETS3357::SwerveSubsystem swerve{"Swerve"};
+  
   ElbowSubsystem elbow{};
   EndEffectorSubsystem endEffector{};
   ExtenderSubsystem extender{};
@@ -85,6 +88,7 @@ class RobotContainer {
   frc2::InstantCommand lowerElbow{[this](){lowerElbowWithRequire.Schedule();}, {}};
   frc2::InstantCommand coneFlash{[this](){LED.SetLEDCode('g');}, {&LED}};
   frc2::InstantCommand cubeFlash{[this](){LED.SetLEDCode('e');}, {&LED}};
+  frc2::InstantCommand stopFlash{[this](){LED.SetLEDCode('n');}, {&LED}};
 
   Wait w1{&timer,1.75_s};
   Wait w2{&timer,0.4_s};
@@ -109,7 +113,8 @@ class RobotContainer {
     {"AutonConePlaceCommand", std::make_shared<frc2::SequentialCommandGroup>(highPlace, w1, lowerElbow, w2, eject, w3, homePos)},
     {"AutonEnd", std::make_shared<frc2::SequentialCommandGroup>(w4, homePos)},
     {"ConeFlash", std::make_shared<frc2::InstantCommand>(coneFlash)},
-    {"CubeFlash", std::make_shared<frc2::InstantCommand>(cubeFlash)}
+    {"CubeFlash", std::make_shared<frc2::InstantCommand>(cubeFlash)},
+    {"StopFlash", std::make_shared<frc2::InstantCommand>(stopFlash)}
   };
 
 
