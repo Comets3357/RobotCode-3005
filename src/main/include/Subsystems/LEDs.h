@@ -4,6 +4,7 @@
 #include <time.h>
 
 #include "COMETS3357/Subsystems/Subsystem.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 enum LEDState
 {
