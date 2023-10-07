@@ -100,7 +100,6 @@ frc::SwerveModulePosition MAXSwerveModule::GetPosition() {
 
 void MAXSwerveModule::SetDesiredState(
     const frc::SwerveModuleState& desiredState) {
-      frc::SmartDashboard::PutNumber("AJKSLDNKSAD", desiredState.angle.Radians().value());
   // Apply chassis angular offset to the desired state.
   frc::SwerveModuleState correctedDesiredState{};
   correctedDesiredState.speed = desiredState.speed;

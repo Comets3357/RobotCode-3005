@@ -177,7 +177,6 @@ void SparkMaxPosition::SetVelocity(double velocity)
 
 void SparkMaxPosition::SetPosition(double position)
 {
-    frc::SmartDashboard::PutNumber("POSITION", position);
     PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
 }
 
@@ -211,9 +210,6 @@ void SparkMaxPosition::Periodic()
 
     absoluteEncoderPosition = absoluteEncoder.GetPosition();
     relativeEncoderPosition = absoluteEncoder.GetPosition();
-
-    frc::SmartDashboard::PutNumber("abs", absoluteEncoderPosition);
-    frc::SmartDashboard::PutNumber("relative", relativeEncoderPosition);
 
     
 

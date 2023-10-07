@@ -5,7 +5,6 @@
 void Robot::RobotInit() 
 {
 // ConfigFiles::getInstance().LoadConfigFiles("Comp");
-// frc::SmartDashboard::PutNumber("A",ConfigFiles::getInstance().GetConfigFiles().wheelMotorConfigs["DriveMotor1"].ID);
 //m_container.timerSubsystem.ResetAndBeginTimer();
 COMETS3357::SubsystemManager::GetInstance().Init();
 }

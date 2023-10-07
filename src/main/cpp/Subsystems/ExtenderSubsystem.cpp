@@ -14,6 +14,9 @@ void ExtenderSubsystem::Initialize()
 void ExtenderSubsystem::Periodic()
 {
     extendermotor.Periodic();
+
+    frc::SmartDashboard::PutNumber("ExtenderAbsolute", extendermotor.GetAbsolutePosition());
+    frc::SmartDashboard::PutNumber("ExtenderRelative", extendermotor.GetRelativePosition());
 }
 
 void ExtenderSubsystem::SetPercent(double percent)

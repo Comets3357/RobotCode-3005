@@ -15,8 +15,7 @@
 
     void Wait::Execute()
     {
-        frc::SmartDashboard::PutNumber("TIMERJSAHD", (double)endTime);
-        frc::SmartDashboard::PutNumber("TIMERJSAHD2", (double)t->timeSinceEnabled);
+
     }
 
     bool Wait::IsFinished()

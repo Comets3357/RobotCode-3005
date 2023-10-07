@@ -48,7 +48,6 @@ void SetPositionCommand::Initialize()
     
 
     wristSub->SetPosition(wristPos);
-    frc::SmartDashboard::PutNumber("wrist", wristSub->wristMotor.config.positions[wristPos]);
 
     switch (endEffectorMode)
     {
@@ -57,11 +56,9 @@ void SetPositionCommand::Initialize()
         break;
         case END_EFFECTOR_CONE_INPUT:
         endEffectorSub->SetPercent("EndEffectorConeInputPercent");
-        frc::SmartDashboard::PutNumber("endEffector", endEffectorSub->endEffectorMotor.config.percents["EndEffectorConeInputPercent"]);
         break;
         case END_EFFECTOR_CUBE_INPUT:
         endEffectorSub->SetPercent("EndEffectorCubeInputPercent");
-        frc::SmartDashboard::PutNumber("endEffector", endEffectorSub->endEffectorMotor.config.percents["EndEffectorCubeInputPercent"]);
         break;
         case END_EFFECTOR_CONE_HOLD:
         endEffectorSub->SetPercent("EndEffectorConeHoldPercent");
@@ -109,7 +106,6 @@ void SetPositionCommand::Execute()
             if (elbowSub->GetPosition() > 40 || !k)
             {
                 k = false;
-                frc::SmartDashboard::PutNumber("getting here", 1);
                 elbowSub->SetPosition(elbowPos);
             }
             else
@@ -125,7 +121,6 @@ void SetPositionCommand::Execute()
             if (std::abs(elbowSub->GetPosition() - elbowSub->elbowMotor.config.positions[elbowPos]) < 60)
             {
                 extenderSub->SetPosition(extenderPos);
-                frc::SmartDashboard::PutNumber("extender", extenderSub->extendermotor.config.positions[extenderPos]);
             }
             else
             {
@@ -135,7 +130,6 @@ void SetPositionCommand::Execute()
         
     }
 
-    frc::SmartDashboard::PutNumber("elbow", elbowSub->elbowMotor.config.positions[elbowPos]);
 }
 
 bool SetPositionCommand::IsFinished()

@@ -1,4 +1,5 @@
 #include "Subsystems/WristSubsystem.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 
 WristSubsystem::WristSubsystem() : COMETS3357::Subsystem<WristState>("WristSubsystem")
@@ -13,7 +14,10 @@ void WristSubsystem::Initialize()
 
 void WristSubsystem::Periodic()
 {
+    wristMotor.Periodic();
 
+    frc::SmartDashboard::PutNumber("WristAbsolute", wristMotor.GetAbsolutePosition());
+    frc::SmartDashboard::PutNumber("WristRelative", wristMotor.GetRelativePosition());
 }
 
 void WristSubsystem::SetPosition(double position)

@@ -12,7 +12,7 @@ void EndEffectorSubsystem::Initialize()
 
 void EndEffectorSubsystem::Periodic()
 {
-    
+
 }
 
 void EndEffectorSubsystem::SetPercent(double percent)

@@ -21,7 +21,10 @@ void ElbowSubsystem::Periodic()
     elbowMotor.Periodic();
     elbowFollow.Periodic();
 
-    frc::SmartDashboard::PutNumber("ERK2", elbowMotor.GetAbsolutePosition());
+
+
+    frc::SmartDashboard::PutNumber("ElbowAbsolute", elbowMotor.GetAbsolutePosition());
+    frc::SmartDashboard::PutNumber("ElbowRelative", elbowMotor.GetRelativePosition());
 }
 
 void ElbowSubsystem::SetPosition(double position)

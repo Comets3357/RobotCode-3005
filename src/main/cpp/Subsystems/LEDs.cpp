@@ -42,7 +42,6 @@ void LEDs::Initialize()
 
 void LEDs::SetLEDCode(char code)
 {
-    frc::SmartDashboard::PutNumber("LED", (int)code);
 
     char value[1];
 
