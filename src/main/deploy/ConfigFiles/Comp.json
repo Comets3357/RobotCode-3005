@@ -40,7 +40,7 @@
       {
           "ExtenderHomePosition": 0.85,
           "ExtenderHighCubePosition": 17,
-          "ExtenderHighConePosition": 19,
+          "ExtenderHighConePosition": 18,
           "ExtenderMidCubePosition": 0.75,
           "ExtenderMidConePosition": 0.75,
           "ExtenderLowCubePosition": 12.75,
@@ -48,8 +48,8 @@
           "ExtenderUpRightConePosition": 12.75,
           "ExtenderSideConePosition": 13.75,
           "ExtenderCubePosition": 12.75,
-          "ExtenderSingleSubPosition": 0,
-          "ExtenderDoubleSubPosition": 0
+          "ExtenderConeDoubleSubPosition": 0,
+          "ExtenderCubeDoubleSubPosition": 0
       }
     },
     {
@@ -99,8 +99,8 @@
         "ElbowUpRightConePosition": 26.8,
         "ElbowSideConePosition": 23.4,
         "ElbowCubePosition": 30.6,
-        "ElbowSingleSubPosition": 0,
-        "ElbowDoubleSubPosition": 0
+        "ElbowConeDoubleSubPosition": 0,
+        "ElbowCubeDoubleSubPosition": 0
       }
     },
     {
@@ -158,7 +158,7 @@
 
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 72,
+      "AbsoluteZeroOffset": 77,
       "CurrentLimit": 20,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 32,
@@ -203,7 +203,8 @@
         "WristSideConePosition": 45,
         "WristCubePosition": 225,
         "WristSingleSubPosition": 0,
-        "WristDoubleSubPosition": 0
+        "WristConeDoubleSubPosition": 0,
+        "WristCubeDoubleSubPosition": 0
       }
     },
     {

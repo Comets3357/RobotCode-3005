@@ -45,6 +45,8 @@ void Autons::LoadAutons()
         }
     }
 
+    autoChooser.AddOption("Potato", "Potato");
+
     frc::SmartDashboard::PutData("Autonomous Mode", &autoChooser);
 
 }

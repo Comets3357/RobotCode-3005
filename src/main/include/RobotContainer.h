@@ -77,6 +77,8 @@ class RobotContainer {
   SetPositionCommand singleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowSingleSubPosition", "ExtenderSingleSubPosition", "WristSingleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT, NONE};
   SetPositionCommand doubleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowDoubleSubPosition", "ExtenderDoubleSubPosition", "WristDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD, NONE};
   SetPositionCommand homePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHomePosition", "ExtenderHomePosition", "WristHomePosition", SetPositionCommand::END_EFFECTOR_GAME_PIECE, NONE};
+  SetPositionCommand doubleSubConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowConeDoubleSubPosition", "ExtenderConeDoubleSubPosition", "WristConeDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT, CONE};
+  SetPositionCommand doubleSubCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowCubeDoubleSubPosition", "ExtenderCubeDoubleSubPosition", "WristCubeDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT, CUBE};
   EjectCommand ejectPress{&endEffector, true};
   EjectCommand ejectRelease{&endEffector, false};
 
@@ -92,7 +94,7 @@ class RobotContainer {
 
   Wait w1{&timer,1.75_s};
   Wait w2{&timer,0.4_s};
-  Wait w3{&timer,0.1_s};
+  Wait w3{&timer,0.5_s};
   Wait w4{&timer,0.5_s};
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
@@ -114,7 +116,9 @@ class RobotContainer {
     {"AutonEnd", std::make_shared<frc2::SequentialCommandGroup>(w4, homePos)},
     {"ConeFlash", std::make_shared<frc2::InstantCommand>(coneFlash)},
     {"CubeFlash", std::make_shared<frc2::InstantCommand>(cubeFlash)},
-    {"StopFlash", std::make_shared<frc2::InstantCommand>(stopFlash)}
+    {"StopFlash", std::make_shared<frc2::InstantCommand>(stopFlash)},
+    {"DoubleSubConePosition", std::make_shared<AutoRetractCommand>(doubleSubConePosition, homePosition, &endEffector, 0)},
+    {"DoubleSubCubePosition", std::make_shared<AutoRetractCommand>(doubleSubCubePosition, homePosition, &endEffector, 0)}
   };
 
 
