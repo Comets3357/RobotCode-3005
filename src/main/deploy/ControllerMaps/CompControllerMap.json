@@ -97,7 +97,7 @@
                 "D-padDown": "NONE",
                 "LeftStickY": "SemiAutoArmMove",
                 "LeftStickX": "NONE",
-                "LeftStickButton": "",
+                "LeftStickButton": "NONE",
                 "RightStickX": "NONE",
                 "RightStickY": "NONE",
                 "RightStickButton": "NONE",
