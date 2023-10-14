@@ -5,9 +5,18 @@
 
 enum EndEffectorSubsystemState
 {
-NONE,
+GAMEPIECE_NONE,
 CONE,   
 CUBE
+};
+
+enum PlacementPosition
+{
+    HIGH_CONE,
+    MID_CONE,
+    HIGH_CUBE,
+    MID_CUBE,
+    NONE
 };
 
 class EndEffectorSubsystem : public COMETS3357::Subsystem<EndEffectorSubsystemState>
@@ -28,7 +37,7 @@ public:
 
     double GetPosition();
 
-
+    PlacementPosition placement = NONE;
 
     COMETS3357::SparkMaxPercent endEffectorMotor{"EndEffectorMotor"};
 

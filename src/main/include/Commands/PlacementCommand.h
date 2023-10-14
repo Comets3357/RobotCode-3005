@@ -10,7 +10,7 @@
 class PlacementCommand : public frc2::CommandHelper<frc2::CommandBase, PlacementCommand>
 {
 public: 
-    PlacementCommand(EndEffectorSubsystem* endEffector, SetPositionCommand &cubePosition, SetPositionCommand &conePosition);
+    PlacementCommand(EndEffectorSubsystem* endEffector, SetPositionCommand &cubePosition, SetPositionCommand &conePosition, PlacementPosition placement);
 
     void Initialize() override;
   
@@ -26,6 +26,7 @@ private:
 EndEffectorSubsystem* endEffectorSubsystem;
 SetPositionCommand &cubePositionCommand;
 SetPositionCommand &conePositionCommand;
+PlacementPosition placement;
 
 
 };

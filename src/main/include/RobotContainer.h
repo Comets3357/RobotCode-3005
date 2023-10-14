@@ -74,9 +74,7 @@ class RobotContainer {
   SetPositionCommand upRightConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowUpRightConePosition", "ExtenderUpRightConePosition", "WristUpRightConePosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT, CONE};
   SetPositionCommand sideConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowSideConePosition", "ExtenderSideConePosition", "WristSideConePosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT, CONE};
   SetPositionCommand cubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowCubePosition", "ExtenderCubePosition", "WristCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT, CUBE};
-  SetPositionCommand singleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowSingleSubPosition", "ExtenderSingleSubPosition", "WristSingleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT, NONE};
-  SetPositionCommand doubleSubPosition{&elbow, &extender, &wrist, &endEffector, "ElbowDoubleSubPosition", "ExtenderDoubleSubPosition", "WristDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD, NONE};
-  SetPositionCommand homePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHomePosition", "ExtenderHomePosition", "WristHomePosition", SetPositionCommand::END_EFFECTOR_GAME_PIECE, NONE};
+  SetPositionCommand homePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHomePosition", "ExtenderHomePosition", "WristHomePosition", SetPositionCommand::END_EFFECTOR_GAME_PIECE, GAMEPIECE_NONE};
   SetPositionCommand doubleSubConePosition{&elbow, &extender, &wrist, &endEffector, "ElbowConeDoubleSubPosition", "ExtenderConeDoubleSubPosition", "WristConeDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CONE_INPUT, CONE};
   SetPositionCommand doubleSubCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowCubeDoubleSubPosition", "ExtenderCubeDoubleSubPosition", "WristCubeDoubleSubPosition", SetPositionCommand::END_EFFECTOR_CUBE_INPUT, CUBE};
   EjectCommand ejectPress{&endEffector, true};
@@ -88,6 +86,8 @@ class RobotContainer {
   frc2::InstantCommand highPlace{[this](){highConePosition.Schedule();}, {}};
   frc2::InstantCommand lowerElbowWithRequire{[this](){elbow.SetPosition(230);}, {&elbow}};
   frc2::InstantCommand lowerElbow{[this](){lowerElbowWithRequire.Schedule();}, {}};
+  frc2::InstantCommand lowerElbowWithRequire2{[this](){elbow.SetPosition(250);}, {&elbow}};
+  frc2::InstantCommand lowerElbow2{[this](){lowerElbowWithRequire.Schedule();}, {}};
   frc2::InstantCommand coneFlash{[this](){LED.SetLEDCode('g');}, {&LED}};
   frc2::InstantCommand cubeFlash{[this](){LED.SetLEDCode('e');}, {&LED}};
   frc2::InstantCommand stopFlash{[this](){LED.SetLEDCode('n');}, {&LED}};
@@ -97,18 +97,51 @@ class RobotContainer {
   Wait w3{&timer,0.5_s};
   Wait w4{&timer,0.5_s};
 
+
+
+  // Placement
+
+
+
+  frc2::SequentialCommandGroup highConePlaceTeleop{lowerElbow, w2, eject, w3, homePos};
+  frc2::SequentialCommandGroup midConePlaceTeleop{lowerElbow2, w2, eject, w3, homePos};
+
+  frc2::InstantCommand placeGamepiece{[this](){
+    switch (endEffector.placement)
+    {
+    case HIGH_CONE:
+      highConePlaceTeleop.Schedule();
+      break;
+    case HIGH_CUBE:
+      ejectPress.Schedule();
+      break;
+    case MID_CONE:
+      midConePlaceTeleop.Schedule();
+      break;
+    case MID_CUBE:
+      ejectPress.Schedule();
+      break;
+    case NONE:
+      ejectPress.Schedule();
+      break;
+    
+    default:
+      break;
+    }
+  }, {}};
+
+
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
     {"HomePosition", std::make_shared<frc2::InstantCommand>(homePos)},
-    {"HighPosition", std::make_shared<PlacementCommand>(&endEffector, highCubePosition, highConePosition)},
-    {"MidPosition", std::make_shared<PlacementCommand>(&endEffector, midCubePosition, midConePosition)},
-    {"LowPosition", std::make_shared<PlacementCommand>(&endEffector, lowCubePosition, lowConePosition)},
+    {"HighPosition", std::make_shared<PlacementCommand>(&endEffector, highCubePosition, highConePosition, HIGH_CONE)},
+    {"MidPosition", std::make_shared<PlacementCommand>(&endEffector, midCubePosition, midConePosition, MID_CONE)},
+    {"LowPosition", std::make_shared<PlacementCommand>(&endEffector, lowCubePosition, lowConePosition, NONE)},
     {"UpRightConePosition", std::make_shared<AutoRetractCommand>(upRightConePosition, homePosition, &endEffector, 0)},
     {"SideConePosition", std::make_shared<AutoRetractCommand>(sideConePosition, homePosition, &endEffector, 0)},
     {"CubePosition", std::make_shared<AutoRetractCommand>(cubePosition, homePosition, &endEffector, 0)},
-    {"SingleSubPosition", std::make_shared<AutoRetractCommand>(singleSubPosition, homePosition, &endEffector, 0)},
-    {"DoubleSubPosition", std::make_shared<AutoRetractCommand>(doubleSubPosition, homePosition, &endEffector, 0)},
-    {"EjectOnPress", std::make_shared<frc2::InstantCommand>(eject)},
+    {"EjectOnPress", std::make_shared<frc2::InstantCommand>(placeGamepiece)},
+    //{"EjectOnPress", std::make_shared<frc2::InstantCommand>(eject)},
     {"EjectOnRelease", std::make_shared<frc2::InstantCommand>(stopEject)},
     {"ConeFlip", std::make_shared<ConeFlipCommand>(&wrist)},
     {"HighConePlacement", std::make_shared<frc2::InstantCommand>(highPlace)},
