@@ -65,8 +65,39 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, double directionX, double directionY,
               bool fieldRelative, bool rateLimit)
 {
+  frc::SmartDashboard::PutNumber("Gyro Angle", gyroSubsystemData->GetEntry("angle").GetDouble(0));
+  frc::SmartDashboard::PutNumber("Angle Difference", gyroSubsystemData->GetEntry("angle").GetDouble(0) - lastAngle);
 
-  units::radians_per_second_t rot = units::radians_per_second_t{(atan2(directionX, directionY) - gyroSubsystemData->GetEntry("angle").GetDouble(0)) * 0.6 * sqrt(pow(directionX, 2) + pow(directionY, 2))};
+  double gyroAngle = gyroSubsystemData->GetEntry("angle").GetDouble(0);
+
+  if (gyroAngle - lastAngle > 180)
+  {
+    actualAngle += (gyroAngle - lastAngle) - 360;
+  }
+  else if (gyroAngle - lastAngle < -180)
+  {
+    actualAngle += (gyroAngle - lastAngle) + 360;
+  }
+  else
+  {
+    actualAngle += gyroAngle - lastAngle;
+  }
+
+  frc::SmartDashboard::PutNumber("ActualRotation", actualAngle);
+
+  
+
+  double targetAngle = (atan2(directionX, directionY) * 180 / (2 * 3.14159)) + (actualAngle - fmod(actualAngle, 360));
+
+  // double speed = sqrt(pow(directionX, 2) + pow(directionY, 2));
+  // rotationController.SetIntegratorRange(-speed, speed);
+  rotationController.SetIntegratorRange(-1, 1);
+
+
+
+  units::radians_per_second_t rot = units::radians_per_second_t{rotationController.Calculate(actualAngle, targetAngle)};
+
+  frc::SmartDashboard::PutNumber("ROTATION AMMOUNT", (double)rot);
 
   double xSpeedCommanded;
   double ySpeedCommanded;
@@ -118,13 +149,15 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
 
     xSpeedCommanded = m_currentTranslationMag * cos(m_currentTranslationDir);
     ySpeedCommanded = m_currentTranslationMag * sin(m_currentTranslationDir);
-    m_currentRotation = m_rotLimiter.Calculate(rot.value());
+    // m_currentRotation = m_rotLimiter.Calculate(rot.value());
 
   } else {
     xSpeedCommanded = xSpeed.value();
     ySpeedCommanded = ySpeed.value();
     m_currentRotation = rot.value();
   }
+
+  m_currentRotation = rot.value();
 
   // Convert the commanded speeds into the correct units for the drivetrain
   units::meters_per_second_t xSpeedDelivered =
