@@ -36,6 +36,7 @@
       "ReverseSoftLimitEnabled": true,
       "ForwardSoftLimit": 18.5,
       "ReverseSoftLimit": 0.5,
+      "PositionTolerance": 0,
       "Positions":
       {
           "ExtenderHomePosition": 0.85,
@@ -87,6 +88,7 @@
       "ReverseSoftLimitEnabled": true,
       "ForwardSoftLimit": 299, 
       "ReverseSoftLimit": 15, 
+      "PositionTolerance": 0,
       "Positions":
       {
         "ElbowHomePosition": 12,
@@ -138,6 +140,7 @@
       "ReverseSoftLimitEnabled": false,
       "ForwardSoftLimit": 0,
       "ReverseSoftLimit": 0,
+      "PositionTolerance": 0,
       "Positions":
       {
         "ElbowHomePosition": 10,
@@ -190,6 +193,7 @@
       "ReverseSoftLimitEnabled": true,
       "ForwardSoftLimit": 350,
       "ReverseSoftLimit": 10,
+      "PositionTolerance": 0,
       "Positions":
       {
         "WristHomePosition": 45,
@@ -242,6 +246,7 @@
       "ReverseSoftLimitEnabled": false,
       "ForwardSoftLimit": 0,
       "ReverseSoftLimit": 0,
+      "PositionTolerance": 0,
       "Positions":
       {
         
@@ -282,6 +287,7 @@
       "ReverseSoftLimitEnabled": false,
       "ForwardSoftLimit": 0,
       "ReverseSoftLimit": 0,
+      "PositionTolerance": 0,
       "Positions":
       {
         
@@ -322,6 +328,7 @@
       "ReverseSoftLimitEnabled": false,
       "ForwardSoftLimit": 0,
       "ReverseSoftLimit": 0,
+      "PositionTolerance": 0,
       "Positions":
       {
         
@@ -362,6 +369,7 @@
       "ReverseSoftLimitEnabled": false,
       "ForwardSoftLimit": 0,
       "ReverseSoftLimit": 0,
+      "PositionTolerance": 0,
       "Positions":
       {
         

@@ -119,6 +119,8 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
         motorConfig.forwardSoftLimit = config.get("ForwardSoftLimit").get<double>();
         motorConfig.reverseSoftLimit = config.get("ReverseSoftLimit").get<double>();
 
+        motorConfig.positionTolerance = config.get("PositionTolerance").get<double>();
+
         picojson::object positions = config.get("Positions").get<picojson::object>();
         for (auto& position : positions)
         {

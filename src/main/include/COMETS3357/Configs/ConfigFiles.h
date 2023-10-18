@@ -53,6 +53,8 @@ namespace COMETS3357
         double forwardSoftLimit;
         double reverseSoftLimit;
 
+        double positionTolerance;
+
         std::map<std::string, double> positions;
     };
 

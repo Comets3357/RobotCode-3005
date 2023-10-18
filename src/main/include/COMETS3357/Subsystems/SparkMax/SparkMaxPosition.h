@@ -158,6 +158,8 @@ namespace COMETS3357
          */
         void CheckAbsoluteEncoder();
 
+        bool IsDone();
+
         rev::CANSparkMax motor;
         COMETS3357::PID positionPID{};
         COMETS3357::PID velocityPID{};
@@ -166,6 +168,7 @@ namespace COMETS3357
 
         double absoluteEncoderPosition = 0;
         double relativeEncoderPosition = 0;
+        double targetPosition = 0;
         COMETS3357::SparkMaxPositionRunMode runMode = POSITION_SPARK_MAX_NONE;
         COMETS3357::SparkMaxPositionRunMode runModeRequest = runMode;
         bool requestRunMode = false;

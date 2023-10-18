@@ -178,11 +178,13 @@ void SparkMaxPosition::SetVelocity(double velocity)
 void SparkMaxPosition::SetPosition(double position)
 {
     PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
+    targetPosition = position;
 }
 
 void SparkMaxPosition::SetPosition(std::string position)
 {
     PIDController.SetReference(config.positions[position], rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
+    targetPosition = config.positions[position];
 }
 
 double SparkMaxPosition::GetRelativePosition()
@@ -231,6 +233,11 @@ void SparkMaxPosition::changeRunMode(SparkMaxPositionRunMode mode)
 void SparkMaxPosition::SetFeedForward(std::function<double(double)> feedforward)
 {
     feedForwardFunction = feedforward;
+}
+
+bool SparkMaxPosition::IsDone()
+{
+    return abs(targetPosition - absoluteEncoderPosition) < config.positionTolerance;
 }
 
 
