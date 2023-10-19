@@ -142,6 +142,14 @@ namespace COMETS3357
     // 4 defines the number of modules
     frc::SwerveDriveOdometry<4> m_odometry;
 
+    double actualAngle = 0; 
+    double lastAngle = 0; 
+
+    double kP = 1.25;
+    double kD = 0;
+
+    frc::PIDController rotationController{kP, 0, kD};
+
     
 
     

@@ -130,6 +130,9 @@ namespace COMETS3357
      * @brief Gets the raw target vertices (x1, y1, x2, y2, x3, y3, x4, y4).
      * @return The raw target vertices.
      */
+
+    void Periodic() override;
+    
     std::vector<double> getRawTargetVertices();
 
     private:

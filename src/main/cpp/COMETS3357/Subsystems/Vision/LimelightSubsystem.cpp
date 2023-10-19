@@ -1,11 +1,17 @@
 #include "COMETS3357/Subsystems/Vision/LimelightSubsystem.h"
-
+#include <frc/smartdashboard/SmartDashboard.h>
 using namespace COMETS3357;
 
 LimelightSubsystem::LimelightSubsystem() : Subsystem<LimelightState>("LimelightSubsystem") {
     // Retrieve the Limelight network table instance
     nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
     table = inst.GetTable("limelight");
+}
+
+void LimelightSubsystem::Periodic()
+{
+    frc::SmartDashboard::PutNumber("LIMELIGHT X", getX());
+    setLEDMode(0);
 }
 
 double LimelightSubsystem::getX() {

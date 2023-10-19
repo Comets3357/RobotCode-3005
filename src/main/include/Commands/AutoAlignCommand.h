@@ -26,6 +26,8 @@ private:
     COMETS3357::LimelightSubsystem *limelight;
     EndEffectorSubsystem *endEffector;
     COMETS3357::GyroSubsystem * gyro;
+    
+    double angleX = 0;
 
 
 

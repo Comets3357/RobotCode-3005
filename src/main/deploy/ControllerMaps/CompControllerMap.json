@@ -74,7 +74,22 @@
                 "LeftStickY": "SwerveDefaultCommand",
                 "LeftStickX": "SwerveDefaultCommand",
                 "RightStickX": "SwerveDefaultCommand",
-                "RightStickY": "SwerveDefaultCommand"
+                "RightStickY": "SwerveDefaultCommand",
+                "LShoulder": "NONE",
+                "LShoulderPressed": "TaranusSemiAutoDirectional",
+                "LShoulderReleased": "NONE"
+                
+            },
+
+            "TaranusSemiAutoDirectional":
+            {
+                "LeftStickY": "SwerveDefaultCommandDirectional",
+                "LeftStickX": "SwerveDefaultCommandDirectional",
+                "RightStickX": "SwerveDefaultCommandDirectional",
+                "RightStickY": "SwerveDefaultCommandDirectional",
+                "LShoulder": "NONE",
+                "LShoulderPressed": "NONE",
+                "LShoulderReleased": "TaranusSemiAuto"
                 
             }
         }
@@ -179,7 +194,7 @@
                 "AButtonPressed": "ConeFlip",
                 "BButtonPressed": "NONE",
                 "XButtonPressed": "UpRightConePosition",
-                "YButtonPressed": "NONE",
+                "YButtonPressed": "Align",
                 "LeftBumperPressed": "NONE",
                 "RightBumperPressed": "NONE",
                 "BackButtonPressed": "NONE",

@@ -165,6 +165,8 @@ bool Controller::LoadControls(picojson::value &controllers)
                         {
                             std::map<std::string, frc2::Trigger> joystickTriggers;
 
+                            SetButton(frc2::Trigger{[this]{return controller.GetRawButton(2);}}, "LShoulder", mode);
+
                             SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(0), 0.08) != 0;}}, "LeftStickY", mode, joystickTriggers);
                             SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(3), 0.08) != 0;}}, "LeftStickX", mode, joystickTriggers);
                             SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(2), 0.08) != 0;}}, "RightStickY", mode, joystickTriggers);
@@ -174,7 +176,7 @@ bool Controller::LoadControls(picojson::value &controllers)
                         }
                         else if (controllerType.first == "XBOX")
                         {
-                            SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 0;}}, "D-padUp", mode);
+                            
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 90;}}, "D-padRight", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 180;}}, "D-padDown", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 270;}}, "D-padLeft", mode);

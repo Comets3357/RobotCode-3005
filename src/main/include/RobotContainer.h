@@ -37,6 +37,7 @@
 #include <frc2/command/SequentialCommandGroup.h>
 #include "Commands/ConeFlipCommand.h"
 #include "Commands/Wait.h"
+#include "Commands/AutoAlignCommand.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -87,7 +88,7 @@ class RobotContainer {
   frc2::InstantCommand lowerElbowWithRequire{[this](){elbow.SetPosition(230);}, {&elbow}};
   frc2::InstantCommand lowerElbow{[this](){lowerElbowWithRequire.Schedule();}, {}};
   frc2::InstantCommand lowerElbowWithRequire2{[this](){elbow.SetPosition(250);}, {&elbow}};
-  frc2::InstantCommand lowerElbow2{[this](){lowerElbowWithRequire.Schedule();}, {}};
+  frc2::InstantCommand lowerElbow2{[this](){lowerElbowWithRequire2.Schedule();}, {}};
   frc2::InstantCommand coneFlash{[this](){LED.SetLEDCode('g');}, {&LED}};
   frc2::InstantCommand cubeFlash{[this](){LED.SetLEDCode('e');}, {&LED}};
   frc2::InstantCommand stopFlash{[this](){LED.SetLEDCode('n');}, {&LED}};
@@ -134,6 +135,7 @@ class RobotContainer {
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
     {"HomePosition", std::make_shared<frc2::InstantCommand>(homePos)},
+    {"Align", std::make_shared<AutoAlignCommand>(&swerve, &limelight, &endEffector, &gyro)},
     {"HighPosition", std::make_shared<PlacementCommand>(&endEffector, highCubePosition, highConePosition, HIGH_CONE)},
     {"MidPosition", std::make_shared<PlacementCommand>(&endEffector, midCubePosition, midConePosition, MID_CONE)},
     {"LowPosition", std::make_shared<PlacementCommand>(&endEffector, lowCubePosition, lowConePosition, NONE)},
@@ -157,7 +159,8 @@ class RobotContainer {
 
   std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, COMETS3357::Controller::JoystickCommandMode>> joystickActionMap
   {
-   {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.Drive(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX}, true, true);}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.Drive(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -rightX, rightY, true, true);}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"SwerveDefaultCommandDirectional", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.Drive(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX}, true, true);}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualEndEffector", {[this](auto leftX, auto leftY, auto rightX, auto rightY){endEffector.SetPercent(leftY);}, &endEffector, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualExtender", {[this](auto leftX, auto leftY, auto rightX, auto rightY){extender.SetPercent(rightY);}, &extender, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualElbow", {[this](auto leftX, auto leftY, auto rightX, auto rightY){elbow.SetPercent(rightY);}, &elbow, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},

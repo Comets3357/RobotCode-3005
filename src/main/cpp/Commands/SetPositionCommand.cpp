@@ -41,7 +41,7 @@ void SetPositionCommand::Initialize()
     }
 
 
-    if (piece != NONE)
+    if (piece != GAMEPIECE_NONE)
     {
         endEffectorSub->SetState(piece);
     }
