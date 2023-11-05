@@ -1,28 +1,19 @@
 #pragma once
-#include <frc2/command/CommandHelper.h>
+
+#include "COMETS3357/Commands/Command.h"
 
 #include "Subsystems/WristSubsystem.h"
 
 
-class ConeFlipCommand : public frc2::CommandHelper<frc2::CommandBase, ConeFlipCommand>
-{
-public:
+DECLARE_COMMAND(ConeFlipCommand)
 
     ConeFlipCommand(WristSubsystem * wrist);
-
-    void Initialize() override;
-
-    void Execute() override;
-
-    bool IsFinished() override;
-
-    void End(bool interrupted) override;
 
 private:
 
     WristSubsystem * wrist;
 
-};
+DECLARE_COMMAND_END
 
 
 

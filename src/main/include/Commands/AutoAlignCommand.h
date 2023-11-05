@@ -7,18 +7,11 @@
 #include "Subsystems/EndEffectorSubsystem.h"
 #include "COMETS3357/GyroSubsystem.h"
 
-class AutoAlignCommand : public frc2::CommandHelper<frc2::CommandBase, AutoAlignCommand>
-{
-public:
+#include "COMETS3357/Commands/Command.h"
+
+DECLARE_COMMAND(AutoAlignCommand)
+
     AutoAlignCommand(COMETS3357::SwerveSubsystem *driveSub, COMETS3357::LimelightSubsystem *limelightSub, EndEffectorSubsystem *endEffectorSub, COMETS3357::GyroSubsystem * gyroSub);
-
-    void Initialize() override;
-
-    void Execute() override;
-
-    bool IsFinished() override;
-
-    void End(bool interrupted) override;
 
 private:
 
@@ -29,6 +22,4 @@ private:
     
     double angleX = 0;
 
-
-
-};
+DECLARE_COMMAND_END

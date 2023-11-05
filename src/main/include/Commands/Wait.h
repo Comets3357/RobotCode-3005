@@ -10,10 +10,10 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "COMETS3357/TimerSubsystem.h"
 
+#include "COMETS3357/Commands/Command.h"
 
-class Wait : public frc2::CommandHelper<frc2::CommandBase, Wait>
-{
-public:
+
+DECLARE_COMMAND(Wait)
 
     COMETS3357::TimerSubsystem * t;
     units::second_t endTime{0};
@@ -21,17 +21,9 @@ public:
 
     Wait(COMETS3357::TimerSubsystem* timer, units::second_t time);
 
-    void Initialize() override;
-
-    void Execute() override;
-
-    bool IsFinished() override;
-    void End(bool interrupted) override;
 
     units::second_t s;
 
 private:
-
     
-
-};
+DECLARE_COMMAND_END

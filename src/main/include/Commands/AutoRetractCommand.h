@@ -6,18 +6,12 @@
 #include "Subsystems/EndEffectorSubsystem.h"
 #include "Commands/SetPositionCommand.h"
 
-class AutoRetractCommand : public frc2::CommandHelper<frc2::CommandBase, AutoRetractCommand>
-{
-public:
+#include "COMETS3357/Commands/Command.h"
+
+
+DECLARE_COMMAND(AutoRetractCommand)
+
     AutoRetractCommand(SetPositionCommand &targetPosition, SetPositionCommand &homePosition, EndEffectorSubsystem* endEffector, double amps);
-
-    void Initialize() override;
-
-    void Execute() override;
-
-    bool IsFinished() override;
-
-    void End(bool interrupted) override;
 
 private:
 
@@ -27,4 +21,4 @@ private:
 
     double ampLimit;
 
-};
+DECLARE_COMMAND_END

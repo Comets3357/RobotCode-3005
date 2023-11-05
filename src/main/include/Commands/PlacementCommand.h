@@ -6,20 +6,11 @@
 #include "Subsystems/EndEffectorSubsystem.h"
 #include "Commands/SetPositionCommand.h"
 
+#include "COMETS3357/Commands/Command.h"
 
-class PlacementCommand : public frc2::CommandHelper<frc2::CommandBase, PlacementCommand>
-{
-public: 
+DECLARE_COMMAND(PlacementCommand)
+
     PlacementCommand(EndEffectorSubsystem* endEffector, SetPositionCommand &cubePosition, SetPositionCommand &conePosition, PlacementPosition placement);
-
-    void Initialize() override;
-  
-    void Execute() override;
-
-    bool IsFinished() override;
-
-    void End(bool interrupted) override; 
-
 
 private:
 
@@ -28,5 +19,4 @@ SetPositionCommand &cubePositionCommand;
 SetPositionCommand &conePositionCommand;
 PlacementPosition placement;
 
-
-};
+DECLARE_COMMAND_END

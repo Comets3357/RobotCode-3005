@@ -5,11 +5,9 @@
 #include "Subsystems/WristSubsystem.h"
 #include "Subsystems/EndEffectorSubsystem.h"
 
+#include "COMETS3357/Commands/Command.h"
 
-
-class SetPositionCommand : public frc2::CommandHelper<frc2::CommandBase, SetPositionCommand>
-{
-public:
+DECLARE_COMMAND(SetPositionCommand)
 
     enum EndEffectorMode
     {
@@ -23,13 +21,6 @@ public:
 
     SetPositionCommand(ElbowSubsystem* elbowSubsystem, ExtenderSubsystem* extenderSubsystem, WristSubsystem* wristSubsystem, EndEffectorSubsystem* endEffectorSubsystem, std::string elbowPosition, std::string extenderPosition, std::string wristPosition, EndEffectorMode mode, EndEffectorSubsystemState gamePiece);
 
-    void Initialize() override;
-
-    void Execute() override;
-
-    bool IsFinished() override;
-
-    void End(bool interrupted) override;
 
 private:
 
@@ -47,4 +38,5 @@ private:
     bool isFromHome = false;
 
     bool k = false;
-};
+
+DECLARE_COMMAND_END

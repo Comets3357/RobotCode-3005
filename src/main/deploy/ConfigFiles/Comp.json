@@ -158,7 +158,7 @@
 
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 13,
+      "AbsoluteZeroOffset": 148,
       "CurrentLimit": 20,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 32,

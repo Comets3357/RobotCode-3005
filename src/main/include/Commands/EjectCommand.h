@@ -1,22 +1,13 @@
 #pragma once
-#include <frc2/command/CommandHelper.h>
-
+#include "COMETS3357/Commands/Command.h"
 #include "Subsystems/EndEffectorSubsystem.h"
 
 
-class EjectCommand : public frc2::CommandHelper<frc2::CommandBase, EjectCommand>
-{
-public:
+
+DECLARE_COMMAND(EjectCommand)
 
     EjectCommand(EndEffectorSubsystem* endEffectorState, bool on);
 
-    void Initialize() override;
-
-    void Execute() override;
-
-    bool IsFinished() override;
-
-    void End(bool interrupted) override;
 
 private:
 
@@ -24,7 +15,6 @@ private:
 
     bool enabled = false;
 
-};
-
+DECLARE_COMMAND_END
 
 
