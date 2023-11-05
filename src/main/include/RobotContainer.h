@@ -38,6 +38,7 @@
 #include "Commands/ConeFlipCommand.h"
 #include "Commands/Wait.h"
 #include "Commands/AutoAlignCommand.h"
+#include "Subsystems/ShuffleBoardDebug.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -64,6 +65,7 @@ class RobotContainer {
   ExtenderSubsystem extender{};
   WristSubsystem wrist{};
   LEDs LED{};
+  ShuffleBoardDebug debug{};
 
   //Commands
   SetPositionCommand highCubePosition{&elbow, &extender, &wrist, &endEffector, "ElbowHighCubePosition", "ExtenderHighCubePosition", "WristHighCubePosition", SetPositionCommand::END_EFFECTOR_CUBE_HOLD, CUBE};
