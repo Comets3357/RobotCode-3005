@@ -52,7 +52,7 @@ namespace COMETS3357
      */
     void Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, units::radians_per_second_t rot,
-              bool fieldRelative, bool rateLimit);
+              bool fieldRelative, bool rateLimit, frc::SwerveDriveKinematics<4>* kinematics);
     
     void Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, double directionX, double directionY,
@@ -106,7 +106,59 @@ namespace COMETS3357
      */
     void ResetOdometry(frc::Pose2d pose);
 
+    /**
+     * Drive for field relative swerve with the X axis for rotating
+     * 
+     * @param xSpeed drivebase speed in the x direction
+     * @param ySpeed drivebase speed in the y direction
+     * @param rot drivebase rotation speed with direction
+    */
+    void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot);
+
+    /**
+     * Drive for field relative swerve with directional steering
+     * 
+     * @param xSpeed drivebase speed in the x direction
+     * @param ySpeed drivebase speed in the y direction
+     * @param directionX x portion of the target facing direction of the drivebase
+     * @param directionY y portion of the target facing direction of the drivebase
+    */
+    void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, double directionX, double directionY);
+
+    /**
+     * Drive for field relative swerve with the X axis for rotating while automatically choosing a corner to rotate around
+     * 
+     * @param xSpeed drivebase speed in the x direction
+     * @param ySpeed drivebase speed in the y direction
+     * @param rot drivebase rotation speed with direction
+    */
+    void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot);
+
     frc::SwerveDriveKinematics<4> kDriveKinematics{
+        frc::Translation2d{},
+        frc::Translation2d{},
+        frc::Translation2d{},
+        frc::Translation2d{}};
+
+    frc::SwerveDriveKinematics<4> kDriveKinematicsFrontLeft{
+        frc::Translation2d{},
+        frc::Translation2d{},
+        frc::Translation2d{},
+        frc::Translation2d{}};
+    
+    frc::SwerveDriveKinematics<4> kDriveKinematicsFrontRight{
+        frc::Translation2d{},
+        frc::Translation2d{},
+        frc::Translation2d{},
+        frc::Translation2d{}};
+
+    frc::SwerveDriveKinematics<4> kDriveKinematicsBackLeft{
+        frc::Translation2d{},
+        frc::Translation2d{},
+        frc::Translation2d{},
+        frc::Translation2d{}};
+
+    frc::SwerveDriveKinematics<4> kDriveKinematicsBackRight{
         frc::Translation2d{},
         frc::Translation2d{},
         frc::Translation2d{},
@@ -145,7 +197,9 @@ namespace COMETS3357
 
     frc::PIDController rotationController{kP, 0, kD};
 
-    
+    bool pickedCorner = false;
+
+    frc::SwerveDriveKinematics<4U>* corner;
 
     
   };

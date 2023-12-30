@@ -25,13 +25,54 @@ SwerveSubsystem::SwerveSubsystem(std::string configFileName)
       m_rotLimiter{configuration.rotationalSlewRate / 1_s},
       kDriveKinematics{
       frc::Translation2d{configuration.wheelBase / 2,
-                         configuration.trackWidth / 2},
-      frc::Translation2d{configuration.wheelBase / 2 / 2,
-                         -configuration.trackWidth / 2},
-      frc::Translation2d{-configuration.wheelBase / 2 / 2,
-                         configuration.trackWidth / 2},
-      frc::Translation2d{-configuration.wheelBase / 2 / 2,
-                         -configuration.trackWidth / 2}},
+                         configuration.trackWidth / 2}, // front right
+      frc::Translation2d{configuration.wheelBase / 2,
+                         -configuration.trackWidth / 2}, // back right
+      frc::Translation2d{-configuration.wheelBase / 2,
+                         configuration.trackWidth / 2}, // front left
+      frc::Translation2d{-configuration.wheelBase / 2,
+                         -configuration.trackWidth / 2}}, // back left
+
+      kDriveKinematicsFrontLeft{
+      frc::Translation2d{configuration.wheelBase,
+                         units::length::meter_t{0}}, // front right
+      frc::Translation2d{configuration.wheelBase,
+                         -configuration.trackWidth}, // back right
+      frc::Translation2d{units::length::meter_t{0},
+                         units::length::meter_t{0}}, // front left
+      frc::Translation2d{units::length::meter_t{0},
+                         -configuration.trackWidth}}, // back left
+
+      kDriveKinematicsFrontRight{
+      frc::Translation2d{units::length::meter_t{0},
+                         units::length::meter_t{0}}, // front right
+      frc::Translation2d{units::length::meter_t{0},
+                         -configuration.trackWidth}, // back right
+      frc::Translation2d{-configuration.wheelBase,
+                         units::length::meter_t{0}}, // front left
+      frc::Translation2d{-configuration.wheelBase,
+                         -configuration.trackWidth}}, // back left
+
+      kDriveKinematicsBackLeft{
+      frc::Translation2d{configuration.wheelBase,
+                         configuration.trackWidth}, // front right
+      frc::Translation2d{configuration.wheelBase,
+                         units::length::meter_t{0}}, // back right
+      frc::Translation2d{units::length::meter_t{0},
+                         configuration.trackWidth}, // front left
+      frc::Translation2d{units::length::meter_t{0},
+                         units::length::meter_t{0}}}, // back left
+
+      kDriveKinematicsBackRight{
+      frc::Translation2d{units::length::meter_t{0},
+                         configuration.trackWidth}, // front right
+      frc::Translation2d{units::length::meter_t{0},
+                         units::length::meter_t{0}}, // back right
+      frc::Translation2d{-configuration.wheelBase,
+                         configuration.trackWidth}, // front left
+      frc::Translation2d{-configuration.wheelBase,
+                         units::length::meter_t{0}}}, // back left
+
       m_odometry{kDriveKinematics,
                  frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}),
                  {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
@@ -206,7 +247,8 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
 void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
                            units::meters_per_second_t ySpeed,
                            units::radians_per_second_t rot, bool fieldRelative,
-                           bool rateLimit) {
+                           bool rateLimit,
+                           frc::SwerveDriveKinematics<4>* kinematics) {
   double xSpeedCommanded;
   double ySpeedCommanded;
 
@@ -273,14 +315,14 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
   units::radians_per_second_t rotDelivered =
       m_currentRotation * configuration.maxTurnSpeed;
 
-  auto states = kDriveKinematics.ToSwerveModuleStates(
+  auto states = kinematics->ToSwerveModuleStates(
       fieldRelative
           ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
                 xSpeedDelivered, ySpeedDelivered, rotDelivered,
                 frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}))
           : frc::ChassisSpeeds{xSpeedDelivered, ySpeedDelivered, rotDelivered});
 
-  kDriveKinematics.DesaturateWheelSpeeds(&states, configuration.maxSpeed);
+  kinematics->DesaturateWheelSpeeds(&states, configuration.maxSpeed);
 
   auto [fl, fr, bl, br] = states;
 
@@ -342,4 +384,45 @@ void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
       {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
        m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
       pose);
+}
+
+void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
+{
+  Drive(xSpeed, ySpeed, rot, true, true, &kDriveKinematics);
+  pickedCorner = false;
+}
+
+void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, double directionX, double directionY)
+{
+  Drive(xSpeed, ySpeed, directionX, directionY, true, true);
+  pickedCorner = false;
+}
+
+void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
+{
+  if (!pickedCorner)
+  {
+    double angleOnDrivebase = atan2(ySpeed.value(), xSpeed.value()) - gyroSubsystemData->GetEntry("angle").GetDouble(0);
+    double angleXPortion = sin(angleOnDrivebase);
+    double angleYPortion = cos(angleOnDrivebase);
+    if (angleXPortion <= 0 && angleYPortion >= 0)
+    {
+      corner = &kDriveKinematicsFrontLeft;
+    }
+    else if (angleXPortion >= 0 && angleYPortion >= 0)
+    {
+      corner = &kDriveKinematicsFrontRight;
+    }
+    else if (angleXPortion <= 0 && angleYPortion <= 0)
+    {
+      corner = &kDriveKinematicsBackLeft;
+    }
+    else if (angleXPortion >= 0 && angleYPortion <= 0)
+    {
+      corner = &kDriveKinematicsBackRight;
+    }
+    pickedCorner = true;
+  }
+
+  Drive(xSpeed, ySpeed, rot, true, true, corner);
 }
