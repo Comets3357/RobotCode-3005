@@ -38,5 +38,9 @@ namespace COMETS3357
         AHRS m_navx;
         std::shared_ptr<nt::NetworkTable> driveTable;
 
+        void CalculatePositions();
+
+        float robotX, rototY; // experimental
+
     };
 };
