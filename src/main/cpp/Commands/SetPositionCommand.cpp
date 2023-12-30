@@ -43,7 +43,7 @@ void SetPositionCommand::Initialize()
 
     if (piece != GAMEPIECE_NONE)
     {
-        endEffectorSub->SetState(piece);
+        endEffectorSub->gamepiece = piece;
     }
     
 
@@ -67,7 +67,7 @@ void SetPositionCommand::Initialize()
         endEffectorSub->SetPercent("EndEffectorCubeHoldPercent");
         break;
         case END_EFFECTOR_GAME_PIECE:
-            switch (endEffectorSub->State())
+            switch (endEffectorSub->gamepiece)
             {
             case CUBE:
                 endEffectorSub->SetPercent(-.05);

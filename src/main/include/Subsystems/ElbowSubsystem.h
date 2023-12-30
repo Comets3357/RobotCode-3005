@@ -5,12 +5,8 @@
 
 #define PI 3.1415926535897932384626
 
-enum ElbowState 
-{
 
-};
-
-class ElbowSubsystem : public COMETS3357::Subsystem<ElbowState>
+class ElbowSubsystem : public COMETS3357::Subsystem
 {
 public:
 

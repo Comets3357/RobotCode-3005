@@ -19,12 +19,7 @@ namespace COMETS3357
         double angleRate = 0;
     };
 
-    enum GyroState
-    {
-        GYRO_RUNNING
-    };
-
-    class GyroSubsystem : public COMETS3357::Subsystem<GyroState>
+    class GyroSubsystem : public COMETS3357::Subsystem
     {
 
     public:

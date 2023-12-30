@@ -1,7 +1,7 @@
 #include "Subsystems/ExtenderSubsystem.h"
 #include "frc/smartdashboard/SmartDashboard.h"
 
-ExtenderSubsystem::ExtenderSubsystem() : COMETS3357::Subsystem<ExtenderState>("ExtenderSubsystem")
+ExtenderSubsystem::ExtenderSubsystem() : COMETS3357::Subsystem("ExtenderSubsystem")
 {
     extendermotor.SetFeedForward([](double a){return 0;});
 }

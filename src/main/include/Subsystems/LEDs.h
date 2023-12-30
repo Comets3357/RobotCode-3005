@@ -6,12 +6,7 @@
 #include "COMETS3357/Subsystems/Subsystem.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
-enum LEDState
-{
-
-};
-
-class LEDs : public COMETS3357::Subsystem<LEDState>
+class LEDs : public COMETS3357::Subsystem
 {
 public:
     LEDs();

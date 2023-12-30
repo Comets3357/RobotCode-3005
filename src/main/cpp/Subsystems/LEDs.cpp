@@ -1,7 +1,7 @@
 #include "Subsystems/LEDs.h"
 
 
-LEDs::LEDs() : COMETS3357::Subsystem<LEDState>("LEDs")
+LEDs::LEDs() : COMETS3357::Subsystem("LEDs")
 {
     
     while (!arduinoWorking && (attemptsToConnectToArduino < 10))

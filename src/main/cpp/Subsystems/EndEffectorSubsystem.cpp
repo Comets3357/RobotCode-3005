@@ -1,6 +1,6 @@
 #include "Subsystems/EndEffectorSubsystem.h"
 
-EndEffectorSubsystem::EndEffectorSubsystem() : COMETS3357::Subsystem<EndEffectorSubsystemState>("EndEffectorSubsystem")
+EndEffectorSubsystem::EndEffectorSubsystem() : COMETS3357::Subsystem("EndEffectorSubsystem")
 {
 
 }

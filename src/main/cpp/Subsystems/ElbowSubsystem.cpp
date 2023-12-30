@@ -1,7 +1,7 @@
 #include "Subsystems/ElbowSubsystem.h"
 #include "frc/smartdashboard/SmartDashboard.h"
 
-ElbowSubsystem::ElbowSubsystem() : COMETS3357::Subsystem<ElbowState>("ElbowSubsystem")
+ElbowSubsystem::ElbowSubsystem() : COMETS3357::Subsystem("ElbowSubsystem")
 {
     elbowMotor.SetFeedForward([](double theta){
         double p1 = 19, f1 = 0, f2 = 0;

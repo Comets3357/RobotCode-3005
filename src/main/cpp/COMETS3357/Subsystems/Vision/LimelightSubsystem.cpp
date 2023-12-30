@@ -2,7 +2,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 using namespace COMETS3357;
 
-LimelightSubsystem::LimelightSubsystem() : Subsystem<LimelightState>("LimelightSubsystem") {
+LimelightSubsystem::LimelightSubsystem() : COMETS3357::Subsystem("LimelightSubsystem") {
     // Retrieve the Limelight network table instance
     nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
     table = inst.GetTable("limelight");

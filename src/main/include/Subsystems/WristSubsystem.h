@@ -4,12 +4,7 @@
 
 #include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
 
-enum WristState
-{
-
-};
-
-class WristSubsystem : public COMETS3357::Subsystem<WristState>
+class WristSubsystem : public COMETS3357::Subsystem
 {
 public:
 

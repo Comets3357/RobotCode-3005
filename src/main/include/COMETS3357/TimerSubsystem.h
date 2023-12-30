@@ -8,12 +8,9 @@
 namespace COMETS3357
 {
 
-    enum TimerState
-    {
-        TIMER_RUNNING
-    };
 
-    class TimerSubsystem : public COMETS3357::Subsystem<TimerState>
+
+    class TimerSubsystem : public COMETS3357::Subsystem
     {
     public:
 

@@ -15,7 +15,7 @@ using namespace COMETS3357;
 
 SwerveSubsystem::SwerveSubsystem(std::string configFileName)
     : configuration{ConfigFiles::getInstance().GetConfigFiles().swerveConfigs[configFileName]},
-      Subsystem<SwerveState>("SwerveSubsystem"),
+      COMETS3357::Subsystem("SwerveSubsystem"),
       gyroSubsystemData{GetSubsystemData("GyroSubsystem")},
       m_frontLeft{configuration.frontLeftModule},
       m_rearLeft{configuration.backLeftModule},

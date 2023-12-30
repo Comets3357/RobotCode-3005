@@ -17,16 +17,11 @@
 
 class RobotContainer;
 
-enum SwerveState
-{
-  SWERVE_AUTONOMOUS,
-  SWERVE_TELEOP
-};
 
 namespace COMETS3357
 {
 
-  class SwerveSubsystem : public COMETS3357::Subsystem<SwerveState>
+  class SwerveSubsystem : public COMETS3357::Subsystem
   {
   public:
     SwerveSubsystem(std::string configFileName);

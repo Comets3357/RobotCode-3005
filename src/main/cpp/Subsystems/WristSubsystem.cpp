@@ -2,7 +2,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 
-WristSubsystem::WristSubsystem() : COMETS3357::Subsystem<WristState>("WristSubsystem")
+WristSubsystem::WristSubsystem() : COMETS3357::Subsystem("WristSubsystem")
 {
     wristMotor.SetFeedForward([](double a){return 0;});
 }

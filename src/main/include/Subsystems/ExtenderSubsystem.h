@@ -3,12 +3,8 @@
 #include "COMETS3357/Subsystems/Subsystem.h"
 #include "COMETS3357/Subsystems/Sparkmax/SparkMaxPosition.h"
 
-enum ExtenderState
-{
 
-};
-
-class ExtenderSubsystem : public COMETS3357::Subsystem<ExtenderState>
+class ExtenderSubsystem : public COMETS3357::Subsystem
 {
 public:
 

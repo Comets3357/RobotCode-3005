@@ -14,7 +14,7 @@ void EjectCommand::Initialize()
 {
     if (enabled)
     {
-        switch (endEffectorSubsystem->State())
+        switch (endEffectorSubsystem->gamepiece)
             {
             case CUBE:
                 endEffectorSubsystem->SetPercent(0.5);

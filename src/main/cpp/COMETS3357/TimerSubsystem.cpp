@@ -2,7 +2,7 @@
 
 using namespace COMETS3357;
 
-TimerSubsystem::TimerSubsystem() : Subsystem<TimerState>("TimerSubsystem")
+TimerSubsystem::TimerSubsystem() : COMETS3357::Subsystem("TimerSubsystem")
 {
     ResetAndBeginTimer();
 }

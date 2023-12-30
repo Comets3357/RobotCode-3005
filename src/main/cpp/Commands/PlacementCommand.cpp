@@ -7,7 +7,7 @@ PlacementCommand::PlacementCommand(EndEffectorSubsystem* endEffector, SetPositio
 
 void PlacementCommand::Initialize()
 {
-    if (endEffectorSubsystem->State()==EndEffectorSubsystemState::CONE)
+    if (endEffectorSubsystem->gamepiece ==EndEffectorSubsystemState::CONE)
     {
         conePositionCommand.Schedule();
 

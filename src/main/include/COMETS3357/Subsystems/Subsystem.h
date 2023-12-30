@@ -8,7 +8,6 @@
 
 namespace COMETS3357
 {
-    template <typename state>
     class Subsystem : public frc2::SubsystemBase
     {
     public:
@@ -41,26 +40,10 @@ namespace COMETS3357
         */
         virtual void Initialize() {}
 
-        /**
-         * @brief Gets the Subsystem State
-         * 
-         * @return Subsystem State Enum
-        */
-        state& State()
-        {
-            return m_state;
-        }
-
-        void SetState(state to)
-        {
-            m_state = to;
-        }
-
         
 
     protected:
 
-        state m_state{};
         std::shared_ptr<nt::NetworkTable> subsystemData;
     };
 };
